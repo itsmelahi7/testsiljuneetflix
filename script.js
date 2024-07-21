@@ -4901,6 +4901,7 @@ function addBlockLinkedItems(div) {
                                 </div>`;
                 linked_div.querySelector(".tabs .images").classList.remove("hide");
             }
+            //test
         });
     });
 }
