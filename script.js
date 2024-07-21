@@ -471,7 +471,13 @@ function setAutoComplete(event, arr, type, target) {
                 var tar = input.parentElement;
                 var tag = event.target.textContent.trim();
                 if (type == "search-filter-tag") tar = document.querySelector(".filtered-tags .tags");
-                else if (type == "explanation") {
+                if (type == "new-mock-select-chapter") {
+                    let span = document.createElement("span");
+                    span.className = "link chapter";
+                    span.textContent = tag;
+                    var tar_ele = input.closest(".select-chapter").querySelector(".chapter-list");
+                    tar_ele.appendChild(span);
+                } else if (type == "explanation") {
                     input.value = tag;
                     autocompleteList.classList.remove("active");
                     return;
@@ -532,7 +538,7 @@ function displayTags(tag_array, tag_target) {
     });
 }
 
-function loadAllTags() {
+function loadAllTags(all_tags) {
     console.log("loadAllTags called");
     que_data.forEach((obj) => {
         obj.tags.forEach((tag) => {
@@ -540,6 +546,7 @@ function loadAllTags() {
         });
     });
 }
+
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -820,7 +827,9 @@ function filterQuestionsOnTagBased(tag, filter_tags, span) {
     if (!ele) que_count_ele.classList.add("hide");
 
     curr_que_index = 0;
-    displayQuestion();
+    curr_ques = fil_ques[0];
+    displayQuestion(curr_ques);
+    //displayQuestion();
 }
 function filterQuestionsByTags(questions, tags) {
     return questions.filter((question) => tags.some((tag) => question.tags.includes(tag)));
@@ -1205,15 +1214,58 @@ function openMockTestPage(arg) {
     var ele = document.querySelector(".page.mock");
     if (!ele.children.length || arg) {
         ele.innerHTML = `
-                        <button id="start-new-mock" class="start-new-mock">Start new mock</button>
-                        <div class="mock-history head">
-                            <i class="fa-solid arrow fa-chevron-right"></i> 
-                            <span class="label">Show Mock History</span>
-                            
+                        <div>
+                            <div class="new-mock me-flex-co">
+                                <span class="label">New Mock Test</span>
+                                <div class="select-chapter hide">
+                                    <div>
+                                        <span class="label">Select chapter:</span>
+                                        <input type="text" class="select-chapter-input" placeholder="search chapter" />
+                                    </div>
+                                    <div class="chapter-list"></div>
+                                </div>
+                                <div class="select-que-count hide">
+                                    <span>Number of questions:</span>
+                                    <select id="dropdown">
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                </div>
+                                <span class="link start-new-mock">Start new mock test</span>
+                            </div>
+                            <div class="mock-history head">
+                                <i class="fa-solid arrow fa-chevron-right"></i>
+                                <span class="label">Show Mock History</span>
+                            </div>
+                            <div class="mock-history list hide me-dis-flex-co"></div>
                         </div>
-                        <div class="mock-history list hide me-dis-flex-co"></div>
                         <div class="mock-test-sec hide me-dis-flex-co"></div>`;
 
+        // new-mock div
+        var div = ele.querySelector(".new-mock");
+        ele = div.querySelector(".link.start-new-mock");
+        if (ele) {
+            ele.addEventListener("click", () => {
+                startNewMockTest();
+            });
+        }
+        ele = div.querySelector(".select-chapter input");
+        if (ele) {
+            ele.addEventListener("focus", (event) => {
+                debugger;
+                let eles = document.querySelectorAll(".list.notes .me-chapter .name");
+                if (!eles) {
+                    addChapterIndexList();
+                }
+                eles = document.querySelectorAll(".list.notes .me-chapter .name");
+                var arr = [];
+                eles.forEach((eee) => {
+                    arr.push(eee.textContent.toLowerCase());
+                });
+                setAutoComplete(event, arr, "new-mock-select-chapter");
+            });
+        }
         var head = document.querySelector(".mock-history.head");
         addDividerBefore(head);
         head.addEventListener("click", (event) => {
@@ -1227,10 +1279,6 @@ function openMockTestPage(arg) {
                 head.querySelector("span").textContent = "Hide Mock History";
                 loadPreviousMockResults();
             }
-        });
-
-        ele.querySelector("#start-new-mock").addEventListener("click", () => {
-            startNewMockTest();
         });
     }
 }
@@ -1251,7 +1299,7 @@ function endMockTestHTMLTemplate() {
     return `<div class="result">
             <div class="top me-dis-flex">
                 <span class="label">Result</span>
-                <button id="start-new-mock" class="start-new-mock">Start new mock</button>
+                <span id="start-new-mock" class=" link start-new-mock">Start new mock</span>
                 <div class="cross">X</div>
             </div>
             <div class="result-item">
@@ -1279,7 +1327,7 @@ function endMockTestHTMLTemplate() {
                 <div class="chart-bar unattempted-bar" id="unattempted-bar"></div>
                 <div class="chart-bar incorrect-bar" id="incorrect-bar"></div>
             </div>
-            <button class="show-questions">Show questions</button>
+            <button class="show-questions hide">Show questions</button>
             <div class="show-que-list"></div>
         </div>`;
 }
@@ -1291,6 +1339,7 @@ function loadNotesData(arg) {
 
     var target_ele = document.querySelector(".page.notes");
     let list_icon = target_ele.querySelector(".fa-list-ul");
+    debugger;
     if (list_icon) {
         let ele = document.querySelector(".page.notes .page-title");
         //let ttt = document.querySelector(".page.notes.hide");
@@ -1469,7 +1518,7 @@ function addChapterIndexItem(item, tar, level) {
 
             var div = document.createElement("div");
             div.id = data.id;
-            div.className = "me-block me-page-title";
+            div.className = "me-block me-page-title page-title";
 
             ele = document.querySelector(".page-text");
             if (ele) {
@@ -2082,7 +2131,7 @@ function openNotesPageById(page_id, block_id) {
 
     var div = document.createElement("div");
     div.id = data.id;
-    div.className = "me-block me-page-title";
+    div.className = "me-block me-page-title page-title";
 
     ele = document.querySelector(".page-text");
     if (ele) {
@@ -2997,17 +3046,28 @@ function addDividerBefore(element) {
 function startNewMockTest() {
     document.querySelector(".top").classList.add("hide");
     document.querySelector(".tabs").classList.add("hide");
+    document.querySelector(".page.mock > div").classList.add("hide");
+    document.querySelector(".page.mock .mock-test-sec").classList.remove("hide");
+    /*
     document.querySelectorAll(".page.mock > *").forEach((ele) => {
         ele.classList.add("hide");
         if (ele.classList.contains("mock-test-sec")) ele.classList.remove("hide");
-    });
+    });*/
     var ele = document.querySelector(".page.mock .mock-test-sec");
     ele.innerHTML = getMockTestHTMLTemplate();
 
     ele.querySelector(".cross").addEventListener("click", () => {
         document.querySelector(".top").classList.remove("hide");
         document.querySelector(".tabs").classList.remove("hide");
+        document.querySelector(".page.mock > div").classList.remove("hide");
+        document.querySelector(".page.mock .mock-test-sec").classList.add("hide");
+        return;
+        /*
+        document.querySelector(".top").classList.remove("hide");
+        document.querySelector(".tabs").classList.remove("hide");
         //openMockTestPage("cross");
+        document.querySelector(".page.mock > *").classList.remove("hide");
+        document.querySelector(".page.mock > .mock-test-sec").classList.remove("hide");
 
         document.querySelectorAll(".page.mock > *").forEach((ele) => {
             ele.classList.remove("hide");
@@ -3019,7 +3079,9 @@ function startNewMockTest() {
                 }
             }
         });
+        */
     });
+
     var number_of_questions_for_mock = 20;
     var dot_target_ele = document.querySelector(".que-list-dots");
     for (var i = 0; i < number_of_questions_for_mock; i++) {
@@ -3254,7 +3316,7 @@ function openRandomPractisePage() {
             });
         }
 
-        ele = document.querySelector(".filter-section i.filter");
+        ele = document.querySelector(".filter-section div.filter");
         if (ele) {
             ele.addEventListener("click", () => {
                 //showIndexTagsList("random");
@@ -3303,8 +3365,12 @@ function getRandomPageHTMLTemplate() {
                 <div class="filter-section">
                     <div class="head">
                         <input type="text" class="filter input hide" placeholder="search filter tags" />
-                        <i class="fa-solid fa-search search"></i>
-                        <i class="fa-solid fa-filter filter"></i>
+                        <i class="fa-solid fa-search hide search"></i>
+                        
+                        <div class="filter">
+                            <i class="fa-regular fa-filter filter"></i>
+                            <span class="filter">Filter</span>
+                        </div>
                     </div>
                     <div class="filtered-tags hide"></div>
                     <span class="filter-ques-count hide label"></span>
@@ -4164,38 +4230,106 @@ function getURLParameters(url) {
 }
 
 function addTagIndexList() {
+    //var tar_ele = document.querySelector(".page.random .index-tags .subject");
+    debugger;
+    var div1 = document.querySelector(".page.random .index-tags.tags");
+    if (!div1) {
+        let ele = document.querySelector(".page.random");
+
+        div1 = document.createElement("div");
+        div1.className = "index-tags tags";
+        ele.appendChild(div1);
+        div1.innerHTML = `<div class="head">
+                                <span> Tag Index </span>
+                                <span class="cross close">X</span>
+                            </div>
+                            <div class="tabs">
+                                <div class="tab subject active">Chapters</div>
+                                <div class="tab all">All</div>
+                            </div>
+                            <div class="content lists">
+                                <div class="list random subject"></div>
+                                <div class="list all hide"></div>
+                            </div>`;
+        ele = div1.querySelector(".cross");
+        if (ele) {
+            ele.addEventListener("click", () => {
+                div1.classList.remove("open");
+            });
+        }
+        debugger;
+        ele = div1.querySelectorAll(".tabs .tab");
+        if (ele) {
+            ele.forEach((tab) => {
+                tab.addEventListener("click", (event) => {
+                    //let tab = event.target;
+                    let tabs = div1.querySelectorAll(".tabs .tab");
+                    tabs.forEach((tabb) => {
+                        tabb.classList.remove("active");
+                    });
+                    tab.classList.add("active");
+
+                    if (tab.classList.contains("subject")) {
+                        div1.querySelectorAll(".content .list").forEach((list) => {
+                            list.classList.add("hide");
+                        });
+                        div1.querySelector(".content .list.subject").classList.remove("hide");
+                    }
+                    debugger;
+                    if (tab.classList.contains("all")) {
+                        div1.querySelectorAll(".content .list").forEach((list) => {
+                            list.classList.add("hide");
+                        });
+                        div1.querySelector(".content .list.all").classList.remove("hide");
+                    }
+                });
+            });
+        }
+    }
+
+    // Load structured tags
     var index_tags = "";
     for (var i = 0; i < other_data.length; i++) {
         if (other_data[i].type == "tags_index") {
             index_tags = other_data[i].data;
         }
     }
-    var tar_ele = document.querySelector(".page.random .index-tags .random");
 
-    if (!tar_ele) {
-        let ele = document.querySelector(".page.random");
-
-        let div1 = document.createElement("div");
-        div1.className = "index-tags";
-        ele.appendChild(div1);
-        div1.innerHTML = `<div class="head">
-                            <span> Tag Index </span>
-                            <span class="cross close">X</span>
-                         </div>`;
-        div1.querySelector(".cross").addEventListener("click", () => {
-            div1.classList.remove("open");
-        });
-
-        let div2 = document.createElement("div");
-        div2.className = "list random";
-        div1.appendChild(div2);
-        tar_ele = div2;
-    }
-
+    let tar_ele = div1.querySelector(".list.subject");
+    tar_ele.classList.add("active");
     index_tags.forEach((tag) => {
         addTagIndexItem(tag, tar_ele, 0);
     });
+
+    // Load all tags
+    var all_tags = [];
+    loadAllTags(all_tags);
+    tar_ele = div1.querySelector(".list.all");
+    all_tags.forEach((tag) => {
+        addAllTagsItems(tag, tar_ele);
+    });
 }
+
+function addAllTagsItems(tag, tar_ele) {
+    debugger;
+    var div = document.createElement("div");
+    div.className = "tag";
+    tar_ele.appendChild(div);
+
+    var span = document.createElement("span");
+    span.textContent = tag;
+    span.className = "tag-name";
+    div.appendChild(span);
+
+    div.addEventListener("click", () => {
+        let ele = document.querySelector(".filtered-tags");
+        if (ele) ele.innerHTML = "";
+        let arr = [];
+        arr.push(tag);
+        filterQuestionsOnTagBased(tag, arr);
+    });
+}
+
 function addTagIndexItem(tag, tar_ele, level) {
     tag = tag.name ? tag : tag[0];
     var children = tag.children;
@@ -4210,7 +4344,7 @@ function addTagIndexItem(tag, tar_ele, level) {
         div.appendChild(div2);
 
         let i = document.createElement("i");
-        i.className = "arrow-icon fa-solid fa-chevron-right";
+        i.className = "arrow-icon fa-solid fa-chevron-down";
         div2.appendChild(i);
         i.addEventListener("click", (event) => {
             let i = event.target;
@@ -4234,7 +4368,7 @@ function addTagIndexItem(tag, tar_ele, level) {
         div2.appendChild(span);
 
         let div3 = document.createElement("div");
-        div3.className = "tag-children hide";
+        div3.className = "tag-children";
         div.appendChild(div3);
 
         children.forEach((child) => {
@@ -4264,9 +4398,6 @@ function addTagIndexItem(tag, tar_ele, level) {
             });
 
             filterQuestionsOnTagBased(tag, tags, span);
-            curr_que_index = 0;
-            curr_ques = fil_ques[0];
-            displayQuestion(curr_ques);
         });
     }
 }
@@ -4444,7 +4575,7 @@ async function loadDataFromFiles() {
     console.log("me: user_data[] loaded");
     setTimeout(() => {
         addTagIndexList();
-        //addChapterIndexList();
+        addChapterIndexList();
         //loadNotesData();
         initialLoading();
     }, 1000);
@@ -4901,7 +5032,6 @@ function addBlockLinkedItems(div) {
                                 </div>`;
                 linked_div.querySelector(".tabs .images").classList.remove("hide");
             }
-            //test
         });
     });
 }
