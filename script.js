@@ -688,7 +688,6 @@ async function updateMyMcqAppGistFile(filename) {
     console.log("Updating Gist with ID:", gistId);
     const all_data = [...new_ques, ...que_data];
     const newContent = JSON.stringify(all_data, null, 2);
-    const accessToken = "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"; //git_token.replace(/_elahi_/g, "");
 
     const url = `https://api.github.com/gists/${gistId}`;
     const headers = {
