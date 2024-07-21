@@ -931,6 +931,14 @@ div.tab.separator {
     content: "Filter: ";
 }
 
+.filter-section .filter-ques-count {
+    display: none;
+}
+
+.filter-section:has(.filtered-tags .tag) .filter-ques-count {
+    display: block;
+}
+
 
 
 .filter-tags-section .search-filter,
@@ -2048,7 +2056,7 @@ div.support-me {
     cursor: pointer;
 }
 
-.page .index-tags .tabs .tab.active {
+.filter-section:has(.filtered-tags .tag) .page .index-tags .tabs .tab.active {
     opacity: 1;
     border-bottom: 2px solid;
     margin: 0px 15px;
