@@ -1200,14 +1200,14 @@ function setTimer(minutes) {
 }
 
 function openPage(tab) {
-    document.querySelectorAll(".tabs .tab").forEach((tab) => {
+    document.querySelectorAll(".main.tabs > .tab").forEach((tab) => {
         tab.classList.remove("active");
     });
-    document.querySelectorAll(".home .page").forEach((page) => {
+    document.querySelectorAll(".home > .page").forEach((page) => {
         page.classList.add("hide");
     });
-    document.querySelector(`.tab.${tab}`).classList.add("active");
-    document.querySelector(`.page.${tab}`).classList.remove("hide");
+    document.querySelector(`.main.tabs > .tab.${tab}`).classList.add("active");
+    document.querySelector(`.home > .page.${tab}`).classList.remove("hide");
 }
 function openMockTestPage(arg) {
     openPage("mock");
@@ -1268,6 +1268,7 @@ function openMockTestPage(arg) {
         }
         var head = document.querySelector(".mock-history.head");
         addDividerBefore(head);
+
         head.addEventListener("click", (event) => {
             var tar_ele = document.querySelector(".page.mock .mock-history.list");
             tar_ele.classList.toggle("hide");
@@ -1437,7 +1438,7 @@ function addChapterIndexItem(item, tar, level) {
         div.appendChild(div2);
 
         let i = document.createElement("i");
-        i.className = "arrow-icon fa-solid fa-chevron-right";
+        i.className = "arrow-icon fa-solid fa-chevron-down";
         div2.appendChild(i);
 
         div2.addEventListener("click", (event) => {
@@ -3015,6 +3016,7 @@ function getDaySuffix(day) {
 }
 
 function getFormattedTime(timeStr) {
+    return "ss:ss";
     const timeParts = timeStr.split("_");
     const hours = timeParts[0].padStart(2, "0");
     const minutes = timeParts[1].padStart(2, "0");
@@ -3057,17 +3059,13 @@ function startNewMockTest() {
     ele.innerHTML = getMockTestHTMLTemplate();
 
     ele.querySelector(".cross").addEventListener("click", () => {
-        document.querySelector(".top").classList.remove("hide");
+        //document.querySelector(".top").classList.remove("hide");
         document.querySelector(".tabs").classList.remove("hide");
         document.querySelector(".page.mock > div").classList.remove("hide");
         document.querySelector(".page.mock .mock-test-sec").classList.add("hide");
+        user_data[0].mocks.shift();
+
         return;
-        /*
-        document.querySelector(".top").classList.remove("hide");
-        document.querySelector(".tabs").classList.remove("hide");
-        //openMockTestPage("cross");
-        document.querySelector(".page.mock > *").classList.remove("hide");
-        document.querySelector(".page.mock > .mock-test-sec").classList.remove("hide");
 
         document.querySelectorAll(".page.mock > *").forEach((ele) => {
             ele.classList.remove("hide");
@@ -3079,7 +3077,6 @@ function startNewMockTest() {
                 }
             }
         });
-        */
     });
 
     var number_of_questions_for_mock = 20;
@@ -3213,10 +3210,11 @@ function startNewMockTest() {
         }
 
         document.querySelector(".mock-test-sec .cross").addEventListener("click", () => {
-            document.querySelector(".top").classList.remove("hide");
+            //document.querySelector(".top").classList.remove("hide");
             document.querySelector(".tabs").classList.remove("hide");
-            //openMockTestPage("cross");
 
+            //openMockTestPage("cross");
+            //return;
             document.querySelectorAll(".page.mock > *").forEach((ele) => {
                 ele.classList.remove("hide");
                 if (ele.classList.contains("mock-test-sec")) ele.classList.add("hide");
