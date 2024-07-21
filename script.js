@@ -50,6 +50,7 @@ var me_admin = false;
 var data_other = [];
 var autocompleteList = "";
 
+hardReloadCode();
 loadDataFromFiles();
 
 document.addEventListener("DOMContentLoaded", function () {
