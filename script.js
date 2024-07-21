@@ -3046,8 +3046,7 @@ function addDividerBefore(element) {
 }
 
 function startNewMockTest() {
-    document.querySelector(".top").classList.add("hide");
-    document.querySelector(".tabs").classList.add("hide");
+    document.querySelector(".main.tabs").classList.add("hide");
     document.querySelector(".page.mock > div").classList.add("hide");
     document.querySelector(".page.mock .mock-test-sec").classList.remove("hide");
     /*
@@ -3211,7 +3210,7 @@ function startNewMockTest() {
 
         document.querySelector(".mock-test-sec .cross").addEventListener("click", () => {
             //document.querySelector(".top").classList.remove("hide");
-            document.querySelector(".tabs").classList.remove("hide");
+            document.querySelector(".main.tabs").classList.remove("hide");
 
             //openMockTestPage("cross");
             //return;

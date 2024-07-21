@@ -1084,7 +1084,7 @@ div.tab.separator {
     opacity: 0;
 }
 
-.main-content>.tabs {
+.main.tabs {
     display: flex;
     flex-wrap: nowrap;
     max-width: 100%;
@@ -1097,7 +1097,7 @@ div.tab.separator {
     ;
 }
 
-.tab-btn {
+.main.tabs .tab {
     flex: 0 0 auto;
     padding: 10px;
     margin: 0px;
@@ -1116,12 +1116,12 @@ div.tab.separator {
 }
 
 
-.tabs-btns::-webkit-scrollbar {
+.main.tabs .tab::-webkit-scrollbar {
     display: none;
     /* For Chrome, Safari, and Opera */
 }
 
-.tab-btn.active {
+.main.tabs .tab.active {
     color: var(--link-color);
     border-bottom: 3px solid var(--link-color);
 }
@@ -2056,6 +2056,7 @@ div.support-me {
 
 .page .index-tags .content.lists {
     margin-top: 25px;
+    padding: 0px 15px;
 }
 
 .index-tags .content .list.all {
