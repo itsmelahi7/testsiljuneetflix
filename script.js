@@ -4972,7 +4972,7 @@ function addBlockLinkedItems(div) {
                                 <span class="cross">X</span>
                             </div>
                             <div class="me-iframe">
-                               <iframe  id="${iframe_id}"class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed/${video.video_id}?enablejsapi=1&amp;origin=http://127.0.0.1:5500&amp;widgetid=5" ></iframe>
+                               <iframe  id="${iframe_id}"class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed/${video.video_id}?enablejsapi=1&amp;origin=https://neetflix.life&amp;widgetid=5" ></iframe>
                             </div>
                             <div class="text">
                                 <span>${time_hh}: ${video.text}</span>
