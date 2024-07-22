@@ -15,6 +15,12 @@
                                         "name": "[[amendment]]",
                                         "children": []
                                     }
+                                ],
+                                [
+                                    {
+                                        "name": "[[article]]",
+                                        "children": []
+                                    }
                                 ]
                             ]
                         }

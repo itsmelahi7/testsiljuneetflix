@@ -1329,7 +1329,7 @@ function endMockTestHTMLTemplate() {
                 <div class="chart-bar unattempted-bar" id="unattempted-bar"></div>
                 <div class="chart-bar incorrect-bar" id="incorrect-bar"></div>
             </div>
-            <button class="show-questions hide">Show questions</button>
+            <button class="show-questions">Show questions</button>
             <div class="show-que-list"></div>
         </div>`;
 }
@@ -3129,6 +3129,7 @@ function startNewMockTest() {
     });
 
     document.querySelector(".page.mock-test .submit-test").addEventListener("click", () => {
+        document.querySelector(".main.tabs").classList.remove("hide");
         user_data[0].mocks[0].end_time = getCurrentTime();
         var que_arr = user_data[0].mocks[0].questions;
 
@@ -3226,6 +3227,9 @@ function startNewMockTest() {
             });
         });
         document.querySelector(".mock-test-sec .show-questions").addEventListener("click", () => {
+            let mock = user_data[0].mocks[0];
+            showPreviousMockQuestions(event, mock);
+            return;
             que_arr.forEach((que) => {
                 var target_ele = document.querySelector(".mock-test-sec .show-que-list");
                 //var que_div = getMCQQuestionElement(getQuestionById(que.id), target_ele, "mock-result");
@@ -4047,7 +4051,7 @@ function openAboutMePage() {
             img.src = `./assets/${site}.png`;
             a.appendChild(img);
         });
-        var text = ["Hello everyone, I'm Mehboob Elahi from Kargil, Ladakh. I have developed this app to make your journey of competitive exams easy and joyful, and I hope that it is very useful in your prepration", "About me:", "B.Tech ECE from NIT Warangal", "Software engineer with 3.5 years of experiance in MNCs", "Cleared UPSC prelims", "Currently a govt. employee in the revenue department under UT Ladakh govt."];
+        var text = ["Hello everyone, I'm Mehboob Elahi from Kargil, Ladakh. I have developed this app to make your journey of competitive exams easy and joyful, and I hope that it is very useful in your prepration", "About me:", "B.Tech ECE from NIT Warangal", "Software engineer with 3.5 years of experiance in various MNCs", "Cleared UPSC prelims", "Currently a govt. employee in the revenue department, UT Ladakh govt."];
         div = document.createElement("div");
         div.className = "about-me-text";
         tar_ele.appendChild(div);
@@ -4538,7 +4542,7 @@ async function fetchDataFromFile(filename) {
 }
 
 async function loadDataFromFiles() {
-    alert("HELLO");
+    //alert("HELLO");
     que_data = await fetchDataFromFile(`data_${exam}_questions`);
     console.log("me: que_data[] loaded");
     notes_data = await fetchDataFromFile(`data_${exam}_notes`);
