@@ -50,7 +50,8 @@ var me_admin = false;
 var data_other = [];
 var autocompleteList = "";
 
-hardReloadCode();
+//hardReloadCode();
+clearCache();
 loadDataFromFiles();
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -1754,7 +1755,7 @@ function loadPageText(item, target, level) {
                     iframe_div.className = "page-iframe";
                     page_div.insertBefore(iframe_div, page_div.children[1]);
                     //iframe_div.innerHTML = ` <span class="close">X close video</span> <iframe class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed/${video_id}?enablejsapi=1&amp;origin=http://silju.in&amp;widgetid=5" id="widget6"></iframe>`;
-                    iframe_div.innerHTML = ` <span class="close">X close video</span> <iframe class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed/${video_id}?enablejsapi=1&amp;origin=https://neetflix.life&amp;widgetid=5" id="widget6"></iframe>`;
+                    iframe_div.innerHTML = ` <span class="close">X close video</span> <iframe class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed/${video_id}?enablejsapi=1&amp;origin=http://127.0.0.1:5500&amp;widgetid=5" id="widget6"></iframe>`;
 
                     iframe_div.querySelector(".close").addEventListener("click", (event) => {
                         event.target.parentElement.remove();
@@ -2758,14 +2759,13 @@ function openAddNewQuestion() {
     });
 }
 function getYoutubeObj(text) {
-    let videoId, timeInSeconds;
+    let videoId = "";
+    let timeInSeconds = 0;
 
     // Extract the video ID from the URL
     const urlMatch = text.match(/(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/watch\?v=|youtube\.com\/embed\/|youtube\.com\/v\/)([a-zA-Z0-9_-]{11})/);
     if (urlMatch) {
         videoId = urlMatch[1];
-    } else {
-        throw new Error("Invalid YouTube URL");
     }
 
     // Extract the time part
@@ -2787,7 +2787,7 @@ function getYoutubeObj(text) {
             }
         }
     } else {
-        throw new Error("Invalid time format");
+        //("Invalid time format");
     }
 
     return { video_id: videoId, time: timeInSeconds };
@@ -4538,6 +4538,7 @@ async function fetchDataFromFile(filename) {
 }
 
 async function loadDataFromFiles() {
+    alert("HELLO");
     que_data = await fetchDataFromFile(`data_${exam}_questions`);
     console.log("me: que_data[] loaded");
     notes_data = await fetchDataFromFile(`data_${exam}_notes`);
@@ -4968,11 +4969,19 @@ function addBlockLinkedItems(div) {
                 tar_ele.appendChild(div1);
                 let time_hh = convertTimeSecondToHour(video.time);
                 let iframe_id = tar_ele.closest(".me-block").id + video.video_id;
+
+                var page_link = window.location.href; // Get the current URL
+                if (page_link.includes("127.0.0")) {
+                    page_link = "http://127.0.0.1:5500";
+                } else {
+                    page_link = "https://neetflix.life";
+                }
+
                 div1.innerHTML = `<div class="head_">
                                 <span class="cross">X</span>
                             </div>
                             <div class="me-iframe">
-                               <iframe  id="${iframe_id}"class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed/${video.video_id}?enablejsapi=1&amp;origin=https://neetflix.life&amp;widgetid=5" ></iframe>
+                               <iframe  id="${iframe_id}"class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed/${video.video_id}?enablejsapi=1&amp;origin=${page_link}&amp;widgetid=5" ></iframe>
                             </div>
                             <div class="text">
                                 <span>${time_hh}: ${video.text}</span>
@@ -5031,4 +5040,30 @@ function addBlockLinkedItems(div) {
             }
         });
     });
+}
+
+async function clearCache() {
+    // Store user data in a variable
+    var user_data = getDataFromLocale("user_data");
+    // Unregister all service workers
+    if ("serviceWorker" in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        for (let registration of registrations) {
+            await registration.unregister();
+        }
+    }
+
+    // Clear all caches
+    const cacheNames = await caches.keys();
+    for (let name of cacheNames) {
+        await caches.delete(name);
+    }
+
+    // Save the user data back in local storage
+    if (user_data) {
+        localStorage.setItem("user_data", user_data);
+    }
+
+    // Optionally reload the page to apply changes
+    //window.location.reload();
 }

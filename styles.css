@@ -6,6 +6,8 @@
     --focus-block-bc: #ffdec9;
 }
 
+
+
 span.me-bold {
     font-weight: 700;
     padding: 0px !important;
@@ -20,7 +22,6 @@ span.me-bold {
     background-color: #f0f0f0;
     margin: 0px;
     line-height: 25px;
-    /*hh*/
 }
 
 span.me-highlight {
@@ -2057,7 +2058,7 @@ div.support-me {
     cursor: pointer;
 }
 
-.filter-section:has(.filtered-tags .tag) .page .index-tags .tabs .tab.active {
+.page .index-tags .tabs .tab.active {
     opacity: 1;
     border-bottom: 2px solid;
     margin: 0px 15px;
@@ -2405,9 +2406,7 @@ i.fa-chevron-right:before {
 }
 
 .me-block-main .linked-items .content-list {
-    margin-left: 12px;
-    padding: 0px 10px;
-    margin-top: 15px;
+    margin: 15px 0px;
 
 }
 
