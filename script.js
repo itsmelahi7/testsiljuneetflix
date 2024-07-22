@@ -23,6 +23,7 @@ var exam = "ssc";
 var que_data = [];
 var notes_data = [];
 var other_data = [];
+var tags_list = [];
 var user_data = [];
 // ghghghg
 var explanation_data = [];
@@ -1254,7 +1255,6 @@ function openMockTestPage(arg) {
         ele = div.querySelector(".select-chapter input");
         if (ele) {
             ele.addEventListener("focus", (event) => {
-                debugger;
                 let eles = document.querySelectorAll(".list.notes .me-chapter .name");
                 if (!eles) {
                     addChapterIndexList();
@@ -1341,7 +1341,7 @@ function loadNotesData(arg) {
 
     var target_ele = document.querySelector(".page.notes");
     let list_icon = target_ele.querySelector(".fa-list-ul");
-    debugger;
+
     if (list_icon) {
         let ele = document.querySelector(".page.notes .page-title");
         //let ttt = document.querySelector(".page.notes.hide");
@@ -1358,7 +1358,13 @@ function loadNotesData(arg) {
         //target_ele.querySelector(".index-tags").classList.add("open");
         ele.addEventListener("click", () => {
             //showIndexTagsList("notes");
-            document.querySelector(".page.notes .index-tags").classList.add("open");
+            let eee = document.querySelector(".page.notes .index-tags");
+            if (eee) eee.classList.add("open");
+            else {
+                addChapterIndexList();
+                eee = document.querySelector(".page.notes .index-tags");
+                eee.classList.add("open");
+            }
             //let chapter_list = document.querySelector(".page.notes .index-tags .notes");
             //chapter_list.classList.add("open");
         });
@@ -2272,7 +2278,7 @@ function scrollToView(ele) {
         behavior: "smooth", // Optional: Smooth scrolling behavior
         block: "center", // Optional: Scroll to the top of the element
     });
-    debugger;
+
     if (ele.classList.contains("me-block")) {
         ele.querySelector(".me-block-main").classList.add("focus");
     } else {
@@ -2432,7 +2438,6 @@ function playVideoPlayer_____(time, video_id, target) {
 var video_player = null;
 var old_video_block_id = "";
 function playVideoPlayer(time, video_id, target) {
-    debugger;
     const iframe = target.querySelector("iframe");
     // If the player is already initialized and the video ID matches, just seek and play
     let block_id = target.closest(".me-block").id;
@@ -4232,7 +4237,7 @@ function getURLParameters(url) {
 
 function addTagIndexList() {
     //var tar_ele = document.querySelector(".page.random .index-tags .subject");
-    debugger;
+
     var div1 = document.querySelector(".page.random .index-tags.tags");
     if (!div1) {
         let ele = document.querySelector(".page.random");
@@ -4258,7 +4263,7 @@ function addTagIndexList() {
                 div1.classList.remove("open");
             });
         }
-        debugger;
+
         ele = div1.querySelectorAll(".tabs .tab");
         if (ele) {
             ele.forEach((tab) => {
@@ -4276,7 +4281,7 @@ function addTagIndexList() {
                         });
                         div1.querySelector(".content .list.subject").classList.remove("hide");
                     }
-                    debugger;
+
                     if (tab.classList.contains("all")) {
                         div1.querySelectorAll(".content .list").forEach((list) => {
                             list.classList.add("hide");
@@ -4298,7 +4303,9 @@ function addTagIndexList() {
 
     let tar_ele = div1.querySelector(".list.subject");
     tar_ele.classList.add("active");
-    index_tags.forEach((tag) => {
+    //index_tags.forEach((tag) => {
+    debugger;
+    tags_list.forEach((tag) => {
         addTagIndexItem(tag, tar_ele, 0);
     });
 
@@ -4312,7 +4319,6 @@ function addTagIndexList() {
 }
 
 function addAllTagsItems(tag, tar_ele) {
-    debugger;
     var div = document.createElement("div");
     div.className = "tag";
     tar_ele.appendChild(div);
@@ -4331,7 +4337,83 @@ function addAllTagsItems(tag, tar_ele) {
     });
 }
 
-function addTagIndexItem(tag, tar_ele, level) {
+function addTagIndexItem(item, tar_ele, level) {
+    item = item.name ? item : item[0];
+    try {
+        var children = item.children;
+    } catch {
+        debugger;
+    }
+    var span = "";
+    if (children.length) {
+        let div = document.createElement("div");
+        div.className = `me-tag level-${level}`;
+        tar_ele.appendChild(div);
+
+        let div2 = document.createElement("div");
+        div2.className = "tag-item";
+        div.appendChild(div2);
+
+        let i = document.createElement("i");
+        i.className = "arrow-icon fa-solid fa-chevron-down";
+        div2.appendChild(i);
+        i.addEventListener("click", (event) => {
+            let i = event.target;
+            let div = i.closest(".me-tag");
+            let children_ele = div.querySelector(".tag-children");
+            children_ele.classList.toggle("hide");
+
+            if (children_ele.classList.contains("hide")) {
+                i.className = "arrow-icon fa-solid fa-chevron-right";
+            } else {
+                i.className = "arrow-icon fa-solid fa-chevron-down";
+            }
+        });
+
+        span = document.createElement("span");
+        span.className = "link name";
+        let name = item.name; //tag.name;
+        if (name.indexOf("[[") == -1) span.className = "name";
+        name = name.replace("[[", "").replace("]]", "");
+        span.textContent = name.toLowerCase();
+        div2.appendChild(span);
+
+        let div3 = document.createElement("div");
+        div3.className = "tag-children";
+        div.appendChild(div3);
+
+        children.forEach((child) => {
+            var i = level + 1;
+            addTagIndexItem(child, div3, i);
+        });
+    } else {
+        let div = document.createElement("div");
+        div.className = `me-tag level-${level}`;
+        tar_ele.appendChild(div);
+
+        span = document.createElement("span");
+        span.className = "link name";
+        let name = item.name; //.name;
+        if (name.indexOf("[[") == -1) span.className = "name";
+        name = name.replace("[[", "").replace("]]", "");
+        span.textContent = name.toLowerCase();
+        div.appendChild(span);
+    }
+    if (span.classList.contains("link")) {
+        span.addEventListener("click", () => {
+            var tags = [];
+            let tag = span.textContent;
+            let link_spans = span.closest(".me-tag").querySelectorAll(".name");
+            link_spans.forEach((ss) => {
+                tags.push(ss.textContent);
+            });
+
+            filterQuestionsOnTagBased(tag, tags, span);
+        });
+    }
+}
+
+function addTagIndexItem2(tag, tar_ele, level) {
     tag = tag.name ? tag : tag[0];
     var children = tag.children;
     var span = "";
@@ -4541,14 +4623,22 @@ async function fetchDataFromFile(filename) {
     }
 }
 
+var my_data = "";
 async function loadDataFromFiles() {
     //alert("HELLO");
+    /*
     que_data = await fetchDataFromFile(`data_${exam}_questions`);
     console.log("me: que_data[] loaded");
     notes_data = await fetchDataFromFile(`data_${exam}_notes`);
     console.log("me: notes_data[] loaded");
     other_data = await fetchDataFromFile(`data_${exam}_other`);
     console.log("me: other_data[] loaded");
+    
+    */
+    my_data = await fetchDataFromFile(`my_data`);
+    que_data = my_data[0].ques;
+    notes_data = my_data[0].notes;
+    tags_list = my_data[0].tags_list;
     //console.log("Array data:", array_data); // Log the array data
     //displayData(array_data);
     //name = `user_data_${exam}`;
@@ -4941,7 +5031,7 @@ function setBlockIconsEvents(div) {
                     ddiv.classList.add("hide");
                 });
                 ele.classList.toggle("active");
-                debugger;
+
                 if (ele.classList.contains("active")) {
                     div.querySelector(`.content-list > .list.${type}`).classList.remove("hide");
                 }
@@ -4951,10 +5041,8 @@ function setBlockIconsEvents(div) {
 }
 
 function addBlockLinkedItems(div) {
-    debugger;
     var block_id = div.id;
-    if (block_id == "NClzsgLw0") debugger;
-    div.querySelector(".content-list .videos").innerHTML = "";
+    if (block_id == "NClzsgLw0") div.querySelector(".content-list .videos").innerHTML = "";
     div.querySelector(".content-list .images").innerHTML = "";
     div.querySelector(".content-list .links").innerHTML = "";
     var linked_div = div.querySelector(".linked-items");
@@ -4963,7 +5051,6 @@ function addBlockLinkedItems(div) {
     videos.forEach((video) => {
         video.linked_blocks.forEach((blk) => {
             if (blk.block_id == block_id) {
-                debugger;
                 linked_div.classList.remove("hide");
                 var div1 = document.createElement("div");
                 div1.className = "video";
