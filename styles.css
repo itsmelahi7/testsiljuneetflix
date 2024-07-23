@@ -2604,3 +2604,22 @@ i.fa-chevron-right:before {
     max-height: 50vh;
     overflow-y: scroll;
 }
+
+
+
+.more .data-related * {
+    color: var(--link-color);
+}
+
+.more .download,
+.more .import {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #92a8e4;
+    border-radius: 5px;
+    cursor: pointer;
+}

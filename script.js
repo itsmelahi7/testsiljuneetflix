@@ -184,6 +184,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    ele = document.querySelector(".tab.more");
+    if (ele) {
+        ele.addEventListener("click", () => {
+            openSettingPage();
+        });
+    }
+
     ele = document.querySelector(".tab.upload");
     if (ele) {
         ele.addEventListener("click", () => {
@@ -939,7 +946,8 @@ function downloadJSON(all_data) {
 
     // Get the current date and time
     const currentDate = new Date();
-    const fileName = `my_mcq_app_${currentDate.getFullYear()}_${String(currentDate.getMonth() + 1).padStart(2, "0")}_${String(currentDate.getDate()).padStart(2, "0")}_${String(currentDate.getHours()).padStart(2, "0")}_${String(currentDate.getMinutes()).padStart(2, "0")}.json`;
+    //const fileName = `revise_app_data_${currentDate.getFullYear()}${String(currentDate.getMonth() + 1).padStart(2, "0")}_${String(currentDate.getDate()).padStart(2, "0")}_${String(currentDate.getHours()).padStart(2, "0")}_${String(currentDate.getMinutes()).padStart(2, "0")}.json`;
+    const fileName = `revise_app_data_${currentDate.getFullYear()}${String(currentDate.getMonth() + 1).padStart(2, "0")}${String(currentDate.getDate()).padStart(2, "0")}${String(currentDate.getHours()).padStart(2, "0")}${String(currentDate.getMinutes()).padStart(2, "0")}.json`;
 
     // Create a blob with the JSON data
     const blob = new Blob([jsonData], { type: "application/json" });
@@ -5435,4 +5443,34 @@ function loadPredefinedMocks() {
     });
 }
 
-function startNewMockTest2(mock) {}
+function openSettingPage() {
+    openPage("more");
+
+    var page = document.querySelector(".page.more");
+
+    var div1 = document.createElement("div");
+    div1.className = "data-related";
+    page.appendChild(div1);
+
+    var div = document.createElement("div");
+    div.className = "download";
+    div1.appendChild(div);
+    div.innerHTML = `
+                    <i class="fa-solid  fa-download"></i>
+                    <span class="label">Download User Data</span>
+                    `;
+    div.addEventListener("click", () => {
+        downloadJSON(user_data);
+    });
+
+    div = document.createElement("div");
+    div.className = "import";
+    div1.appendChild(div);
+    div.innerHTML = `
+                    <i class="fa-solid  fa-file-import"></i>
+                    <span class="label">Import User Data</span>
+                    `;
+    div.addEventListener("click", () => {
+        importUserData();
+    });
+}
