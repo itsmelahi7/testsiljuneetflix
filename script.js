@@ -3583,7 +3583,7 @@ function displayQuestion(que, tar_ele, type) {
                     selected_option_id: que_div.querySelector(".option.selected").id,
                     answer_option_id: que_div.querySelector(".option.correct").id,
                 };
-                ques.push(oobj);
+                ques.unshift(oobj);
                 saveUserData();
                 updateDailyQuestionsCircles();
 
