@@ -5446,6 +5446,9 @@ function loadPredefinedMocks() {
 function openSettingPage() {
     openPage("more");
 
+    let ele = document.querySelector(".page.more .download");
+    if (ele) return;
+
     var page = document.querySelector(".page.more");
 
     var div1 = document.createElement("div");
