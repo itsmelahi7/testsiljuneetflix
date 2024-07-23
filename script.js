@@ -386,7 +386,8 @@ function initialLoading() {
     openRandomPractisePage();
     updateDailyQuestionsCircles();
     displayQuestion();
-
+    supportMyWork();
+    addSocialMediaSection();
     //new_que_tags = all_tags;
     //new_ques = getDataFromLocale("new_ques");
     //if (!new_ques) new_ques = [];
@@ -401,7 +402,7 @@ function initialLoading() {
     // video_links_data = getDataFromLocale("video_links_data");
     // updated_ques = getDataFromLocale("updated_ques");
 
-    openRandomPractisePage();
+    //openRandomPractisePage();
     loadNotesData("kk");
 
     //
@@ -867,10 +868,15 @@ function popupAlert(message, time) {
     div.className = "me-popup-alert";
     div.textContent = message;
     document.body.append(div);
-    if (time) return;
-    setTimeout(function () {
-        div.remove();
-    }, 3000);
+    if (time) {
+        setTimeout(function () {
+            div.remove();
+        }, `${time * 1000}`);
+    } else {
+        setTimeout(function () {
+            div.remove();
+        }, 3000);
+    }
 }
 function popupAlertBackgroundColorChange(color) {}
 function removePopupAlert() {
@@ -5475,5 +5481,103 @@ function openSettingPage() {
                     `;
     div.addEventListener("click", () => {
         importUserData();
+    });
+}
+
+function supportMyWork() {
+    var ele = document.querySelector(".page.random .social-media");
+    if (ele) return;
+
+    let page = document.querySelector(".page.random");
+    let intex_tags = document.querySelector(".page.random .index-tags");
+
+    var div = document.createElement("div");
+    div.className = "support-me";
+    page.insertBefore(div, intex_tags);
+
+    div.innerHTML = `<div class="head me-header">
+                        <i class="fa-solid arrow fa-chevron-right"></i>
+                        <span class="label"> ₹ Support Me</span>
+                    </div>
+                    <div class="me-header-list  hide list">
+                    <span>If you find this app useful in your prepration then do support my work, this will help me continue this project and improve it even further.</span>
+                    <div class="upi">
+                        <span>You can support me through UPI</span>
+                        <div class="upi-id">
+                            <span> UPI:</span>
+                            <span>6005480317@upi</span>
+                            <i class="fa-regular fa-copy copy"></i>
+                        </div>
+                        <div class="scanner">
+                            <span>OR
+                            Scan the below QR code:
+                            </span>
+                        </div>
+                    </div>
+                    </div>
+                    `;
+
+    let img = document.createElement("img");
+    img.src = `/assets/gpay_qr_code.jpg`;
+    div.querySelector(".upi .scanner").appendChild(img);
+
+    ele = div.querySelector(".me-header");
+    if (ele) {
+        ele.addEventListener("click", (event) => {
+            let ele = event.target.closest(".me-header");
+            let eee = div.querySelector(".me-header-list");
+            eee.classList.toggle("hide");
+            if (eee.classList.contains("hide")) {
+                ele.querySelector(".head i").className = "fa-solid arrow fa-chevron-right";
+                //ele.querySelector(".head span").className = "Show linked items";
+            } else {
+                ele.querySelector(".head i").className = "fa-solid arrow fa-chevron-down";
+                //ele.querySelector(".head span").className = "Hide linked items";
+            }
+        });
+    }
+
+    ele = div.querySelector(".upi-id");
+    if (ele) {
+        ele.addEventListener("click", (event) => {
+            copyToClipboard("6005480317@upi");
+            popupAlert("UPI ID Copied to Clipboard");
+        });
+    }
+}
+function addSocialMediaSection() {
+    var ele = document.querySelector(".page.random .social-media");
+    if (ele) return;
+
+    let page = document.querySelector(".page.random");
+    let intex_tags = document.querySelector(".page.random .index-tags");
+
+    var div = document.createElement("div");
+    div.className = "social-media about-me";
+    page.insertBefore(div, intex_tags);
+
+    var span = document.createElement("h1");
+    span.className = "";
+    span.textContent = "✨ Follow me:";
+    div.appendChild(span);
+
+    var id = "mehboobelahi05";
+    var link = ["facebook", "twitter", "instagram", "youtube"];
+
+    var div2 = document.createElement("div");
+    div2.className = "social-media .links";
+    div.appendChild(div2);
+
+    link.forEach((site) => {
+        var a = document.createElement("a");
+        a.className = `icon ${name}`;
+        a.target = "_blank";
+        a.href = `https://${site}.com/${id}`;
+        div2.appendChild(a);
+        if (site == "youtube") a.href = `https://www.${site}.com/@${id}/featured`;
+
+        var img = document.createElement("img");
+        img.src = `./assets/${site}.png`;
+        a.appendChild(img);
     });
 }

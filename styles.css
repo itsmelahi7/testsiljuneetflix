@@ -362,7 +362,8 @@ span.option.wrong-ans {
 .about-me .social-media {
     display: flex;
     gap: 10px;
-    justify-content: center;
+    justify-content: start;
+    align-items: center;
     margin: 20px;
 }
 
@@ -397,8 +398,8 @@ span.option.wrong-ans {
 }
 
 .about-me .social-media img {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border-radius: 127px;
 }
 
@@ -587,7 +588,7 @@ span.check-ans {
     border-radius: 3px;
     width: 70%;
     text-align: center;
-    width: fit-content;
+    /*width: fit-content;*/
 }
 
 .filtered-tags {
@@ -2017,7 +2018,7 @@ div.me-block div.icons {
     opacity: 0.7;
 }
 
-div.support-me {
+div.support-me_ {
     display: flex;
     justify-content: stretch;
     margin: 10px;
@@ -2621,5 +2622,44 @@ i.fa-chevron-right:before {
     padding: 10px;
     border: 1px solid #92a8e4;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.random .social-media {
+    margin-top: 30px;
+}
+
+.random .social-media h1 {
+    font-size: 1.5em;
+    color: #6770a6;
+}
+
+.support-me img {
+    width: 80%;
+    height: auto;
+}
+
+.support-me span {
+    color: #787878;
+    padding: 5px 0px;
+    line-height: 25px;
+}
+
+.support-me .upi {
+    margin: 15px 0px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.support-me .me-header-list {
+    padding: 0px 25px;
+}
+
+.support-me .upi-id {
+    border: 1px solid #8484e1;
+    padding: 6px;
+    border-radius: 4px;
+    width: 160px;
     cursor: pointer;
 }
