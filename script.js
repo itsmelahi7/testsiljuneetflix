@@ -25,6 +25,7 @@ var notes_data = [];
 var other_data = [];
 var tags_list = [];
 var user_data = [];
+var mocks_data = [];
 // ghghghg
 var explanation_data = [];
 var linked_blocks_data = [];
@@ -1221,18 +1222,11 @@ function openMockTestPage(arg) {
                             <div class="new-mock me-flex-co">
                                 <div class="head">
                                     <i class="fa-solid arrow fa-chevron-down"></i>
-                                    <span class="label">New Mock Test</span>
+                                    <span class="label">Random Mock Test</span>
                                 </div>
                                 <div class="content me-flex-co">
-                                    <span class="link start-new-mock">Start new mock test</span>
+                                    <span class="link start-new-mock">Start a new random mock test</span>
                                 </div>
-                            </div>
-                            <div class="mock-history">
-                                <div class="head">
-                                    <i class="fa-solid arrow fa-chevron-right"></i>
-                                    <span class="label">Mock Test History</span>
-                                </div>
-                                <div class="mock-history-list hide me-dis-flex-co"></div>
                             </div>
                         </div>
                         <div class="mock-test-sec hide me-dis-flex-co"></div>`;
@@ -1297,6 +1291,8 @@ function openMockTestPage(arg) {
                 }
             });
         }
+        loadPredefinedMocks();
+        loadMockTestHistory();
     }
 }
 
@@ -1316,7 +1312,7 @@ function endMockTestHTMLTemplate() {
     return `<div class="result">
             <div class="top me-dis-flex">
                 <span class="label">Result</span>
-                <span id="start-new-mock" class=" link start-new-mock">Start new mock</span>
+                <span id="start-new-mock" class=" hide link start-new-mock">Start new mock</span>
                 <div class="cross">X</div>
             </div>
             <div class="result-item">
@@ -2298,18 +2294,17 @@ function scrollToView(ele) {
         behavior: "smooth", // Optional: Smooth scrolling behavior
         block: "center", // Optional: Scroll to the top of the element
     });
-
     if (ele.classList.contains("me-block")) {
-        ele.querySelector(".me-block-main").classList.add("focus");
+        ele = ele.querySelector(".me-block-main");
+        ele.classList.add("focus");
     } else {
         ele.classList.add("focus");
     }
 
     setTimeout(() => {
         ele.classList.remove("focus");
-    }, 5000);
+    }, 4000);
 }
-
 function openTestQuestion() {
     var id = "oyxgdCVRPx";
     var que = getQuestionById(id);
@@ -2384,6 +2379,22 @@ function playVideoPlayer__(time, video_id, target) {
         initializeYouTubePlayer();
     }
 }
+var mocks = [];
+function generateSomeMocks() {
+    for (let i = 0; i < 20; i++) {
+        let arr = {
+            id: generateUniqueId(),
+            que_ids: [],
+        };
+        let tq = que_data.length;
+        for (let i = 0; i < 20; i++) {
+            let randomIndex = Math.floor(Math.random() * tq);
+            arr.que_ids.push(que_data[randomIndex].id); // Remove the element from the copy and push it to result
+        }
+        mocks.push(arr);
+    }
+}
+
 function playVideoPlayer_____(time, video_id, target) {
     // Initialize the YouTube player using the IFrame API
     function initializeYouTubePlayer() {
@@ -3070,7 +3081,7 @@ function addDividerBefore(element) {
     element.parentElement.insertBefore(div, element);
 }
 
-function startNewMockTest() {
+function startNewMockTest(mock) {
     document.querySelector(".main.tabs").classList.add("hide");
     document.querySelector(".page.mock > div").classList.add("hide");
     document.querySelector(".page.mock .mock-test-sec").classList.remove("hide");
@@ -3103,7 +3114,7 @@ function startNewMockTest() {
         });
     });
 
-    var number_of_questions_for_mock = 20;
+    var number_of_questions_for_mock = mock ? mock.que_ids.length : 20;
     var dot_target_ele = document.querySelector(".que-list-dots");
     for (var i = 0; i < number_of_questions_for_mock; i++) {
         var div = document.createElement("div");
@@ -3121,9 +3132,10 @@ function startNewMockTest() {
         });
     }
     setTimer(number_of_questions_for_mock / 2);
+
     fil_ques = que_data.slice(0, 20);
     var mock_obj = {
-        id: generateUniqueId(),
+        id: mock ? mock.id : generateUniqueId(),
         date: getTodayDate(),
         start_time: getCurrentTime(),
         end_time: "",
@@ -3140,9 +3152,19 @@ function startNewMockTest() {
     user_data[0].mocks.unshift(mock_obj);
     var que_arr = [];
     que_arr = user_data[0].mocks[0].questions;
-    fil_ques.forEach((que) => {
+    let arr = [];
+    if (!mock) {
+        let tq = que_data.length;
+        for (let i = 0; i < 20; i++) {
+            let randomIndex = Math.floor(Math.random() * tq);
+            arr.push(que_data[randomIndex].id); // Remove the element from the copy and push it to result
+        }
+    } else {
+        arr = mock.que_ids;
+    }
+    arr.forEach((id) => {
         var obj = {
-            id: que.id,
+            id: id,
             selected_option_id: "",
             answer_option_id: "",
             time_taken: "",
@@ -3150,6 +3172,7 @@ function startNewMockTest() {
         que_arr.push(obj);
         var target_ele = document.querySelector(".mock-test .que-text");
         //var que_div = getMCQQuestionElement(que, target_ele, "mock");
+        let que = getQuestionById(id);
         displayQuestion(que, target_ele, "mock");
     });
 
@@ -3560,24 +3583,8 @@ function displayQuestion(que, tar_ele, type) {
             if (!type || type == "random") {
                 var que_div = document.querySelector(".page.random .que-text .que-div");
                 //save data in today practise questions
-                let arr = user_data[0].daily_practise_questions;
-                if (!arr.length) {
-                    let obj = {
-                        date: getTodayDate(),
-                        questions: [],
-                    };
-                    arr.unshift(obj);
-                    ques;
-                }
-                let date = getTodayDate();
-                if (arr[0].date != date) {
-                    let obj = {
-                        date: getTodayDate(),
-                        questions: [],
-                    };
-                    arr.unshift(obj);
-                }
-                let ques = arr[0].questions;
+                let ques = user_data[0].daily_practise_questions[0].questions;
+                //let ques = arr[0].questions;
                 let oobj = {
                     que_id: curr_ques.id,
                     selected_option_id: que_div.querySelector(".option.selected").id,
@@ -4695,11 +4702,14 @@ async function loadDataFromFiles() {
     que_data = my_data[0].ques;
     notes_data = my_data[0].notes;
     tags_list = my_data[0].tags_list;
+    mocks_data = await fetchDataFromFile(`mocks`);
     //console.log("Array data:", array_data); // Log the array data
     //displayData(array_data);
     //name = `user_data_${exam}`;
+    generateSomeMocks();
     user_data = getDataFromLocale(`user_data_${exam}`);
 
+    debugger;
     //if (!user_data) user_data = [];
     if (!user_data || !user_data.length) {
         user_data = [];
@@ -4719,6 +4729,22 @@ async function loadDataFromFiles() {
         while (!user_data[0].username) {
             user_data.shift();
         }
+    }
+    let dpq = user_data[0].daily_practise_questions;
+    let today_date = getTodayDate();
+
+    if (!dpq.length) {
+        dpq.unshift({
+            date: today_date,
+            questions: [],
+        });
+        saveUserData();
+    } else if (dpq[0].date !== today_date) {
+        dpq.unshift({
+            date: today_date,
+            questions: [],
+        });
+        saveUserData();
     }
     console.log("me: user_data[] loaded");
     setTimeout(() => {
@@ -5254,32 +5280,159 @@ function updateDailyQuestionsCircles() {
     }
 }
 function showDailyQuestions(div) {
-    let ele = div.querySelector(".content .circles");
-    if (ele) ele.innerHTML = "";
+    let div_circles = div.querySelector(".content .circles");
+    if (div_circles) div_circles.innerHTML = "";
 
-    ele = div.querySelector(".content .list");
-    if (ele) ele.innerHTML = "";
-    let ques = user_data[0].daily_practise_questions;
+    let div_list = div.querySelector(".content .list");
+    if (div_list) div_list.innerHTML = "";
+    let ques = user_data[0].daily_practise_questions[0].questions;
     if (!ques.length) return;
-    ques = ques[0].questions;
+    //ques = ques[0].questions;
 
-    ques.forEach((qqq) => {
+    ques.forEach((qqq, index) => {
         let tar = div.querySelector(".content .list");
         let que = getQuestionById(qqq.que_id);
+
+        let div_dot = document.createElement("div");
+        div_dot.className = `que-dot`;
+        div_circles.appendChild(div_dot);
+        div_dot.addEventListener("click", () => {
+            debugger;
+            let que_id = qqq.que_id;
+            let ele = div_list.querySelector(`#${que_id}`);
+            scrollToView(ele);
+        });
+
         let qq_div = displayQuestion(que, tar, "daily-ques");
+
         if (qqq.selected_option_id === qqq.answer_option_id) {
             let option = qq_div.querySelector(`#${qqq.selected_option_id}`);
             option.classList.add("selected");
             option.classList.add("correct");
+            div_dot.classList.add("correct");
         } else {
             let option = qq_div.querySelector(`#${qqq.selected_option_id}`);
             option.classList.add("selected");
             option.classList.add("wrong");
             option = qq_div.querySelector(`#${qqq.answer_option_id}`);
             option.classList.add("correct");
+            div_dot.classList.add("wrong");
         }
         qq_div.querySelectorAll(`div.option`).forEach((opt) => {
             opt.classList.add("disabled");
         });
     });
 }
+
+function loadMockTestHistory() {
+    let ele = document.querySelector(".page.mock > div");
+
+    var div = document.createElement("div");
+    div.className = "mock-history";
+    ele.appendChild(div);
+
+    div.innerHTML = `<div class="head me-header">
+                        <i class="fa-solid arrow fa-chevron-right"></i>
+                        <span>Mock Test History</span>
+                    </div>
+                    <div class="mock-history-list hide me-header-list me-dis-flex-co">
+                    </div>
+                    `;
+    ele = div.querySelector(".me-header");
+    if (ele) {
+        addDividerBefore(ele);
+        ele.addEventListener("click", (event) => {
+            let ele = event.target.closest(".head");
+            let eee = document.querySelector(".page.mock .mock-history-list");
+            eee.classList.toggle("hide");
+            if (eee.classList.contains("hide")) {
+                ele.querySelector("i").className = "fa-solid fa-chevron-right";
+                //head.querySelector("span").textContent = "Mock History";
+            } else {
+                ele.querySelector("i").className = "fa-solid fa-chevron-down";
+                //head.querySelector("span").textContent = "Mock History";
+                loadPreviousMockResults();
+            }
+        });
+    }
+}
+
+function loadPredefinedMocks() {
+    let ele = document.querySelector(".page.mock > div");
+
+    var div = document.createElement("div");
+    div.className = "pre-defined-mocks";
+    ele.appendChild(div);
+
+    div.innerHTML = `<div class="head me-header">
+                        <i class="fa-solid arrow fa-chevron-right"></i>
+                        <span>Static Mock Tests</span>
+                    </div>
+                    <div class="mock-test-list list hide me-header-list">
+                        
+                    </div>
+                    `;
+    ele = div.querySelector(".me-header");
+    if (ele) {
+        addDividerBefore(ele);
+        ele.addEventListener("click", (event) => {
+            let ele = event.target.closest(".head");
+            let eee = div.querySelector(".mock-test-list");
+            eee.classList.toggle("hide");
+            if (eee.classList.contains("hide")) {
+                ele.querySelector("i").className = "fa-solid fa-chevron-right";
+                //head.querySelector("span").textContent = "Mock History";
+            } else {
+                ele.querySelector("i").className = "fa-solid fa-chevron-down";
+                //head.querySelector("span").textContent = "Mock History";
+                //loadPreviousMockResults();
+            }
+        });
+    }
+    let list_ele = div.querySelector(".mock-test-list");
+    mocks_data.forEach((mock, index) => {
+        var div_mock = document.createElement("div");
+        div_mock.className = "pd-mock";
+        list_ele.appendChild(div_mock);
+
+        div_mock.innerHTML = `
+                            <span class="start link">Start mock test ${index + 1}</span>
+                            <div class="history">
+                                <div class="head me-header-inner hide">
+                                    <i class="fa-solid arrow fa-chevron-right"></i>
+                                    <span class="label">History</span>
+                                </div>
+                                <div class="history-list  me-header-list list hide">
+                                </div>
+                            </div>`;
+
+        ele = div_mock.querySelector(".me-header-inner");
+        let div = div_mock;
+        if (ele) {
+            //addDividerBefore(ele);
+            ele.addEventListener("click", (event) => {
+                debugger;
+                let ele = event.target.closest(".head");
+                let eee = div.querySelector(".me-header-list");
+                eee.classList.toggle("hide");
+                if (eee.classList.contains("hide")) {
+                    ele.querySelector("i").className = "fa-solid fa-chevron-right";
+                    //head.querySelector("span").textContent = "Mock History";
+                } else {
+                    ele.querySelector("i").className = "fa-solid fa-chevron-down";
+                    //head.querySelector("span").textContent = "Mock History";
+                    //loadPreviousMockResults();
+                }
+            });
+        }
+
+        ele = div_mock.querySelector(".start.link");
+        if (ele) {
+            ele.addEventListener("click", () => {
+                startNewMockTest(mock);
+            });
+        }
+    });
+}
+
+function startNewMockTest2(mock) {}

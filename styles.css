@@ -1411,6 +1411,29 @@ div.que-dot.selected {
 }
 
 
+.daily-practise-questions .circles {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+    margin: 10px;
+}
+
+.daily-practise-questions .circles .que-dot {
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.daily-practise-questions .circles .que-dot.correct {
+    background-color: #a4e8b1;
+}
+
+.daily-practise-questions .circles .que-dot.wrong {
+    background-color: #ffc2c2;
+}
+
 
 .link.start-new-mock {
     margin: 14px;
@@ -1477,7 +1500,7 @@ span.toc {
 
 
 
-
+.que-div.focus,
 .me-block-main.focus,
 div.me-block.focus,
 span.block.focus {
@@ -1867,6 +1890,23 @@ div.head * {
     font-size: 1.3em;
     margin: 0px;
     padding: 0px;
+
+}
+
+.mock-test-list {
+    margin: 0px 20px;
+}
+
+.mock-test-list .pd-mock {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin: 10px;
+    border: 1px solid #cbcddf;
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px;
+    box-shadow: 0px 4px 8px rgb(187 190 230 / 50%);
 
 }
 
@@ -2516,14 +2556,18 @@ i.fa-chevron-right:before {
     gap: 10px;
 }
 
+.me-header.head,
 .daily-practise-questions>.head,
 .mock-history>.head,
 .new-mock>.head {
     border-left: 3px solid #8585fa;
     background-color: #8585fa1a;
     padding: 11px 5px;
+    margin: 10px;
 }
 
+.me-header-inner.head *,
+.me-header.head *,
 .daily-practise-questions>div.head *,
 .mock-history>div.head *,
 .new-mock>div.head * {
@@ -2533,7 +2577,7 @@ i.fa-chevron-right:before {
     padding: 0px;
 }
 
-.daily-practise-questions .content {
+.daily-practise-questions .content .list {
     max-height: 70vh;
     overflow-y: scroll;
 }
@@ -2554,4 +2598,9 @@ i.fa-chevron-right:before {
     margin: 0px;
     padding: 0px;
 
+}
+
+.me-header-list {
+    max-height: 50vh;
+    overflow-y: scroll;
 }
