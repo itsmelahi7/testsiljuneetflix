@@ -6,6 +6,10 @@
     --focus-block-bc: #ffdec9;
 }
 
+.pages>.page {
+    max-height: 93vh;
+    overflow-y: scroll;
+}
 
 
 span.me-bold {
@@ -197,8 +201,8 @@ span.logo::before {
     border-top: 0px solid #cbcbcb;
     border-bottom: 0px solid #cbcbcb;
     padding-bottom: 21px;
-    max-height: 70vh;
-    overflow-y: scroll;
+    /*max-height: 70vh;
+    overflow-y: scroll;*/
 }
 
 .sd-container {
@@ -1406,10 +1410,7 @@ div.que-dot.selected {
     margin-right: auto;
 }
 
-.new-mock,
-.mock-history.head {
-    padding: 15px;
-}
+
 
 .link.start-new-mock {
     margin: 14px;
@@ -1417,6 +1418,7 @@ div.que-dot.selected {
     justify-content: end;
     width: fit-content;
 }
+
 
 div.page {
     padding: 0px;
@@ -1611,12 +1613,13 @@ span.block.heading {
 
 
 
-.notes .fa-list-ul {
+.notes .header .chapter-index {
     display: flex;
     justify-content: end;
+    gap: 4px;
+    color: var(--link-color);
     margin-right: 20px;
-    width: fit-content;
-    margin-left: auto;
+    cursor: pointer;
 }
 
 .top i.menu {
@@ -1867,11 +1870,16 @@ div.head * {
 
 }
 
-.mock-history .mock-data {
-    border-bottom: 0px solid gray;
-    border-top: 0px solid gray;
-    margin: 10px 0px;
+.mock-history-list .mock-data {
+    border: 1px solid gray;
+    border-radius: 3px;
+    box-shadow: 5px 4px 8px rgb(187 190 230 / 50%);
+    margin: 10px;
     padding: 15px;
+}
+
+.mock-data>.date {
+    margin: 0px 5px;
 }
 
 .mock-history .result {
@@ -2506,4 +2514,44 @@ i.fa-chevron-right:before {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.daily-practise-questions>.head,
+.mock-history>.head,
+.new-mock>.head {
+    border-left: 3px solid #8585fa;
+    background-color: #8585fa1a;
+    padding: 11px 5px;
+}
+
+.daily-practise-questions>div.head *,
+.mock-history>div.head *,
+.new-mock>div.head * {
+    color: black;
+    font-size: 1em;
+    margin: 0px;
+    padding: 0px;
+}
+
+.daily-practise-questions .content {
+    max-height: 70vh;
+    overflow-y: scroll;
+}
+
+.filter-section .head .filter,
+.filter-section .head .search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-right: 10px;
+}
+
+.filter-section .head .filter *,
+.filter-section .head .search * {
+    color: var(--link-color);
+    font-size: 0.8em;
+    margin: 0px;
+    padding: 0px;
+
 }

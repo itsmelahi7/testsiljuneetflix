@@ -376,6 +376,7 @@ function initialLoading() {
     curr_que_index = 0;
     curr_ques = fil_ques[curr_que_index];
     openRandomPractisePage();
+    updateDailyQuestionsCircles();
     displayQuestion();
 
     //new_que_tags = all_tags;
@@ -1218,40 +1219,52 @@ function openMockTestPage(arg) {
         ele.innerHTML = `
                         <div>
                             <div class="new-mock me-flex-co">
-                                <span class="label">New Mock Test</span>
-                                <div class="select-chapter hide">
-                                    <div>
-                                        <span class="label">Select chapter:</span>
-                                        <input type="text" class="select-chapter-input" placeholder="search chapter" />
-                                    </div>
-                                    <div class="chapter-list"></div>
+                                <div class="head">
+                                    <i class="fa-solid arrow fa-chevron-down"></i>
+                                    <span class="label">New Mock Test</span>
                                 </div>
-                                <div class="select-que-count hide">
-                                    <span>Number of questions:</span>
-                                    <select id="dropdown">
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
-                                        <option value="20">20</option>
-                                    </select>
+                                <div class="content me-flex-co">
+                                    <span class="link start-new-mock">Start new mock test</span>
                                 </div>
-                                <span class="link start-new-mock">Start new mock test</span>
                             </div>
-                            <div class="mock-history head">
-                                <i class="fa-solid arrow fa-chevron-right"></i>
-                                <span class="label">Show Mock History</span>
+                            <div class="mock-history">
+                                <div class="head">
+                                    <i class="fa-solid arrow fa-chevron-right"></i>
+                                    <span class="label">Mock Test History</span>
+                                </div>
+                                <div class="mock-history-list hide me-dis-flex-co"></div>
                             </div>
-                            <div class="mock-history list hide me-dis-flex-co"></div>
                         </div>
                         <div class="mock-test-sec hide me-dis-flex-co"></div>`;
 
         // new-mock div
         var div = ele.querySelector(".new-mock");
+
+        ele = div.querySelector(".head");
+        if (ele) {
+            //addDividerBefore(ele);
+            ele.addEventListener("click", (event) => {
+                let ele = event.target.closest(".head");
+                let eee = div.querySelector(".content");
+                eee.classList.toggle("hide");
+                if (eee.classList.contains("hide")) {
+                    ele.querySelector("i").className = "fa-solid fa-chevron-right";
+                    //head.querySelector("span").textContent = "Mock History";
+                } else {
+                    ele.querySelector("i").className = "fa-solid fa-chevron-down";
+                    //head.querySelector("span").textContent = "Mock History";
+                    //loadPreviousMockResults();
+                }
+            });
+        }
+
         ele = div.querySelector(".link.start-new-mock");
         if (ele) {
             ele.addEventListener("click", () => {
                 startNewMockTest();
             });
         }
+
         ele = div.querySelector(".select-chapter input");
         if (ele) {
             ele.addEventListener("focus", (event) => {
@@ -1267,21 +1280,23 @@ function openMockTestPage(arg) {
                 setAutoComplete(event, arr, "new-mock-select-chapter");
             });
         }
-        var head = document.querySelector(".mock-history.head");
-        addDividerBefore(head);
-
-        head.addEventListener("click", (event) => {
-            var tar_ele = document.querySelector(".page.mock .mock-history.list");
-            tar_ele.classList.toggle("hide");
-            if (tar_ele.classList.contains("hide")) {
-                head.querySelector("i").className = "fa-solid fa-chevron-right";
-                head.querySelector("span").textContent = "Show Mock History";
-            } else {
-                head.querySelector("i").className = "fa-solid fa-chevron-down";
-                head.querySelector("span").textContent = "Hide Mock History";
-                loadPreviousMockResults();
-            }
-        });
+        ele = document.querySelector(".mock-history .head");
+        if (ele) {
+            addDividerBefore(ele);
+            ele.addEventListener("click", (event) => {
+                let ele = event.target.closest(".head");
+                let eee = document.querySelector(".page.mock .mock-history-list");
+                eee.classList.toggle("hide");
+                if (eee.classList.contains("hide")) {
+                    ele.querySelector("i").className = "fa-solid fa-chevron-right";
+                    //head.querySelector("span").textContent = "Mock History";
+                } else {
+                    ele.querySelector("i").className = "fa-solid fa-chevron-down";
+                    //head.querySelector("span").textContent = "Mock History";
+                    loadPreviousMockResults();
+                }
+            });
+        }
     }
 }
 
@@ -1340,7 +1355,7 @@ function loadNotesData(arg) {
     if (!chapter_list) addChapterIndexList();
 
     var target_ele = document.querySelector(".page.notes");
-    let list_icon = target_ele.querySelector(".fa-list-ul");
+    let list_icon = target_ele.querySelector(".chapter-index");
 
     if (list_icon) {
         let ele = document.querySelector(".page.notes .page-title");
@@ -1350,10 +1365,15 @@ function loadNotesData(arg) {
         return;
     }
 
-    target_ele.innerHTML = ` <i class="fa-solid fa-list-ul"></i>
+    target_ele.innerHTML = ` <div class="header">
+                                <div class="chapter-index">
+                                    <i class="fa-solid fa-list-ul"></i>
+                                    <span>Chapters</span>
+                                </div>
+                            </div>
                             <div class="page-content page-text hide "></div>`;
 
-    var ele = target_ele.querySelector(".fa-list-ul");
+    var ele = target_ele.querySelector(".chapter-index");
     if (ele) {
         //target_ele.querySelector(".index-tags").classList.add("open");
         ele.addEventListener("click", () => {
@@ -2850,7 +2870,7 @@ function loadPreviousMockResults() {
         }
     });*/
 
-    var tar_ele = document.querySelector(".page.mock .mock-history.list");
+    var tar_ele = document.querySelector(".page.mock .mock-history-list");
     tar_ele.innerHTML = "";
     var mocks = user_data[0].mocks;
     if (!mocks) mocks = [];
@@ -2861,13 +2881,13 @@ function loadPreviousMockResults() {
         tar_ele.appendChild(div_mock);
 
         var span0 = document.createElement("span");
-        span0.className = "mock-test-num";
+        span0.className = "mock-test-num hide";
         span0.textContent = `Mock Test ${index + 1}`;
         div_mock.appendChild(span0);
 
         var span = document.createElement("span");
         span.className = "date label";
-        span.textContent = "Attempted Date: " + getFormattedDate(mock.date) + "  (" + getFormattedTime(mock.start_time) + "  -  " + getFormattedTime(mock.end_time) + ")";
+        span.textContent = "Attempted Date: " + getFormattedDate(mock.date); //+ "  (" + getFormattedTime(mock.start_time) + "  -  " + getFormattedTime(mock.end_time) + ")";
         div_mock.appendChild(span);
 
         var result = mock.result;
@@ -3374,8 +3394,13 @@ function getRandomPageHTMLTemplate() {
                         <i class="fa-solid fa-search hide search"></i>
                         
                         <div class="filter">
-                            <i class="fa-regular fa-filter filter"></i>
-                            <span class="filter">Filter</span>
+                            <i class="fa-regular fa-filter"></i>
+                            <span>Filter</span>
+                        </div>
+
+                        <div class="search hide">
+                            <i class="fa-regular fa-search"></i>
+                            <span>Search</span>
                         </div>
                     </div>
                     <div class="filtered-tags hide"></div>
@@ -3488,6 +3513,7 @@ function displayQuestion(que, tar_ele, type) {
         */
 
         if (type == "mock-result") return;
+        if (type == "daily-ques") return;
 
         div.addEventListener("click", (event) => {
             var span = event.target.closest(".option");
@@ -3532,12 +3558,42 @@ function displayQuestion(que, tar_ele, type) {
             });
 
             if (!type || type == "random") {
+                var que_div = document.querySelector(".page.random .que-text .que-div");
+                //save data in today practise questions
+                let arr = user_data[0].daily_practise_questions;
+                if (!arr.length) {
+                    let obj = {
+                        date: getTodayDate(),
+                        questions: [],
+                    };
+                    arr.unshift(obj);
+                    ques;
+                }
+                let date = getTodayDate();
+                if (arr[0].date != date) {
+                    let obj = {
+                        date: getTodayDate(),
+                        questions: [],
+                    };
+                    arr.unshift(obj);
+                }
+                let ques = arr[0].questions;
+                let oobj = {
+                    que_id: curr_ques.id,
+                    selected_option_id: que_div.querySelector(".option.selected").id,
+                    answer_option_id: que_div.querySelector(".option.correct").id,
+                };
+                ques.push(oobj);
+                saveUserData();
+                updateDailyQuestionsCircles();
+
+                //saveDataInLocale("user_data", user_data);
+
                 // showing the explanations for only the random question or question in random page
                 // not showing explanations for the mock questions and pre-mock-questions
 
                 //explanation of the id and the value of the ID in the value
 
-                var que_div = document.querySelector(".page.random .que-text .que-div");
                 var div = document.createElement("div");
                 div.className = "explanations me-dis-flex-co";
                 que_div.appendChild(div);
@@ -5157,4 +5213,73 @@ async function clearCache() {
 
     // Optionally reload the page to apply changes
     //window.location.reload();
+}
+
+function saveUserData() {
+    saveDataInLocale("user_data", user_data);
+}
+function updateDailyQuestionsCircles() {
+    let que_div = document.querySelector(".page.random .que-div");
+    let div = document.querySelector(".page.random .bottom .daily-practise-questions");
+    if (!div) {
+        div = document.createElement("div");
+        div.className = "daily-practise-questions";
+        let ele = document.querySelector(".page.random .bottom");
+        ele.appendChild(div);
+
+        div.innerHTML = `<div class="head">
+                        <i class="fa-solid fa-chevron-right"></i>
+                        <span>Today practise questions</span>
+                    </div>
+                    <div class="content hide">
+                        <div class="circles"></div>
+                        <div class="list"></div>
+                    </div>`;
+        ele = div.querySelector(".head");
+        if (ele) {
+            ele.addEventListener("click", () => {
+                let eee = div.querySelector(".content");
+                eee.classList.toggle("hide");
+                if (eee.classList.contains("hide")) {
+                    div.querySelector(".head i").className = "fa-solid fa-chevron-right";
+                    div.querySelector(".head span").textContent = "Today practise questions";
+                } else {
+                    div.querySelector(".head i").className = "fa-solid fa-chevron-down";
+                    div.querySelector(".head span").textContent = "Today practise questions";
+                    showDailyQuestions(div);
+                }
+            });
+        }
+        //ele = div;
+    }
+}
+function showDailyQuestions(div) {
+    let ele = div.querySelector(".content .circles");
+    if (ele) ele.innerHTML = "";
+
+    ele = div.querySelector(".content .list");
+    if (ele) ele.innerHTML = "";
+    let ques = user_data[0].daily_practise_questions;
+    if (!ques.length) return;
+    ques = ques[0].questions;
+
+    ques.forEach((qqq) => {
+        let tar = div.querySelector(".content .list");
+        let que = getQuestionById(qqq.que_id);
+        let qq_div = displayQuestion(que, tar, "daily-ques");
+        if (qqq.selected_option_id === qqq.answer_option_id) {
+            let option = qq_div.querySelector(`#${qqq.selected_option_id}`);
+            option.classList.add("selected");
+            option.classList.add("correct");
+        } else {
+            let option = qq_div.querySelector(`#${qqq.selected_option_id}`);
+            option.classList.add("selected");
+            option.classList.add("wrong");
+            option = qq_div.querySelector(`#${qqq.answer_option_id}`);
+            option.classList.add("correct");
+        }
+        qq_div.querySelectorAll(`div.option`).forEach((opt) => {
+            opt.classList.add("disabled");
+        });
+    });
 }
