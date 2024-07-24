@@ -53,8 +53,8 @@ var data_other = [];
 var autocompleteList = "";
 
 //hardReloadCode();
-clearCache();
-getDataFromJSONFiles();
+//clearCache();
+//getDataFromJSONFiles();
 
 document.addEventListener("DOMContentLoaded", function () {
     //sconst currentURL = window.location.href;
@@ -373,53 +373,22 @@ function hardReloadCode() {
 
 //saveDataInLocale("me_admin", true);
 function initialLoading() {
-    //loadSettings();
-    if (testing) document.querySelector("body").classList.add("editor");
-    document.querySelector("body").classList.add(`${exam}`);
     document.querySelector(".loading").classList.add("hide");
     document.querySelector(".me-content").classList.remove("hide");
-    //loadAllTags();
+
     sortArrayRandomly(que_data);
 
     fil_ques = que_data;
     curr_que_index = 0;
     curr_ques = fil_ques[curr_que_index];
+
     openRandomPractisePage();
     updateDailyQuestionsCircles();
+
     displayQuestion();
     supportMyWork();
     addSocialMediaSection();
-    //new_que_tags = all_tags;
-    //new_ques = getDataFromLocale("new_ques");
-    //if (!new_ques) new_ques = [];
     loadAllFilterTags();
-    //saveDataInLocale("me_admin", true);
-    //me_admin = getDataFromLocale("me_admin");
-
-    //user_data = getDataFromLocale("user_data");
-
-    // explanation_data = getDataFromLocale("explanation_data");
-    // linked_blocks_data = getDataFromLocale("linked_blocks_data");
-    // video_links_data = getDataFromLocale("video_links_data");
-    // updated_ques = getDataFromLocale("updated_ques");
-
-    //openRandomPractisePage();
-    //openNotesPage("kk");
-
-    //
-    if (false) {
-        var span1 = document.querySelector("span.add-new-que");
-        span1.classList.remove("hide");
-        /* span1.addEventListener("click", () => {
-            
-            document.querySelector("div.add-que").classList.toggle("hide");
-        }); */
-        document.body.addEventListener("click", (event) => {
-            if (event.target === span1) {
-                document.querySelector("div.add-que").classList.toggle("hide");
-            }
-        });
-    }
 }
 
 function getCurrentTime() {
@@ -431,6 +400,11 @@ function getCurrentTime() {
 }
 
 function escapeCSSSelector(id) {
+    // Escape characters that are not allowed in CSS selectors
+    return id.replace(/([!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~])/g, "\\$&").replace(/^(-|[0-9])/g, "\\$1");
+}
+
+function escapeCSSSelector_(id) {
     return id.replace(/([ #;&,.+*~':"!^$[\]()=>|/@])/g, "\\$1").replace(/^([0-9])/g, "\\3$1 ");
 }
 
@@ -2264,13 +2238,6 @@ function getBlockData(block, block_id) {
     }
 }
 
-function openNotePage(que) {
-    var block = que.linked_blocks[0];
-    var page_id = block.page_id;
-    var block_id = block.block_id;
-    openChapterById(page_id, block_id);
-}
-
 function openChapterById(page_id, block_id) {
     openPage("notes");
 
@@ -3711,6 +3678,7 @@ function displayQuestion(que, tar_ele, type) {
         if (type == "mock-result") return;
         if (type == "daily-ques") return;
 
+        // div = option div
         div.addEventListener("click", (event) => {
             var span = event.target.closest(".option");
             if (type == "mock") {
@@ -3834,7 +3802,6 @@ function displayQuestion(que, tar_ele, type) {
                     div2.appendChild(span1);
 
                     span1.addEventListener("click", (event) => {
-                        //openNotePage(block_id, page_id);
                         openChapterById(page_id, block_id);
                     });
 
@@ -3971,162 +3938,29 @@ function displayQuestion(que, tar_ele, type) {
             }
         });
     });
-    if (testing && false) {
-        var edit_div = document.querySelector(".edit-que");
-        edit_div.innerHTML = `<div class="add-explanation  me-dis-flex-co">
-                                    <textarea name="explanation" class="explanation" placeholder="explanation" id="" cols="30" rows="4"></textarea>
-                                    <input type="text" class="linked-blocks" placeholder="linked-blocks">
-                                    <input type="text" class="video-link" placeholder="video link">    
-                                    <button class="update-que">update</button>
-                                </div>`;
 
-        var arr = [];
-        //var data = getDataFromLocale("ssc_other_data");
-        //explanation_data = data[0].data;
-        explanation_data = getDataFromLocale("explanation_data");
-        linked_blocks_data = getDataFromLocale("linked_blocks_data");
-        video_links_data = getDataFromLocale("video_links_data");
+    // div = share question div
 
-        explanation_data.forEach((item) => {
-            arr.push(item.text + "  ((" + item.id + "))");
-        });
-        var exp_ele = edit_div.querySelector("textarea.explanation");
-        exp_ele.addEventListener("input", (event) => {
-            setAutoComplete(event, arr, "explanation");
-        });
-        // load data
+    let idiv = document.createElement("div");
+    idiv.className = "que-actions";
+    que_div.appendChild(idiv);
 
-        //explanation value
-        let exp_id = curr_ques.explanation_id;
-        if (exp_id && exp_id.trim() != "") {
-            let exp_text = getExplanationTextById(exp_id);
-            exp_ele.value = exp_text;
-        } else {
-            exp_ele.value = "NO TEXT";
+    let sdiv = document.createElement("div");
+    sdiv.className = "share-question link";
+    idiv.appendChild(sdiv);
+
+    sdiv.innerHTML = `<i class="fa-regular fa-share-nodes"></i>
+                          <span>Share</span>`;
+    sdiv.addEventListener("click", () => {
+        let url = window.location.href;
+        let ind = url.indexOf("#");
+        if (ind != -1) {
+            url = url.substring(0, ind - 1);
         }
-
-        //Linked Blocks
-        var linked_block_ele = edit_div.querySelector(".linked-blocks");
-        let linked_block_id = curr_ques.linked_block_id;
-
-        if (linked_block_id && linked_block_id.trim() != "") {
-            let obj = getLinkedBlockObjectById(linked_block_id);
-            linked_block_ele.value = `${obj.block_id}:${obj.page_id}`;
-        } else {
-            linked_block_ele.value = "NO ID";
-        }
-
-        // video id
-        var video_ele = edit_div.querySelector(".video-link");
-        let video_obj_id = curr_ques.linked_video_id;
-
-        if (video_obj_id && video_obj_id.trim() != "") {
-            let obj = getLinkedVideoObjectById(video_obj_id);
-            let video_id = obj.video_id;
-            let time = 0;
-            for (var i = 0; i < obj.linked_questions.length; i++) {
-                if (obj.linked_questions[i].que_id == curr_ques.id) {
-                    time = obj.linked_questions[i].time;
-                    break;
-                }
-            }
-            video_ele.value = `${video_id} : ${time}`;
-        } else {
-            video_ele.value = "NO Video";
-        }
-
-        var update_btn = document.querySelector(".random .update-que");
-
-        update_btn.addEventListener("click", () => {
-            curr_ques.linked_blocks = [];
-            var exp_text = document.querySelector(".add-explanation .explanation").value.trim();
-            var exp_obj = "";
-            if (exp_text != "") {
-                var exp_id = getExplanationId(exp_text);
-                if (exp_id) {
-                    curr_ques.explanation_id = exp_id;
-                    var new_exp_text = exp_text.replace(/\(\(.+?\)\)/, "");
-                    updateExplanationObject(exp_id, new_exp_text, curr_ques.id);
-                } else {
-                    exp_obj = {
-                        id: generateUniqueId(),
-                        text: exp_text,
-                        linked_questions: [],
-                    };
-                    curr_ques.explanation_id = exp_obj.id;
-                    exp_obj.linked_questions.push(curr_ques.id);
-                    explanation_data.push(exp_obj);
-                }
-                saveDataInLocale("explanation_data", explanation_data);
-            }
-
-            var block_ids = document.querySelector(".add-explanation  .linked-blocks ").value.trim();
-            if (block_ids != "") {
-                var parts = block_ids.split(":");
-                var block_id = parts[0];
-                var obj = getLinkedBlockObjectById(block_id);
-                if (obj) {
-                    if (!obj.linked_questions.includes(curr_ques.id)) obj.linked_questions.push(curr_ques.id);
-                    curr_ques.linked_block_id = obj.id;
-                } else {
-                    obj = {
-                        id: generateUniqueId(),
-                        block_id: parts[0],
-                        page_id: parts[1],
-                        linked_questions: [],
-                    };
-                    curr_ques.linked_block_id = obj.id;
-                    obj.linked_questions.push(curr_ques.id);
-                    linked_blocks_data.push(obj);
-                }
-                curr_ques.linked_blocks.push(obj);
-                saveDataInLocale("linked_blocks_data", linked_blocks_data);
-            }
-
-            var video_exp = document.querySelector(".add-explanation .video-link").value.trim();
-            if (video_exp != "") {
-                var obj = getYoutubeObj(video_exp);
-                var video_id = obj.video_id;
-                var obj2 = getLinkedVideoObjectById(video_id);
-                if (obj2) {
-                    var is_present = false;
-                    curr_ques.linked_video_id = obj2.id;
-                    obj2.linked_questions.forEach((item) => {
-                        if (item.que_id == curr_ques.id) {
-                            is_present = true;
-                        }
-                    });
-                    if (!is_present) {
-                        obj2.linked_questions.push({
-                            time: obj.time,
-                            que_id: curr_ques.id,
-                        });
-                    }
-                } else {
-                    obj2 = {
-                        id: generateUniqueId(),
-                        video_id: obj.video_id,
-                        linked_questions: [],
-                    };
-                    obj2.linked_questions.push({
-                        time: obj.time,
-                        que_id: curr_ques.id,
-                    });
-                    video_links_data.push(obj2);
-                    curr_ques.linked_video_id = obj2.id;
-                }
-                saveDataInLocale("video_links_data", video_links_data);
-            }
-            updated_ques.unshift(curr_ques);
-            saveDataInLocale("updated_ques", updated_ques);
-        });
-    }
-    if (testing && false && (!que.linked_blocks || !que.linked_blocks.length)) {
-        var span = document.createElement("span");
-        span.className = "is-linked incorrect";
-        span.textContent = "NOT LINKED";
-        que_div.appendChild(span);
-    }
+        url = url + `/#/${exam}/question/${que.id}`;
+        copyToClipboard(url);
+        popupAlert("Question link copied");
+    });
     return que_div;
 }
 function getExplanationId(exp_text) {
@@ -4859,28 +4693,15 @@ async function fetchDataFromFile(filename) {
 
 var my_data = "";
 async function getDataFromJSONFiles() {
-    //alert("HELLO");
-    /*
-    que_data = await fetchDataFromFile(`data_${exam}_questions`);
-    console.log("me: que_data[] loaded");
-    notes_data = await fetchDataFromFile(`data_${exam}_notes`);
-    console.log("me: notes_data[] loaded");
-    other_data = await fetchDataFromFile(`data_${exam}_other`);
-    console.log("me: other_data[] loaded");
-    
-    */
     my_data = await fetchDataFromFile(`my_data_${exam}`);
     que_data = my_data[0].ques;
     notes_data = my_data[0].notes;
     tags_list = my_data[0].tags_list;
-    mocks_data = await fetchDataFromFile(`mocks_${exam}`);
-    //console.log("Array data:", array_data); // Log the array data
-    //displayData(array_data);
-    //name = `user_data_${exam}`;
-    generateSomeMocks();
-    user_data = getDataFromLocale(`user_data_${exam}`);
 
-    //if (!user_data) user_data = [];
+    mocks_data = await fetchDataFromFile(`mocks_${exam}`);
+
+    user_data = getUserData();
+
     if (!user_data || !user_data.length) {
         user_data = [];
         var obj = {
@@ -4916,13 +4737,9 @@ async function getDataFromJSONFiles() {
         });
         saveUserData();
     }
+
+    generateSomeMocks();
     console.log("me: user_data[] loaded");
-    setTimeout(() => {
-        addTagIndexList();
-        addChapterIndexList2();
-        //openNotesPage();
-        initialLoading();
-    }, 1000);
 }
 
 function openMyNotesPage2() {
@@ -5065,6 +4882,7 @@ function getBlockHTMLTemplate() {
                     </div>
                     <div class="icon_">
                         <span class="plus">+</span>
+                        <i class="fa-regular fa-share-nodes share"></i>
                         <span class="linked-ques"></span>
                     </div>
                 </div>
@@ -5125,6 +4943,29 @@ function setBlockIconsEvents(div) {
             }
             //ele.classList.add("active");
             div.querySelector(".me-block-icons").classList.remove("hide");
+        });
+    }
+
+    ele = div.querySelector(".icon_ .share");
+    if (ele) {
+        ele.addEventListener("click", (event) => {
+            var ele = event.target.closest(".me-block");
+            let page_id = ele.getAttribute("page-id");
+            let block_id = ele.id;
+            if (!page_id) {
+                page_id = block_id;
+                //block_id = null;
+            }
+
+            let url = window.location.href;
+            let ind = url.indexOf("#");
+            if (ind != -1) {
+                url = url.substring(0, ind - 1);
+            }
+            if (block_id) url = url + `/#/${exam}/notes/${page_id}/${block_id}`;
+            else url = url + `/#/${exam}/notes/${page_id}`;
+            copyToClipboard(url);
+            popupAlert("Question link copied");
         });
     }
 
@@ -5412,8 +5253,12 @@ async function clearCache() {
 }
 
 function saveUserData() {
-    saveDataInLocale("user_data", user_data);
+    saveDataInLocale(`user_data_${exam}`, user_data);
 }
+function getUserData() {
+    return getDataFromLocale(`user_data_${exam}`);
+}
+
 function updateDailyQuestionsCircles() {
     let que_div = document.querySelector(".page.random .que-div");
     let div = document.querySelector(".page.random .bottom .daily-practise-questions");
@@ -5551,11 +5396,10 @@ function loadNewMockTestSection() {
                 <div class="mock-test-sec hide me-dis-flex-co"></div>`;
 
     let div = page.querySelector(".new-mock");
-    debugger;
+
     let ele = div.querySelector(".me-header");
     if (ele) {
         ele.addEventListener("click", (event) => {
-            debugger;
             let head = event.target.closest(".head");
             let eee = div.querySelector(".content");
             eee.classList.toggle("hide");
@@ -5585,7 +5429,7 @@ function loadNewMockTestSection() {
             } else {
                 head.querySelector("i").className = "fa-solid arrow fa-chevron-down";
                 let tar = div.querySelector(".mock-chapters-list");
-                debugger;
+
                 tar.innerHTML = "";
                 let chapters = document.querySelectorAll(".page.notes .sidebar .me-chapter .name.link");
 
@@ -5810,3 +5654,99 @@ function addSocialMediaSection() {
         a.appendChild(img);
     });
 }
+
+var old_url = "";
+var first_time = true;
+function openItemBasedOnURL() {
+    let obj = null;
+    let url = window.location.href;
+    if (first_time) {
+        obj = parseUrl3(url);
+
+        if (obj.exam) exam = obj.exam;
+        first_time = false;
+        clearCache();
+        getDataFromJSONFiles();
+    }
+
+    if (que_data.length && user_data.length) {
+    } else {
+        return;
+    }
+    clearInterval(interva_url);
+    //if (url === old_url) return;
+    debugger;
+
+    addTagIndexList();
+    addChapterIndexList2();
+    //openNotesPage();
+    initialLoading();
+
+    obj = parseUrl3(url);
+    old_url = url;
+    //url = "http://127.0.0.1:5500/ssc/question/9Km7Pmaa4";
+
+    if (obj.type) {
+        exam = obj.exam;
+        let type = obj.type;
+        let que_id = obj.que_id;
+        let page_id = obj.page_id;
+        let block_id = obj.block_id;
+
+        if (type == "question") {
+            openPage("random");
+            if (que_id) {
+                let que = getQuestionById(que_id);
+                displayQuestion(que);
+            }
+        } else if (type == "notes") {
+            if (page_id) {
+                if (block_id) {
+                    openChapterById(page_id, block_id);
+                } else {
+                    openChapterById(page_id);
+                }
+            }
+        }
+    } else {
+        fil_ques = que_data;
+        curr_que_index = 0;
+        setQuestionURL(fil_ques[0].id);
+    }
+    //let hashIndex = url.indexOf("#");
+    //let baseUrl = url.substring(0, hashIndex);
+    //window.location.href = baseUrl;
+}
+function parseUrl3(url) {
+    let urlObj = new URL(url);
+    let hashFragment = urlObj.hash.substring(1);
+    let segments = hashFragment.split("/").filter((segment) => segment.length > 0);
+
+    let result = {
+        exam: null,
+        type: null,
+        que_id: null,
+        page_id: null,
+        block_id: null,
+    };
+
+    if (segments.length === 0) {
+        return result;
+    }
+
+    result.exam = segments[0] || null;
+    result.type = segments[1] || null;
+
+    if (result.type === "question" && segments.length >= 3) {
+        result.que_id = segments[2] || null;
+    } else if (result.type === "notes" && segments.length >= 3) {
+        result.page_id = segments[2] || null;
+        if (segments.length >= 4) {
+            result.block_id = segments[3] || null;
+        }
+    }
+    return result;
+}
+var interva_url = setInterval(() => {
+    openItemBasedOnURL();
+}, 100);

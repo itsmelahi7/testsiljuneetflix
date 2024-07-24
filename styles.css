@@ -132,26 +132,16 @@ span.logo::before {
 
 .que-actions {
     display: flex;
-    margin: 15px;
-    border-top: 1px solid var(--border-line-gray-color);
+    justify-content: end;
+    align-items: center;
+    padding: 7px 15px;
+    border-top: 2px solid #d8ddfa;
 }
 
-.que-actions i::before {
-    color: gray;
-    font-size: 18px;
 
-}
 
-.que-actions>div {
-    margin: 10px 5px;
-    cursor: pointer;
-}
 
-.que-actions .copy-ref {
 
-    margin-left: auto;
-
-}
 
 
 
@@ -1343,6 +1333,14 @@ div.que-dot.selected {
     background-color: #ffc7a6;
 }
 
+.mock-test-sec .que-div .share-question {
+    display: none;
+}
+
+.mock-test-sec .result .que-div .share-question {
+    display: flex;
+}
+
 .marks span {
     font-size: 1em;
 }
@@ -2369,6 +2367,12 @@ i.fa-chevron-right:before {
     margin: 0px 50%;
 }
 
+.me-block-text .icon_ .share {
+    font-size: 0.8em;
+    color: var(--link-color);
+    margin-top: 7px;
+}
+
 
 
 .me-page-title>.me-block-main .me-block-text .text-inner {
@@ -2664,6 +2668,10 @@ i.fa-chevron-right:before {
 
 .support-me .me-header-list {
     padding: 0px 25px;
+}
+
+.share-question * {
+    color: var(--link-color);
 }
 
 .support-me .upi-id {
