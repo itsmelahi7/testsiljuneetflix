@@ -2634,6 +2634,16 @@ i.fa-chevron-right:before {
     color: #6770a6;
 }
 
+.hide-image-element {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.me-block img {
+    width: 90%;
+}
+
 .support-me img {
     width: 80%;
     height: auto;
@@ -2662,4 +2672,16 @@ i.fa-chevron-right:before {
     border-radius: 4px;
     width: 160px;
     cursor: pointer;
+}
+
+.new-mock .content {
+    margin: 0px 15px;
+}
+
+.new-mock .me-mock-chapter {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px;
 }

@@ -54,7 +54,7 @@ var autocompleteList = "";
 
 //hardReloadCode();
 clearCache();
-loadDataFromFiles();
+getDataFromJSONFiles();
 
 document.addEventListener("DOMContentLoaded", function () {
     //sconst currentURL = window.location.href;
@@ -174,13 +174,14 @@ document.addEventListener("DOMContentLoaded", function () {
     ele = document.querySelector(".tab.mock");
     if (ele) {
         ele.addEventListener("click", () => {
-            openMockTestPage();
+            openMockTestPage2();
         });
     }
     ele = document.querySelector(".tab.notes");
     if (ele) {
         ele.addEventListener("click", () => {
-            loadNotesData();
+            //openNotesPage();
+            openNotesPage2();
         });
     }
 
@@ -403,7 +404,7 @@ function initialLoading() {
     // updated_ques = getDataFromLocale("updated_ques");
 
     //openRandomPractisePage();
-    loadNotesData("kk");
+    //openNotesPage("kk");
 
     //
     if (false) {
@@ -1227,9 +1228,27 @@ function openPage(tab) {
     document.querySelector(`.main.tabs > .tab.${tab}`).classList.add("active");
     document.querySelector(`.home > .page.${tab}`).classList.remove("hide");
 }
+function openMockTestPage2() {
+    openPage("mock");
+    let ele = document.querySelector(".page.mock .new-mock");
+    if (!ele) {
+        loadNewMockTestSection();
+        loadPredefinedMocks();
+        loadMockTestHistory();
+    }
+}
+
 function openMockTestPage(arg) {
     openPage("mock");
-    var ele = document.querySelector(".page.mock");
+    let ele = document.querySelector(".page.mock .new-mock");
+    if (!ele) {
+        loadNewMockTestSection();
+        loadPredefinedMocks();
+        loadMockTestHistory();
+    }
+    return;
+
+    ele = document.querySelector(".page.mock");
     if (!ele.children.length || arg) {
         ele.innerHTML = `
                         <div>
@@ -1359,11 +1378,20 @@ function endMockTestHTMLTemplate() {
         </div>`;
 }
 
-function loadNotesData(arg) {
-    if (!arg) openPage("notes");
-    let chapter_list = document.querySelector(".page.notes .index-tags .notes");
-    if (!chapter_list) addChapterIndexList();
+function openNotesPage2() {
+    openPage("notes");
+    let ele = document.querySelector(".page.notes .index-tags .notes");
+    if (!ele) {
+        addChapterIndexList();
+    }
+    ele = document.querySelector(".page.notes .me-block");
+    if (!ele) {
+        let eee = document.querySelector(".page.notes .index-tags");
+        if (eee) eee.classList.add("open");
+    }
+}
 
+function openNotesPage(arg) {
     var target_ele = document.querySelector(".page.notes");
     let list_icon = target_ele.querySelector(".chapter-index");
 
@@ -1436,8 +1464,56 @@ function loadNotesData(arg) {
     });
 }
 
+function addChapterIndexList2() {
+    let ele = document.querySelector(".index-tags .me-chapter");
+    if (ele) return;
+    let page = document.querySelector(".page.notes");
+    page.innerHTML = getNotesPageHTMLTemplate();
+
+    var div = page.querySelector(".sidebar .index-tags");
+    ele = div.querySelector(".head .cross");
+    if (ele) {
+        ele.addEventListener("click", () => {
+            div.classList.remove("open");
+        });
+    }
+
+    ele = document.querySelector(".page.notes .chapter-index");
+    if (ele) {
+        ele.addEventListener("click", () => {
+            let eee = document.querySelector(".page.notes .index-tags");
+            eee.classList.toggle("open");
+        });
+    }
+
+    ele = div.querySelector(".chapter-list");
+    notes_data.forEach((item) => {
+        addChapterIndexItem(item, ele, 0);
+    });
+}
+
+function getNotesPageHTMLTemplate() {
+    return ` <div class="main">
+                <div class="header">
+                    <div class="chapter-index">
+                        <i class="fa-solid fa-list-ul"></i>
+                        <span>Chapters</span>
+                    </div>
+                </div>
+                <div class="page-content page-text hide"></div>
+            </div>
+            <div class="sidebar">
+                <div class="index-tags">
+                    <div class="head">
+                        <span> Chapter List </span>
+                        <span class="cross close">X</span>
+                    </div>
+                    <div class="chapter-list list notes"></div>
+                </div>
+            </div> `;
+}
+
 function addChapterIndexList() {
-    //var tar = document.querySelector(".index-tags .notes");
     var tar = document.querySelector(".page.notes .index-tags .notes");
     if (!tar) {
         let ele = document.querySelector(".page.notes");
@@ -1536,7 +1612,7 @@ function addChapterIndexItem(item, tar, level) {
 
         span.addEventListener("click", (event) => {
             var page_id = event.target.id;
-            openNotesPageById(page_id);
+            openChapterById(page_id);
             return;
             document.querySelector("div.page-text").classList.remove("hide");
 
@@ -1738,8 +1814,48 @@ function loadPageText2(item, target, level) {
     let text = item.text;
     if (text) {
         let ele = div.querySelector(".me-block-text .text-inner");
-        ele.innerHTML = getHTMLFormattedText(text);
+        text = text.trim();
+        const imagePattern = /!\[.*?\]\((https:\/\/[^\)]+)\)/;
+        const match = text.match(imagePattern);
+
+        if (match) {
+            // Extract the URL from the match
+            const imageUrl = match[1];
+
+            const textBeforeImage = text.split(imagePattern)[0].trim();
+
+            // Determine the text to use
+            let displayText = textBeforeImage;
+            if (displayText.startsWith("![")) {
+                displayText = "";
+            } else {
+                ele.innerHTML = getHTMLFormattedText(displayText);
+            }
+
+            // Create a new div element with class 'hide-image-element'
+            const div = document.createElement("div");
+            div.className = "hide-image-element";
+            div.textContent = "🖼️ Click to show/hide Image";
+            div.addEventListener("click", () => {
+                div.querySelector("img").classList.toggle("hide");
+            });
+
+            // Create a new img element with the extracted URL as src
+            const img = document.createElement("img");
+            img.src = imageUrl;
+            img.className = "note-image hide";
+
+            // Append the img element to the div
+            div.appendChild(img);
+
+            // Optionally, append the div to the body or another container
+
+            ele.appendChild(div); //getHTMLFormattedText(text);
+        } else {
+            ele.innerHTML = getHTMLFormattedText(text);
+        }
     }
+
     let children = item.children;
     if (children.length) {
         ele = div.querySelector(".children");
@@ -2152,10 +2268,12 @@ function openNotePage(que) {
     var block = que.linked_blocks[0];
     var page_id = block.page_id;
     var block_id = block.block_id;
-    openNotesPageById(page_id, block_id);
+    openChapterById(page_id, block_id);
 }
 
-function openNotesPageById(page_id, block_id) {
+function openChapterById(page_id, block_id) {
+    openPage("notes");
+
     let ele = document.querySelector(".page.notes .index-tags");
     if (ele) ele.classList.remove("open");
 
@@ -2218,7 +2336,7 @@ function openNotesPageById(page_id, block_id) {
         tar.appendChild(cspan);
         loadPageText(d, cspan, 0);
     });*/
-    openPage("notes");
+
     document.querySelector("div.page-text").classList.remove("hide");
     if (block_id) {
         block_id = escapeCSSSelector(block_id);
@@ -2227,7 +2345,7 @@ function openNotesPageById(page_id, block_id) {
     }
 }
 
-function openNotesPageById2(page_id, block_id) {
+function openChapterById2(page_id, block_id) {
     // first close the sidebar if it is open
     var ele = document.querySelector(".page.notes .index-tags");
     if (ele) ele.classList.remove("open");
@@ -3027,7 +3145,7 @@ function showPreviousMockQuestions(event, mock) {
             que_div.appendChild(span);
 
             span.addEventListener("click", () => {
-                openNotesPageById(que.page_uid, parent_block_uid);
+                openChapterById(que.page_uid, parent_block_uid);
             });
         }
     });
@@ -3096,6 +3214,17 @@ function addDividerBefore(element) {
 }
 
 function startNewMockTest(mock) {
+    var selected_chapters = [];
+    let eee = document.querySelector(".page.mock .me-mock-chapter");
+    if (eee) {
+        let chapters = document.querySelectorAll(".new-mock .me-mock-chapter");
+        chapters.forEach((ele) => {
+            if (ele.children[0].checked) {
+                selected_chapters.push(ele.children[1].textContent.toLowerCase());
+            }
+        });
+    }
+
     document.querySelector(".main.tabs").classList.add("hide");
     document.querySelector(".page.mock > div").classList.add("hide");
     document.querySelector(".page.mock .mock-test-sec").classList.remove("hide");
@@ -3128,25 +3257,6 @@ function startNewMockTest(mock) {
         });
     });
 
-    var number_of_questions_for_mock = mock ? mock.que_ids.length : 20;
-    var dot_target_ele = document.querySelector(".que-list-dots");
-    for (var i = 0; i < number_of_questions_for_mock; i++) {
-        var div = document.createElement("div");
-        div.className = "que-dot me-dis-flex unselected";
-        div.textContent = i + 1;
-        dot_target_ele.append(div);
-        div.addEventListener("click", (event) => {
-            var i = parseInt(event.target.textContent, 10);
-            var ele = document.querySelectorAll(".mock-test .que-text .que-div");
-            ele = ele[i - 1];
-            ele.scrollIntoView({
-                behavior: "smooth", // Optional: Smooth scrolling behavior
-                block: "start", // Optional: Scroll to the top of the element
-            });
-        });
-    }
-    setTimer(number_of_questions_for_mock / 2);
-
     fil_ques = que_data.slice(0, 20);
     var mock_obj = {
         id: mock ? mock.id : generateUniqueId(),
@@ -3168,14 +3278,63 @@ function startNewMockTest(mock) {
     que_arr = user_data[0].mocks[0].questions;
     let arr = [];
     if (!mock) {
-        let tq = que_data.length;
-        for (let i = 0; i < 20; i++) {
-            let randomIndex = Math.floor(Math.random() * tq);
-            arr.push(que_data[randomIndex].id); // Remove the element from the copy and push it to result
+        if (selected_chapters.length) {
+            let chapter_arr = {};
+            selected_chapters.forEach((chapter) => {
+                chapter_arr[chapter] = [];
+            });
+
+            let totalQuestions = 20;
+            let questionsPerChapter = Math.floor(totalQuestions / selected_chapters.length);
+            let remainingQuestions = totalQuestions % selected_chapters.length;
+
+            selected_chapters.forEach((chapter, index) => {
+                let count = questionsPerChapter;
+                if (index === selected_chapters.length - 1) {
+                    count += remainingQuestions; // Add remaining questions to the last chapter
+                }
+                chapter_arr[chapter] = que_data.filter((que) => que.tags.includes(chapter)).slice(0, count);
+            });
+
+            for (let chapter in chapter_arr) {
+                chapter_arr[chapter].forEach((que) => {
+                    arr.push(que.id);
+                });
+            }
+
+            //selected_chapters.forEach((chapter) => {});
+
+            ///let filtered_ques = que_data.filter((que) => que.tags.some((tag) => selected_chapters.includes(tag)));
+        } else {
+            let tq = que_data.length;
+            for (let i = 0; i < 20; i++) {
+                let randomIndex = Math.floor(Math.random() * tq);
+                arr.push(que_data[randomIndex].id); // Remove the element from the copy and push it to result
+            }
         }
     } else {
         arr = mock.que_ids;
     }
+
+    var number_of_questions_for_mock = arr.length;
+    var dot_target_ele = document.querySelector(".que-list-dots");
+    for (var i = 0; i < number_of_questions_for_mock; i++) {
+        var div = document.createElement("div");
+        div.className = "que-dot me-dis-flex unselected";
+        div.textContent = i + 1;
+        dot_target_ele.append(div);
+        div.addEventListener("click", (event) => {
+            var i = parseInt(event.target.textContent, 10);
+            var ele = document.querySelectorAll(".mock-test .que-text .que-div");
+            ele = ele[i - 1];
+            ele.scrollIntoView({
+                behavior: "smooth", // Optional: Smooth scrolling behavior
+                block: "start", // Optional: Scroll to the top of the element
+            });
+        });
+    }
+    setTimer(Math.floor(number_of_questions_for_mock / 2));
+
     arr.forEach((id) => {
         var obj = {
             id: id,
@@ -3646,7 +3805,7 @@ function displayQuestion(que, tar_ele, type) {
                     exp_div.appendChild(span);
 
                     span.addEventListener("click", () => {
-                        openNotesPageById(que.page_uid, parent_block_uid);
+                        openChapterById(que.page_uid, parent_block_uid);
                     });
                     if (!page_title) exp_div.classList.add("hide");
                 }
@@ -3676,7 +3835,7 @@ function displayQuestion(que, tar_ele, type) {
 
                     span1.addEventListener("click", (event) => {
                         //openNotePage(block_id, page_id);
-                        openNotesPageById(page_id, block_id);
+                        openChapterById(page_id, block_id);
                     });
 
                     var span2 = document.createElement("span");
@@ -4381,7 +4540,7 @@ function addTagIndexList() {
     let tar_ele = div1.querySelector(".list.subject");
     tar_ele.classList.add("active");
     //index_tags.forEach((tag) => {
-    debugger;
+
     tags_list.forEach((tag) => {
         addTagIndexItem(tag, tar_ele, 0);
     });
@@ -4418,9 +4577,7 @@ function addTagIndexItem(item, tar_ele, level) {
     item = item.name ? item : item[0];
     try {
         var children = item.children;
-    } catch {
-        debugger;
-    }
+    } catch {}
     var span = "";
     if (children.length) {
         let div = document.createElement("div");
@@ -4701,7 +4858,7 @@ async function fetchDataFromFile(filename) {
 }
 
 var my_data = "";
-async function loadDataFromFiles() {
+async function getDataFromJSONFiles() {
     //alert("HELLO");
     /*
     que_data = await fetchDataFromFile(`data_${exam}_questions`);
@@ -4712,18 +4869,17 @@ async function loadDataFromFiles() {
     console.log("me: other_data[] loaded");
     
     */
-    my_data = await fetchDataFromFile(`my_data`);
+    my_data = await fetchDataFromFile(`my_data_${exam}`);
     que_data = my_data[0].ques;
     notes_data = my_data[0].notes;
     tags_list = my_data[0].tags_list;
-    mocks_data = await fetchDataFromFile(`mocks`);
+    mocks_data = await fetchDataFromFile(`mocks_${exam}`);
     //console.log("Array data:", array_data); // Log the array data
     //displayData(array_data);
     //name = `user_data_${exam}`;
     generateSomeMocks();
     user_data = getDataFromLocale(`user_data_${exam}`);
 
-    debugger;
     //if (!user_data) user_data = [];
     if (!user_data || !user_data.length) {
         user_data = [];
@@ -4763,8 +4919,8 @@ async function loadDataFromFiles() {
     console.log("me: user_data[] loaded");
     setTimeout(() => {
         addTagIndexList();
-        addChapterIndexList();
-        //loadNotesData();
+        addChapterIndexList2();
+        //openNotesPage();
         initialLoading();
     }, 1000);
 }
@@ -4882,7 +5038,7 @@ function checkLinkedImagesForPage(block) {
                     span2.textContent = "open note block";
                     div3.appendChild(span2);
                     span2.addEventListener("click", () => {
-                        openNotesPageById(blk.page_id, blk.block_id);
+                        openChapterById(blk.page_id, blk.block_id);
                     });
 
                     var img = document.createElement("img");
@@ -5311,7 +5467,6 @@ function showDailyQuestions(div) {
         div_dot.className = `que-dot`;
         div_circles.appendChild(div_dot);
         div_dot.addEventListener("click", () => {
-            debugger;
             let que_id = qqq.que_id;
             let ele = div_list.querySelector(`#${que_id}`);
             scrollToView(ele);
@@ -5371,6 +5526,81 @@ function loadMockTestHistory() {
     }
 }
 
+function loadNewMockTestSection() {
+    let page = document.querySelector(".page.mock");
+    page.innerHTML = `<div>
+                    <div class="new-mock me-flex-co">
+                        <div class="head me-header">
+                            <i class="fa-solid arrow fa-chevron-down"></i>
+                            <span class="label">New Mock Test</span>
+                        </div>
+                        <div class="content me-flex-co">
+                            <span class="link start-new-mock">Start a new mock test</span>
+                            <div class="mock-chapters">
+                                <div class="head me-header-inner">
+                                    <i class="fa-solid arrow fa-chevron-right"></i>
+                                    <span class="label">Select Chapters</span>
+                                </div>
+                                <div class="mock-chapters-list list me-header-inner-list hide"></div>
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mock-test-sec hide me-dis-flex-co"></div>`;
+
+    let div = page.querySelector(".new-mock");
+    debugger;
+    let ele = div.querySelector(".me-header");
+    if (ele) {
+        ele.addEventListener("click", (event) => {
+            debugger;
+            let head = event.target.closest(".head");
+            let eee = div.querySelector(".content");
+            eee.classList.toggle("hide");
+            if (eee.classList.contains("hide")) {
+                head.querySelector("i").className = "fa-solid arrow fa-chevron-right";
+            } else {
+                head.querySelector("i").className = "fa-solid arrow fa-chevron-down";
+            }
+        });
+    }
+
+    ele = div.querySelector(".link.start-new-mock");
+    if (ele) {
+        ele.addEventListener("click", () => {
+            startNewMockTest();
+        });
+    }
+
+    ele = div.querySelector(".mock-chapters .me-header-inner");
+    if (ele) {
+        ele.addEventListener("click", (event) => {
+            let head = event.target.closest(".head");
+            let eee = div.querySelector(".mock-chapters .mock-chapters-list");
+            eee.classList.toggle("hide");
+            if (eee.classList.contains("hide")) {
+                head.querySelector("i").className = "fa-solid arrow fa-chevron-right";
+            } else {
+                head.querySelector("i").className = "fa-solid arrow fa-chevron-down";
+                let tar = div.querySelector(".mock-chapters-list");
+                debugger;
+                tar.innerHTML = "";
+                let chapters = document.querySelectorAll(".page.notes .sidebar .me-chapter .name.link");
+
+                chapters.forEach((chapter) => {
+                    let ddd = document.createElement("div");
+                    ddd.classList = "me-mock-chapter me-dis-flex";
+                    tar.appendChild(ddd);
+
+                    ddd.innerHTML = ` <input type="checkbox" name="" id="">
+                          <span class="name">${chapter.textContent}</span>`;
+                });
+            }
+        });
+    }
+}
 function loadPredefinedMocks() {
     let ele = document.querySelector(".page.mock > div");
 
@@ -5425,7 +5655,6 @@ function loadPredefinedMocks() {
         if (ele) {
             //addDividerBefore(ele);
             ele.addEventListener("click", (event) => {
-                debugger;
                 let ele = event.target.closest(".head");
                 let eee = div.querySelector(".me-header-list");
                 eee.classList.toggle("hide");
@@ -5497,7 +5726,7 @@ function supportMyWork() {
 
     div.innerHTML = `<div class="head me-header">
                         <i class="fa-solid arrow fa-chevron-right"></i>
-                        <span class="label"> ₹ Support Me</span>
+                        <span class="label"> ₹ Support Me 💵💰💳 🤗</span>
                     </div>
                     <div class="me-header-list  hide list">
                     <span>If you find this app useful in your prepration then do support my work, this will help me continue this project and improve it even further.</span>
