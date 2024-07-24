@@ -976,11 +976,8 @@ function addTodatPracticeQuestionDot(que) {
 
             id = escapeCSSSelector(id);
             var ele = document.querySelector(`div.all-que-text #${id}`);
+            scrollToView(ele);
 
-            ele.scrollIntoView({
-                behavior: "smooth", // Optional: Smooth scrolling behavior
-                block: "start", // Optional: Scroll to the top of the element
-            });
             ele.style.backgroundColor = "#f6cb8b";
             setTimeout(() => {
                 ele.style.backgroundColor = "";
@@ -3301,10 +3298,7 @@ function startNewMockTest(mock) {
             var i = parseInt(event.target.textContent, 10);
             var ele = document.querySelectorAll(".mock-test .que-text .que-div");
             ele = ele[i - 1];
-            ele.scrollIntoView({
-                behavior: "smooth", // Optional: Smooth scrolling behavior
-                block: "start", // Optional: Scroll to the top of the element
-            });
+            scrollToView(ele);
         });
     }
     setTimer(Math.floor(number_of_questions_for_mock / 2));
