@@ -404,7 +404,7 @@ function escapeCSSSelector(id) {
     return id.replace(/([!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~])/g, "\\$&").replace(/^(-|[0-9])/g, "\\$1");
 }
 
-function escapeCSSSelector_(id) {
+function escapeCSSSelector2(id) {
     return id.replace(/([ #;&,.+*~':"!^$[\]()=>|/@])/g, "\\$1").replace(/^([0-9])/g, "\\3$1 ");
 }
 
@@ -2306,9 +2306,16 @@ function openChapterById(page_id, block_id) {
 
     document.querySelector("div.page-text").classList.remove("hide");
     if (block_id) {
-        block_id = escapeCSSSelector(block_id);
-        var block_ele = document.querySelector(`#${block_id}`);
-        scrollToView(block_ele);
+        let ttt = block_id;
+        ttt = escapeCSSSelector(ttt);
+        var block_ele = document.querySelector(`#${ttt}`);
+        if (!block_ele) {
+            ttt = block_id;
+            ttt = escapeCSSSelector2(ttt);
+            block_ele = document.querySelector(`#${ttt}`);
+        }
+        if (block_ele) scrollToView(block_ele);
+        else console.error("block id selector issue");
     }
 }
 
@@ -5708,14 +5715,7 @@ function openItemBasedOnURL() {
                 }
             }
         }
-    } else {
-        fil_ques = que_data;
-        curr_que_index = 0;
-        setQuestionURL(fil_ques[0].id);
     }
-    //let hashIndex = url.indexOf("#");
-    //let baseUrl = url.substring(0, hashIndex);
-    //window.location.href = baseUrl;
 }
 function parseUrl3(url) {
     let urlObj = new URL(url);
