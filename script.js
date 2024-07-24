@@ -950,89 +950,6 @@ function displayAllQuestion() {
     document.querySelector(".today-que-info .link.show-all").click();
 }
 
-function addTodatPracticeQuestionDot(que) {
-    var div = document.createElement("div");
-    div.className = "prev-que me-cp";
-    div.id = que.que_id;
-    div.setAttribute("answer-opt", que.answer_option_id);
-    div.setAttribute("selected-opt", que.selected_option_id);
-    div.textContent = document.querySelectorAll(".prev-ques-list .prev-que").length + 1;
-
-    if (que.answer_option_id == que.selected_option_id) {
-        div.classList.add("correct-ans");
-    } else {
-        div.classList.add("wrong-ans");
-    }
-    document.querySelector("div.prev-ques-list").append(div);
-    document.querySelector("div.today-que-info span.label").textContent = `Today practised questions (${user_data[0].today_practice_questions.length}):`;
-
-    div.addEventListener("click", (event) => {
-        var div = event.target;
-        document.querySelector(".today-que-info .all-que-text").innerHTML = "";
-        displayAllQuestion();
-        var is_all_ques_open = document.querySelector(".today-que-info .all-que-text.hide");
-        if (!is_all_ques_open) {
-            var id = div.id;
-
-            id = escapeCSSSelector(id);
-            var ele = document.querySelector(`div.all-que-text #${id}`);
-            scrollToView(ele);
-
-            ele.style.backgroundColor = "#f6cb8b";
-            setTimeout(() => {
-                ele.style.backgroundColor = "";
-            }, 3000);
-            return;
-        }
-        if (div.classList.contains("active")) {
-            document.querySelector(".today-que-info .que-text").classList.add("hide");
-            div.classList.remove("active");
-            document.querySelector(".today-que-info .link.remove-que").classList.add("hide");
-            return;
-        }
-        document.querySelector(".today-que-info .que-text").classList.remove("hide");
-
-        document.querySelector(".today-que-info .link.remove-que").classList.remove("hide");
-        document.querySelector(".today-que-info .link.remove-que").addEventListener("click", (event) => {
-            document.querySelector(".today-que-info .que-text").classList.add("hide");
-            document.querySelector(".today-que-info .all-que-text").classList.add("hide");
-            //div.classList.remove("active");
-            document.querySelector(".today-que-info .link.remove-que").classList.add("hide");
-            return;
-        });
-        unselectSelectQuestionDot();
-
-        div.classList.add("active");
-        var que_id = div.getAttribute("id");
-        var selected_option_id = div.getAttribute("selected-opt");
-        var answer_option_id = div.getAttribute("answer-opt");
-        var que = getQuestionById(que_id);
-        var target = document.querySelector(".today-que-info .que-text");
-
-        displayQuestion(que, target);
-        //setTimeout(() => {
-        var options = document.querySelectorAll("div.que-text .options .option");
-        options.forEach((option) => {
-            if (option.id == answer_option_id) {
-                option.className = "option me-cp correct-ans disabled";
-            }
-        });
-        if (selected_option_id != answer_option_id) {
-            options.forEach((option) => {
-                if (option.id == selected_option_id) {
-                    option.className = "option me-cp wrong-ans disabled";
-                }
-            });
-        }
-        //}, 1000);
-    });
-}
-
-function unselectSelectQuestionDot() {
-    var div = document.querySelector(".prev-ques-list .prev-que.active");
-    if (div) div.classList.remove("active");
-}
-
 function copyToClipboard(text) {
     // Create a temporary input element
     const input = document.createElement("input");
@@ -2274,32 +2191,8 @@ function openChapterById(page_id, block_id) {
     data = data.data;
     ele = div.querySelector(".children"); // target_element
     data.forEach((block) => {
-        //cspan = document.createElement("span");
-        //cspan.className = "children";
-        //tar.appendChild(cspan);
         loadPageText2(block, ele, 0);
     });
-    /*
-    var div_page = document.createElement("div");
-    div_page.className = "page-title";
-    div_page.id = data.id; // page_id =
-    div_page.innerHTML = getHTMLFormattedText(data.page_title); //page_title
-    data = data.data;
-    var tar = document.querySelector(".page-text");
-    tar.innerHTML = "";
-    //tar.classList.remove("hide");
-    tar.appendChild(div_page);
-
-    var cspan = document.createElement("span");
-    cspan.className = "children-blocks";
-    tar.appendChild(cspan);
-    tar = cspan;
-    data.forEach((d) => {
-        cspan = document.createElement("span");
-        cspan.className = "children";
-        tar.appendChild(cspan);
-        loadPageText(d, cspan, 0);
-    });*/
 
     document.querySelector("div.page-text").classList.remove("hide");
     if (block_id) {
@@ -2393,6 +2286,9 @@ function openChapterById2(page_id, block_id) {
 }
 
 function scrollToView(ele) {
+    if (ele.classList.contains("me-block")) {
+        ele = ele.querySelector(".me-block-main");
+    }
     ele.scrollIntoView({
         behavior: "smooth", // Optional: Smooth scrolling behavior
         block: "center", // Optional: Scroll to the top of the element
@@ -5676,7 +5572,6 @@ function openItemBasedOnURL() {
     }
     clearInterval(interva_url);
     //if (url === old_url) return;
-    debugger;
 
     addTagIndexList();
     addChapterIndexList2();
