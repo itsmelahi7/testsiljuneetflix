@@ -1746,10 +1746,10 @@ span.block.heading {
 }
 
 .me-iframe-div:has(iframe) .cross {
-    color: white;
+    color: black;
     cursor: pointer;
     font-size: 0.8em;
-    border: 1.5px solid white;
+    border: 1.5px solid black;
     border-radius: 50%;
     padding: 2px 5px;
 
