@@ -17,20 +17,42 @@
                     <span>Loading....</span>
                 </div>
             </div>
-
             <div class="main-content top-content">
-                <div class="main tabs tab-btns">
-                    <div class="tab random active">MCQs</div>
-                    <div class="tab notes">Notes</div>
-                    <div class="tab mock">Mock</div>
-                    <div class="tab more">More</div>
+                <div class="me-top">
+                    <div class="header hide">STUDY APP</div>
+                    <div class="main tabs tab-btns">
+                        <div class="tab home active">Home</div>
+                        <div class="tab mcq random">MCQs</div>
+                        <div class="tab notes">Notes</div>
+                        <div class="tab mock">Mock</div>
+                        <div class="tab more">More</div>
+                    </div>
                 </div>
-                <div class="pages home me-content content-body que">
-                    <div class="page random hide"></div>
-                    <div class="page mock-test mock hide"></div>
-                    <div class="page notes hide"></div>
+
+                <div class="pages me-content content-body que">
+                    <div class="page home"></div>
+                    <div class="page mcq random hide">
+                        <div class="main">
+                            <button>open sidebar</button>
+                        </div>
+                        <div class="sidebar">
+                            <div class="header">
+                                <span class="title">Sidebar Title</span>
+                                <span class="cross me-ml">X</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page mock hide">
+                        <div class="main"></div>
+                        <div class="sidebar"></div>
+                    </div>
+                    <div class="page notes hide">
+                        <div class="main"></div>
+                        <div class="sidebar"></div>
+                    </div>
                     <div class="page more hide"></div>
                 </div>
+                <div class="mock-test hide"></div>
             </div>
         </div>
         <script type="module" class="" src="script.js"></script>

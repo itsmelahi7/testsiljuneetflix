@@ -1,5 +1,4 @@
-// Initialise firebase
-
+/*
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-storage.js"; // Import Firebase Storage
@@ -17,6 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const storage = getStorage(app);
+*/
 
 var exam = "ssc";
 // gist data
@@ -27,9 +27,8 @@ var tags_list = [];
 var user_data = [];
 var mocks_data = [];
 // ghghghg
-var mocks = [];
-var me_video_player = null;
-var is_mobile = false;
+var explanation_data = [];
+var linked_blocks_data = [];
 var video_links_data = [];
 var tttt = [];
 //load data
@@ -53,27 +52,10 @@ var me_admin = false;
 var data_other = [];
 var autocompleteList = "";
 
-//hardReloadCode();
-//clearCache();
-//getDataFromJSONFiles();
-
 document.addEventListener("DOMContentLoaded", function () {
     //sconst currentURL = window.location.href;
     //const { exam, que_id } = getURLParameters(currentURL);
     var ele = "";
-
-    ele = document.querySelector(".page .main button");
-    if (ele) {
-        ele.addEventListener("click", (event) => {
-            openSidebar(event);
-        });
-    }
-    ele = document.querySelector(".sidebar > .header .cross");
-    if (ele) {
-        ele.addEventListener("click", (event) => {
-            closeSidebar(event);
-        });
-    }
 
     ele = document.querySelector(".top i.menu");
     if (ele) {
@@ -86,6 +68,27 @@ document.addEventListener("DOMContentLoaded", function () {
     if (ele) {
         ele.addEventListener("click", () => {
             document.querySelector("#tabOverlay").classList.add("hide");
+        });
+    }
+    openRandomPractisePage();
+
+    ele = document.querySelector("button.new-question");
+    if (ele) {
+        ele.addEventListener("click", () => {
+            debugger;
+            if (!fil_ques.length) {
+                fil_ques = que_data;
+            } else {
+                curr_que_index = curr_que_index + 1;
+            }
+            if (curr_que_index == fil_ques.length) {
+                curr_que_index = 0;
+                sortArrayRandomly(fil_ques);
+            }
+            curr_ques = fil_ques[curr_que_index];
+            let id = curr_ques.id;
+            let str = `question/` + id;
+            setURL(str);
         });
     }
 
@@ -135,17 +138,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    ele = document.querySelector(".tab.mcq");
+    ele = document.querySelector(".tab.random");
     if (ele) {
         ele.addEventListener("click", () => {
-            openMCQPage();
-        });
-    }
-
-    ele = document.querySelector(".tab.home");
-    if (ele) {
-        ele.addEventListener("click", () => {
-            openPage("home");
+            openRandomPractisePage();
         });
     }
 
@@ -168,16 +164,22 @@ document.addEventListener("DOMContentLoaded", function () {
             getImageURL();
         });
     }
-
+    ele = document.querySelector(".tab.about-me");
+    if (ele) {
+        ele.addEventListener("click", () => {
+            openAboutMePage();
+        });
+    }
     ele = document.querySelector(".tab.mock");
     if (ele) {
         ele.addEventListener("click", () => {
-            openMockPage();
+            openMockTestPage2();
         });
     }
     ele = document.querySelector(".tab.notes");
     if (ele) {
         ele.addEventListener("click", () => {
+            //openNotesPage();
             openNotesPage2();
         });
     }
@@ -298,6 +300,59 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+async function initialStart() {
+    var isOnline = checkInternetConnection();
+    if (isOnline) {
+        // que data
+        var data = await getDataFromGit(gist_data.data_id, gist_data.data_filename, "que_data");
+
+        if (data == null) {
+            data = getDataFromLocale("que_data");
+            if (!data) que_data = [];
+            que_data = data;
+        } else {
+            que_data = data;
+            saveDataInLocale("que_data", data);
+        }
+
+        // other_data
+        data = await getDataFromGit(gist_data.data_other_id, gist_data.data_other_filename, "data_other");
+
+        if (data == null) {
+            data = getDataFromLocale("data_other");
+            if (!data) data_other = [];
+            else data_other = data;
+        } else {
+            data_other = data;
+            saveDataInLocale("data_other", data);
+        }
+        // notes data
+        var filename = `silju_${exam}_notes`;
+        var id = gist_id[filename];
+        filename = filename + ".json";
+        data = await getDataFromGit(id, filename, "notes");
+        if (data == null) {
+            data = getDataFromLocale("notes_data");
+            if (!data) notes_data = [];
+            else notes_data = data;
+        } else {
+            notes_data = data;
+            saveDataInLocale("notes_data", notes_data);
+        }
+
+        setTimeout(() => {
+            initialLoading();
+        }, 1500);
+    } else {
+        que_data = getDataFromLocale("que_data");
+        notes_data = getDataFromLocale("notes_data");
+        data_other = getDataFromLocale("data_other");
+        setTimeout(() => {
+            initialLoading();
+        }, 1500);
+    }
+}
+
 function hardReloadCode() {
     const links = document.getElementsByTagName("link");
     for (let i = 0; i < links.length; i++) {
@@ -317,20 +372,51 @@ function hardReloadCode() {
 
 //saveDataInLocale("me_admin", true);
 function initialLoading() {
-    if (window.innerWidth < 500) {
-        document.body.classList.add("mobile");
-        is_mobile = true;
-    }
+    //loadSettings();
+    //if (testing) document.querySelector("body").classList.add("editor");
+    //document.querySelector("body").classList.add(`${exam}`);
     document.querySelector(".loading").classList.add("hide");
     document.querySelector(".me-content").classList.remove("hide");
-    let target = document.querySelector(".page.home");
-    loadPage(target, "home");
-    //openPage("home");
-    //openNotesPage2();
-    //openPage("home");
-    // Load items in home page
-    //supportMyWork();
-    //addSocialMediaSection();
+    //loadAllTags();
+
+    sortArrayRandomly(que_data);
+
+    openRandomPractisePage();
+    updateDailyQuestionsCircles();
+
+    supportMyWork();
+    addSocialMediaSection();
+    //new_que_tags = all_tags;
+    //new_ques = getDataFromLocale("new_ques");
+    //if (!new_ques) new_ques = [];
+    loadAllFilterTags();
+    //saveDataInLocale("me_admin", true);
+    //me_admin = getDataFromLocale("me_admin");
+
+    //user_data = getDataFromLocale("user_data");
+
+    // explanation_data = getDataFromLocale("explanation_data");
+    // linked_blocks_data = getDataFromLocale("linked_blocks_data");
+    // video_links_data = getDataFromLocale("video_links_data");
+    // updated_ques = getDataFromLocale("updated_ques");
+
+    //openRandomPractisePage();
+    //openNotesPage("kk");
+
+    //
+    if (false) {
+        var span1 = document.querySelector("span.add-new-que");
+        span1.classList.remove("hide");
+        /* span1.addEventListener("click", () => {
+            
+            document.querySelector("div.add-que").classList.toggle("hide");
+        }); */
+        document.body.addEventListener("click", (event) => {
+            if (event.target === span1) {
+                document.querySelector("div.add-que").classList.toggle("hide");
+            }
+        });
+    }
 }
 
 function getCurrentTime() {
@@ -342,11 +428,6 @@ function getCurrentTime() {
 }
 
 function escapeCSSSelector(id) {
-    // Escape characters that are not allowed in CSS selectors
-    return id.replace(/([!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~])/g, "\\$&").replace(/^(-|[0-9])/g, "\\$1");
-}
-
-function escapeCSSSelector2(id) {
     return id.replace(/([ #;&,.+*~':"!^$[\]()=>|/@])/g, "\\$1").replace(/^([0-9])/g, "\\3$1 ");
 }
 
@@ -498,7 +579,7 @@ function getDataFromLocale(key) {
     }
 }
 function saveDataInLocale(key, data) {
-    if (key == "user_data") key = `user_data_${exam}`;
+    //if (key == "user_data") key = `user_data_${exam}`;
     if (Array.isArray(data)) {
         var jsonData = JSON.stringify(data);
         localStorage.setItem(key, jsonData);
@@ -723,9 +804,7 @@ function filterQuestionsOnTagBased(tag, filter_tags, span) {
         div.children[1].addEventListener("click", (event) => {
             div.remove();
             fil_ques = que_data;
-            curr_que_index = 0;
-            displayQuestion(fil_ques[curr_que_index]);
-            //filterQuestionsOnTagBased("cross");
+            filterQuestionsOnTagBased("cross");
         });
     }
 
@@ -759,8 +838,7 @@ function filterQuestionsOnTagBased(tag, filter_tags, span) {
 
     curr_que_index = 0;
     curr_ques = fil_ques[0];
-    displayQuestion(curr_ques);
-    //displayQuestion();
+    setQuestionURL(fil_ques[0].id);
 }
 function filterQuestionsByTags(questions, tags) {
     return questions.filter((question) => tags.some((tag) => question.tags.includes(tag)));
@@ -894,6 +972,92 @@ function displayAllQuestion() {
     document.querySelector(".today-que-info .link.show-all").click();
 }
 
+function addTodatPracticeQuestionDot(que) {
+    var div = document.createElement("div");
+    div.className = "prev-que me-cp";
+    div.id = que.que_id;
+    div.setAttribute("answer-opt", que.answer_option_id);
+    div.setAttribute("selected-opt", que.selected_option_id);
+    div.textContent = document.querySelectorAll(".prev-ques-list .prev-que").length + 1;
+
+    if (que.answer_option_id == que.selected_option_id) {
+        div.classList.add("correct-ans");
+    } else {
+        div.classList.add("wrong-ans");
+    }
+    document.querySelector("div.prev-ques-list").append(div);
+    document.querySelector("div.today-que-info span.label").textContent = `Today practised questions (${user_data[0].today_practice_questions.length}):`;
+
+    div.addEventListener("click", (event) => {
+        var div = event.target;
+        document.querySelector(".today-que-info .all-que-text").innerHTML = "";
+        displayAllQuestion();
+        var is_all_ques_open = document.querySelector(".today-que-info .all-que-text.hide");
+        if (!is_all_ques_open) {
+            var id = div.id;
+
+            id = escapeCSSSelector(id);
+            var ele = document.querySelector(`div.all-que-text #${id}`);
+
+            ele.scrollIntoView({
+                behavior: "smooth", // Optional: Smooth scrolling behavior
+                block: "start", // Optional: Scroll to the top of the element
+            });
+            ele.style.backgroundColor = "#f6cb8b";
+            setTimeout(() => {
+                ele.style.backgroundColor = "";
+            }, 3000);
+            return;
+        }
+        if (div.classList.contains("active")) {
+            document.querySelector(".today-que-info .que-text").classList.add("hide");
+            div.classList.remove("active");
+            document.querySelector(".today-que-info .link.remove-que").classList.add("hide");
+            return;
+        }
+        document.querySelector(".today-que-info .que-text").classList.remove("hide");
+
+        document.querySelector(".today-que-info .link.remove-que").classList.remove("hide");
+        document.querySelector(".today-que-info .link.remove-que").addEventListener("click", (event) => {
+            document.querySelector(".today-que-info .que-text").classList.add("hide");
+            document.querySelector(".today-que-info .all-que-text").classList.add("hide");
+            //div.classList.remove("active");
+            document.querySelector(".today-que-info .link.remove-que").classList.add("hide");
+            return;
+        });
+        unselectSelectQuestionDot();
+
+        div.classList.add("active");
+        var que_id = div.getAttribute("id");
+        var selected_option_id = div.getAttribute("selected-opt");
+        var answer_option_id = div.getAttribute("answer-opt");
+        var que = getQuestionById(que_id);
+        var target = document.querySelector(".today-que-info .que-text");
+
+        displayQuestion(que, target);
+        //setTimeout(() => {
+        var options = document.querySelectorAll("div.que-text .options .option");
+        options.forEach((option) => {
+            if (option.id == answer_option_id) {
+                option.className = "option me-cp correct-ans disabled";
+            }
+        });
+        if (selected_option_id != answer_option_id) {
+            options.forEach((option) => {
+                if (option.id == selected_option_id) {
+                    option.className = "option me-cp wrong-ans disabled";
+                }
+            });
+        }
+        //}, 1000);
+    });
+}
+
+function unselectSelectQuestionDot() {
+    var div = document.querySelector(".prev-ques-list .prev-que.active");
+    if (div) div.classList.remove("active");
+}
+
 function copyToClipboard(text) {
     // Create a temporary input element
     const input = document.createElement("input");
@@ -946,7 +1110,11 @@ function filterQuestions(temp_filtered_tags) {
     }
 
     curr_que_index = 0;
-    displayQuestion();
+    let id = fil_ques[0].id;
+    setQuestionURL(id);
+}
+function setQuestionURL(id) {
+    setURL(`question/${id}`);
 }
 function getFilteredQuestions(filtered_tags_array) {
     return que_data.filter((obj) => obj.tags.some((tag) => filtered_tags_array.includes(tag)));
@@ -990,7 +1158,8 @@ function addTagInTheFilterTagList(tag) {
             document.querySelector(".filter-ques-count").classList.add("hide");
             fil_ques = que_data;
             curr_que_index = 0;
-            displayQuestion();
+            setQuestionURL(fil_ques[0].id);
+            //displayQuestion();
             return;
         }
         filterQuestions(temp_filtered_tags);
@@ -1054,40 +1223,110 @@ function openPage(tab) {
     document.querySelectorAll(".main.tabs > .tab").forEach((tab) => {
         tab.classList.remove("active");
     });
-    document.querySelectorAll(".pages > .page").forEach((page) => {
+    document.querySelectorAll(".home > .page").forEach((page) => {
         page.classList.add("hide");
     });
     document.querySelector(`.main.tabs > .tab.${tab}`).classList.add("active");
-    document.querySelector(`.pages > .page.${tab}`).classList.remove("hide");
+    document.querySelector(`.home > .page.${tab}`).classList.remove("hide");
 }
-function openMockPage() {
+function openMockTestPage2() {
     openPage("mock");
     let ele = document.querySelector(".page.mock .new-mock");
     if (!ele) {
         loadNewMockTestSection();
         loadPredefinedMocks();
         loadMockTestHistory();
+    }
+}
 
-        ele = document.querySelector(".page.mock .sidebar");
+function openMockTestPage(arg) {
+    openPage("mock");
+    let ele = document.querySelector(".page.mock .new-mock");
+    if (!ele) {
+        loadNewMockTestSection();
+        loadPredefinedMocks();
+        loadMockTestHistory();
+    }
+    return;
+
+    ele = document.querySelector(".page.mock");
+    if (!ele.children.length || arg) {
         ele.innerHTML = `
-                        <div class="header">
-                            <span class="title hide">Title</span>
-                            <span class="cross me-mla">X</span>
+                        <div>
+                            <div class="new-mock me-flex-co">
+                                <div class="head">
+                                    <i class="fa-solid arrow fa-chevron-down"></i>
+                                    <span class="label">Random Mock Test</span>
+                                </div>
+                                <div class="content me-flex-co">
+                                    <span class="link start-new-mock">Start a new random mock test</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tabs">
-                            <div class="tab prev-mock-questions">Mock Questions</div>
-                        </div>
-                        <div class="content">
-                            <div class="prev-mock-questions"></div>
-                        </div>`;
-        ele = ele.querySelector(".header .cross");
+                        <div class="mock-test-sec hide me-dis-flex-co"></div>`;
+
+        // new-mock div
+        var div = ele.querySelector(".new-mock");
+
+        ele = div.querySelector(".head");
         if (ele) {
+            //addDividerBefore(ele);
             ele.addEventListener("click", (event) => {
-                closeSidebar(event);
+                let ele = event.target.closest(".head");
+                let eee = div.querySelector(".content");
+                eee.classList.toggle("hide");
+                if (eee.classList.contains("hide")) {
+                    ele.querySelector("i").className = "fa-solid fa-chevron-right";
+                    //head.querySelector("span").textContent = "Mock History";
+                } else {
+                    ele.querySelector("i").className = "fa-solid fa-chevron-down";
+                    //head.querySelector("span").textContent = "Mock History";
+                    //loadPreviousMockResults();
+                }
             });
         }
-        // close sidebar when open for the first time
-        closeSidebar(ele);
+
+        ele = div.querySelector(".link.start-new-mock");
+        if (ele) {
+            ele.addEventListener("click", () => {
+                startNewMockTest();
+            });
+        }
+
+        ele = div.querySelector(".select-chapter input");
+        if (ele) {
+            ele.addEventListener("focus", (event) => {
+                let eles = document.querySelectorAll(".list.notes .me-chapter .name");
+                if (!eles) {
+                    addChapterIndexList();
+                }
+                eles = document.querySelectorAll(".list.notes .me-chapter .name");
+                var arr = [];
+                eles.forEach((eee) => {
+                    arr.push(eee.textContent.toLowerCase());
+                });
+                setAutoComplete(event, arr, "new-mock-select-chapter");
+            });
+        }
+        ele = document.querySelector(".mock-history .head");
+        if (ele) {
+            addDividerBefore(ele);
+            ele.addEventListener("click", (event) => {
+                let ele = event.target.closest(".head");
+                let eee = document.querySelector(".page.mock .mock-history-list");
+                eee.classList.toggle("hide");
+                if (eee.classList.contains("hide")) {
+                    ele.querySelector("i").className = "fa-solid fa-chevron-right";
+                    //head.querySelector("span").textContent = "Mock History";
+                } else {
+                    ele.querySelector("i").className = "fa-solid fa-chevron-down";
+                    //head.querySelector("span").textContent = "Mock History";
+                    loadPreviousMockResults();
+                }
+            });
+        }
+        loadPredefinedMocks();
+        loadMockTestHistory();
     }
 }
 
@@ -1135,75 +1374,172 @@ function endMockTestHTMLTemplate() {
                 <div class="chart-bar unattempted-bar" id="unattempted-bar"></div>
                 <div class="chart-bar incorrect-bar" id="incorrect-bar"></div>
             </div>
-            <button class="show-questions hide">Show questions</button>
+            <button class="show-questions">Show questions</button>
             <div class="show-que-list"></div>
         </div>`;
 }
 
-function openNotesPage2(id1, id2) {
+function openNotesPage2() {
     openPage("notes");
-    let ele = document.querySelector(".page.notes .main .page-content");
+    let ele = document.querySelector(".page.notes .index-tags .notes");
     if (!ele) {
-        let main_page = document.querySelector(".page.notes .main");
-        main_page.innerHTML = `<div class="header">
-                                <i class="fa-light fa-sidebar-flip me-mla"></i>
-                                <div class="chapter-index hide">
-                                    <i class="fa-solid fa-list-ul"></i>
-                                    
-                                    <span>Chapters</span>
-                                </div>
-                            </div>
-                            <div class="page-content page-text hide ">
-                            <span>Selct a chapter from chapter list</span>
-                            </div>`;
-        ele = main_page.querySelector(".chapter-index");
-        if (ele) {
-            ele.addEventListener("click", (event) => {
-                openSidebar(event);
-            });
-        }
-
-        ele = main_page.querySelector(".fa-sidebar-flip");
-        if (ele) {
-            ele.addEventListener("click", (event) => {
-                openSidebar(event);
-            });
-        }
-
-        let sidebar = document.querySelector(".page.notes .sidebar");
-        sidebar.innerHTML = `<div class="header">
-                            <span class="title hide">Title</span>
-                            <span class="cross me-mla">X</span>
-                        </div>
-                        <div class="tabs">
-                            <div class="tab chapter-index active">Chapters</div>
-                            <div class="tab search">Search</div>
-                        </div>
-                        <div class="content">
-                            <div class="chapter-index"></div>
-                            <div class="search hide">
-                                <div class="top">
-                                    <input type="text" class="search" placeholder="Search" />
-                                    <button class="search">Search</button>
-                                </div>
-                                <div class="search-results"></div>
-                            </div>
-                        </div>`;
-        setNotesPageSidebarItemEvents(sidebar);
-        addChapterIndexList2(sidebar);
-        if (id1) {
-            openChapterById(id1, id2);
-        }
+        addChapterIndexList();
+    }
+    ele = document.querySelector(".page.notes .me-block");
+    if (!ele) {
+        let eee = document.querySelector(".page.notes .index-tags");
+        if (eee) eee.classList.add("open");
     }
 }
 
-function addChapterIndexList2(sidebar) {
-    let ele = sidebar.querySelector(".content > .chapter-index");
+function openNotesPage(arg) {
+    var target_ele = document.querySelector(".page.notes");
+    let list_icon = target_ele.querySelector(".chapter-index");
+
+    if (list_icon) {
+        let ele = document.querySelector(".page.notes .page-title");
+        //let ttt = document.querySelector(".page.notes.hide");
+        //if (!ele && !ttt) target_ele.querySelector(".fa-list-ul").click();
+        if (!ele) document.querySelector(".page.notes .index-tags").classList.add("open");
+        return;
+    }
+
+    target_ele.innerHTML = ` <div class="header">
+                                <div class="chapter-index">
+                                    <i class="fa-solid fa-list-ul"></i>
+                                    <span>Chapters</span>
+                                </div>
+                            </div>
+                            <div class="page-content page-text hide "></div>`;
+
+    var ele = target_ele.querySelector(".chapter-index");
+    if (ele) {
+        //target_ele.querySelector(".index-tags").classList.add("open");
+        ele.addEventListener("click", () => {
+            //showIndexTagsList("notes");
+            let eee = document.querySelector(".page.notes .index-tags");
+            if (eee) eee.classList.add("open");
+            else {
+                addChapterIndexList();
+                eee = document.querySelector(".page.notes .index-tags");
+                eee.classList.add("open");
+            }
+            //let chapter_list = document.querySelector(".page.notes .index-tags .notes");
+            //chapter_list.classList.add("open");
+        });
+    }
+
+    var head_ele = target_ele.querySelector(".head-link");
+    if (head_ele) {
+        head_ele.addEventListener("click", (event) => {
+            var toc_list_ele = target_ele.querySelector(".toc-list");
+            toc_list_ele.classList.toggle("hide");
+
+            if (toc_list_ele.classList.contains("hide")) {
+                head_ele.querySelector("i.arrow").className = "fa-solid arrow fa-chevron-right";
+                head_ele.querySelector(".show-toc").textContent = "Show chapter list";
+            } else {
+                head_ele.querySelector("i.arrow").className = "fa-solid arrow fa-chevron-down";
+                head_ele.querySelector(".show-toc").textContent = "Hide chapter list";
+            }
+        });
+    }
+
+    /*
+    var show_toc_button = document.querySelector("button.show-toc__");
+    show_toc_button.addEventListener("click", () => {
+        show_toc_button.classList.toggle("open");
+        if (show_toc_button.classList.contains("open")) {
+            show_toc_button.textContent = "Hide table of content";
+            document.querySelector(".page.notes .toc-list").classList.remove("hide");
+        } else {
+            show_toc_button.textContent = "Show table of content";
+            document.querySelector(".page.notes .toc-list").classList.add("hide");
+        }
+    });
+    */
+    var toc_list_ele = target_ele.querySelector(".toc-list");
+
+    notes_data.forEach((item) => {
+        addNotesDataElement(item, toc_list_ele, 0);
+    });
+}
+
+function addChapterIndexList2() {
+    let ele = document.querySelector(".index-tags .me-chapter");
+    if (ele) return;
+    let page = document.querySelector(".page.notes");
+    page.innerHTML = getNotesPageHTMLTemplate();
+
+    var div = page.querySelector(".sidebar .index-tags");
+    ele = div.querySelector(".head .cross");
+    if (ele) {
+        ele.addEventListener("click", () => {
+            div.classList.remove("open");
+        });
+    }
+
+    ele = document.querySelector(".page.notes .chapter-index");
+    if (ele) {
+        ele.addEventListener("click", () => {
+            let eee = document.querySelector(".page.notes .index-tags");
+            eee.classList.toggle("open");
+        });
+    }
+
+    ele = div.querySelector(".chapter-list");
     notes_data.forEach((item) => {
         addChapterIndexItem(item, ele, 0);
     });
 }
 
+function getNotesPageHTMLTemplate() {
+    return ` <div class="main">
+                <div class="header">
+                    <div class="chapter-index">
+                        <i class="fa-solid fa-list-ul"></i>
+                        <span>Chapters</span>
+                    </div>
+                </div>
+                <div class="page-content page-text hide"></div>
+            </div>
+            <div class="sidebar">
+                <div class="index-tags">
+                    <div class="head">
+                        <span> Chapter List </span>
+                        <span class="cross close">X</span>
+                    </div>
+                    <div class="chapter-list list notes"></div>
+                </div>
+            </div> `;
+}
+
+function addChapterIndexList() {
+    var tar = document.querySelector(".page.notes .index-tags .notes");
+    if (!tar) {
+        let ele = document.querySelector(".page.notes");
+
+        let div1 = document.createElement("div");
+        div1.className = "index-tags";
+        ele.appendChild(div1);
+        div1.innerHTML = `<div class="head">
+                            <span> Chapter List </span>
+                            <span class="cross close">X</span>
+                         </div>`;
+        div1.querySelector(".cross").addEventListener("click", () => {
+            div1.classList.remove("open");
+        });
+
+        let div2 = document.createElement("div");
+        div2.className = "list notes";
+        div1.appendChild(div2);
+        tar = div2;
+    }
+
+    notes_data.forEach((item) => {
+        addChapterIndexItem(item, tar, 0);
+    });
+}
 function addChapterIndexItem(item, tar, level) {
     var children = item.children;
     var div = document.createElement("div");
@@ -1278,6 +1614,81 @@ function addChapterIndexItem(item, tar, level) {
         span.addEventListener("click", (event) => {
             var page_id = event.target.id;
             openChapterById(page_id);
+            return;
+            document.querySelector("div.page-text").classList.remove("hide");
+
+            // first close the sidebar if it is open
+            var ele = document.querySelector(".page.notes .index-tags");
+            if (ele) ele.classList.remove("open");
+
+            //load page data from pages_data[]
+            var data = [];
+            var page_id = event.target.id; //   data.id;
+            for (var i = 0; i < pages_data.length; ++i) {
+                if (page_id == pages_data[i].id) {
+                    data = pages_data[i];
+                    break;
+                }
+            }
+
+            var div = document.createElement("div");
+            div.id = data.id;
+            div.className = "me-block me-page-title page-title";
+
+            ele = document.querySelector(".page-text");
+            if (ele) {
+                ele.innerHTML = "";
+                ele.appendChild(div);
+            } else {
+                console.error(" 'div.page-text' not found to append 'page-title' ");
+                return;
+            }
+
+            div.innerHTML = getBlockHTMLTemplate();
+            setBlockIconsEvents(div);
+            addBlockLinkedItems(div);
+
+            ele = div.querySelector(".me-block-text .text-inner");
+            ele.innerHTML = getHTMLFormattedText(data.page_title);
+
+            // block data
+
+            data = data.data;
+            ele = div.querySelector(".children"); // target_element
+            data.forEach((block) => {
+                //cspan = document.createElement("span");
+                //cspan.className = "children";
+                //tar.appendChild(cspan);
+                loadPageText2(block, ele, 0);
+            });
+
+            /*
+            var div_page = document.createElement("div");
+            div_page.className = "page-title";
+            div_page.id = item.id;
+            div_page.innerHTML = getHTMLFormattedText(item.text);
+
+            var tar = document.querySelector(".page-text");
+
+            tar.id = item.id;
+            tar.innerHTML = "";
+            tar.classList.remove("hide");
+            tar.appendChild(div_page);
+            var data = [];
+            for (var i = 0; i < pages_data.length; ++i) {
+                if (item.id == pages_data[i].id) data = pages_data[i].data;
+            }
+            var cspan = document.createElement("span");
+            cspan.className = "children-blocks";
+            tar.appendChild(cspan);
+            tar = cspan;
+            data.forEach((d) => {
+                cspan = document.createElement("span");
+                cspan.className = "children";
+                tar.appendChild(cspan);
+                loadPageText(d, cspan, 0);
+            });
+            */
         });
     }
 }
@@ -1397,8 +1808,8 @@ function loadPageText2(item, target, level) {
     }
 
     div.innerHTML = getBlockHTMLTemplate();
-    setBlockIconsEvents(div, item);
-    addBlockLinkedItems(div, item);
+    setBlockIconsEvents(div);
+    addBlockLinkedItems(div);
 
     var ele = "";
     let text = item.text;
@@ -1434,9 +1845,6 @@ function loadPageText2(item, target, level) {
             const img = document.createElement("img");
             img.src = imageUrl;
             img.className = "note-image hide";
-            img.addEventListener("click", (event) => {
-                showImagesInOverlay(event);
-            });
 
             // Append the img element to the div
             div.appendChild(img);
@@ -1799,7 +2207,6 @@ function loadPageText(item, target, level) {
 }
 function getHTMLFormattedText(text) {
     if (!text) text = "";
-
     // Replace [[ and ]] with an empty string
     text = text.replace(/\[\[|\]\]/g, "");
 
@@ -1858,10 +2265,18 @@ function getBlockData(block, block_id) {
     }
 }
 
+function openNotePage(que) {
+    var block = que.linked_blocks[0];
+    var page_id = block.page_id;
+    var block_id = block.block_id;
+    openChapterById(page_id, block_id);
+}
+
 function openChapterById(page_id, block_id) {
-    openNotesPage2();
-    let ele = document.querySelector(".page.notes .sidebar .cross");
-    if (is_mobile) closeSidebar(ele);
+    openPage("notes");
+
+    let ele = document.querySelector(".page.notes .index-tags");
+    if (ele) ele.classList.remove("open");
 
     var data = [];
     for (var i = 0; i < pages_data.length; ++i) {
@@ -1888,10 +2303,6 @@ function openChapterById(page_id, block_id) {
     setBlockIconsEvents(div);
     addBlockLinkedItems(div);
 
-    let div_iframe = document.createElement("div");
-    div_iframe.className = "me-iframe-div";
-    div.insertBefore(div_iframe, div.children[1]);
-
     ele = div.querySelector(".me-block-text .text-inner");
     ele.innerHTML = getHTMLFormattedText(data.page_title);
 
@@ -1900,28 +2311,118 @@ function openChapterById(page_id, block_id) {
     data = data.data;
     ele = div.querySelector(".children"); // target_element
     data.forEach((block) => {
+        //cspan = document.createElement("span");
+        //cspan.className = "children";
+        //tar.appendChild(cspan);
         loadPageText2(block, ele, 0);
     });
+    /*
+    var div_page = document.createElement("div");
+    div_page.className = "page-title";
+    div_page.id = data.id; // page_id =
+    div_page.innerHTML = getHTMLFormattedText(data.page_title); //page_title
+    data = data.data;
+    var tar = document.querySelector(".page-text");
+    tar.innerHTML = "";
+    //tar.classList.remove("hide");
+    tar.appendChild(div_page);
+
+    var cspan = document.createElement("span");
+    cspan.className = "children-blocks";
+    tar.appendChild(cspan);
+    tar = cspan;
+    data.forEach((d) => {
+        cspan = document.createElement("span");
+        cspan.className = "children";
+        tar.appendChild(cspan);
+        loadPageText(d, cspan, 0);
+    });*/
 
     document.querySelector("div.page-text").classList.remove("hide");
     if (block_id) {
-        let ttt = block_id;
-        ttt = escapeCSSSelector(ttt);
-        var block_ele = document.querySelector(`#${ttt}`);
-        if (!block_ele) {
-            ttt = block_id;
-            ttt = escapeCSSSelector2(ttt);
-            block_ele = document.querySelector(`#${ttt}`);
+        block_id = escapeCSSSelector(block_id);
+        var block_ele = document.querySelector(`#${block_id}`);
+        scrollToView(block_ele);
+    }
+}
+
+function openChapterById2(page_id, block_id) {
+    // first close the sidebar if it is open
+    var ele = document.querySelector(".page.notes .index-tags");
+    if (ele) ele.classList.remove("open");
+
+    //load page data from pages_data[]
+    var data = [];
+    for (var i = 0; i < pages_data.length; ++i) {
+        if (page_id == pages_data[i].id) {
+            data = pages_data[i];
+            break;
         }
-        if (block_ele) scrollToView(block_ele);
-        else console.error("block id selector issue");
+    }
+
+    var div = document.createElement("div");
+    div.id = data.id;
+    div.className = "me-block me-page-title";
+
+    ele = document.querySelector(".page-text");
+    if (ele) {
+        ele.innerHTML = "";
+        ele.appendChild(div);
+    } else {
+        console.error(" 'div.page-text' not found to append 'page-title' ");
+        return;
+    }
+
+    div.innerHTML = `<div class="me-block-main">
+                    <div class="me-block-text">
+                        <span></span>
+                    </div>
+                    <div class="me-block-icons">
+                        <span class="plus">+</span>
+                        <div class="add">
+                            <span class="label">Add items:</span>
+                            <div class="icons">
+                                <i class="fa-brands fa-youtube video"></i>
+                                <i class="fa-solid fa-image image"></i>
+                                <i class="fa-solid fa-link link"></i>
+                            </div>
+                            <div class="inputs hide">
+                                <input type="text" class="link-item" />
+                                <input type="text" class="text" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="children"></div>`;
+
+    ele = div.querySelector(".me-block-text span");
+    ele.innerHTML = getHTMLFormattedText(data.page_title);
+
+    // block data
+    data = data.data;
+    ele = div.querySelector(".children"); // target_element
+    data.forEach((block) => {
+        //cspan = document.createElement("span");
+        //cspan.className = "children";
+        //tar.appendChild(cspan);
+        loadPageText(block, ele, 0);
+    });
+    openPage("notes");
+
+    var cspan = document.createElement("span");
+    cspan.className = "children-blocks";
+    tar.appendChild(cspan);
+    tar = cspan;
+
+    document.querySelector("div.page-text").classList.remove("hide");
+    if (block_id) {
+        block_id = escapeCSSSelector(block_id);
+        var block_ele = document.querySelector(`#${block_id}`);
+        scrollToView(block_ele);
     }
 }
 
 function scrollToView(ele) {
-    if (ele.classList.contains("me-block")) {
-        ele = ele.querySelector(".me-block-main");
-    }
     ele.scrollIntoView({
         behavior: "smooth", // Optional: Smooth scrolling behavior
         block: "center", // Optional: Scroll to the top of the element
@@ -1937,15 +2438,73 @@ function scrollToView(ele) {
         ele.classList.remove("focus");
     }, 4000);
 }
-function openTestQuestion() {
-    var id = "oyxgdCVRPx";
-    var que = getQuestionById(id);
-    fil_ques[curr_que_index] = que;
-    var tar = document.querySelector(".page.random .que-text");
-    //getMCQQuestionElement(fil_ques[curr_que_index], tar, "main");
-    displayQuestion(que);
-}
 
+var me_video_player;
+function playVideoPlayer__(time, video_id, target) {
+    // Initialize the YouTube player using the IFrame API
+    function initializeYouTubePlayer() {
+        const iframe = target.querySelector("iframe");
+        if (!iframe) {
+            console.error("Iframe not found in the target element.");
+            return;
+        }
+
+        //me_video_player = new YT.Player(iframe.id, {
+        var me_video_player = new YT.Player(iframe.id, {
+            events: {
+                onReady: function (event) {
+                    // Seek to the specified time and play the video
+                    event.target.seekTo(time);
+                    event.target.playVideo();
+                },
+                onError: function (event) {
+                    console.error("YouTube Player Error:", event.data);
+                    // Additional error logging
+                    switch (event.data) {
+                        case 2:
+                            console.error("Invalid parameter. Please ensure the video ID is correct.");
+                            break;
+                        case 5:
+                            console.error("HTML5 player issue.");
+                            break;
+                        case 100:
+                            console.error("Video not found.");
+                            break;
+                        case 101:
+                        case 150:
+                            console.error("Video not allowed to be played in embedded players.");
+                            break;
+                        default:
+                            console.error("Unknown error.");
+                            break;
+                    }
+                },
+            },
+            playerVars: {
+                autoplay: 1,
+                start: time,
+            },
+        });
+    }
+
+    // Check if the YouTube IFrame API script is already loaded
+    if (typeof YT === "undefined" || typeof YT.Player === "undefined") {
+        // Load the YouTube IFrame API script
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName("script")[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // Set the onYouTubeIframeAPIReady function to initialize the player
+        window.onYouTubeIframeAPIReady = function () {
+            initializeYouTubePlayer();
+        };
+    } else {
+        // The YouTube IFrame API script is already loaded, initialize the player
+        initializeYouTubePlayer();
+    }
+}
+var mocks = [];
 function generateSomeMocks() {
     for (let i = 0; i < 20; i++) {
         let arr = {
@@ -2032,29 +2591,23 @@ function playVideoPlayer_____(time, video_id, target) {
         initializeYouTubePlayer();
     }
 }
-
+var video_player = null;
+var old_video_block_id = "";
 function playVideoPlayer(time, video_id, target) {
     const iframe = target.querySelector("iframe");
     // If the player is already initialized and the video ID matches, just seek and play
-    //let block_id = target.closest(".me-block").id;
-    //let new_video_block_id = block_id + video_id;
-    if (me_video_player && !iframe) {
-        me_video_player = null;
-        target.innerHTML = "";
-        initializeYouTubePlayer(time, video_id, target);
-        return;
-    }
-    if (me_video_player && iframe.id == video_id) {
-        me_video_player.seekTo(time);
-        me_video_player.playVideo();
-        return;
-    }
-    if (me_video_player && iframe.id !== video_id) {
-        //video_player.destroy();
+    let block_id = target.closest(".me-block").id;
+    let new_video_block_id = block_id + video_id;
 
-        //video_player.pauseVideo();
-        me_video_player = null;
-        target.innerHTML = "";
+    if (video_player && old_video_block_id === new_video_block_id) {
+        video_player.seekTo(time);
+        video_player.playVideo();
+        return;
+    }
+    if (video_player && old_video_block_id !== new_video_block_id) {
+        //video_player.destroy();
+        video_player.pauseVideo();
+        video_player = null;
         initializeYouTubePlayer(time, video_id, target);
         return;
     }
@@ -2077,36 +2630,8 @@ function playVideoPlayer(time, video_id, target) {
 }
 function initializeYouTubePlayer(time, video_id, target) {
     // Initialize the player with the new video ID
-    //const iframe = target.querySelector("iframe");
-    let iframe = target.querySelector("iframe");
-    var url = window.location.href; // Get the current URL
-    if (url.includes("127.0.0")) {
-        url = "http://127.0.0.1:5500";
-    } else {
-        url = "https://neetflix.life";
-    }
-    if (!iframe) {
-        target.innerHTML = `
-                                <div class="header">
-                                    <span class="cross">X</span>
-                                </div>
-                                <div class="me-iframe">
-                                <iframe  id="${video_id}"class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed/${video_id}?enablejsapi=1&amp;origin=${url}&amp;widgetid=5" ></iframe>
-                                </div>
-                            `;
-        let ele = target.querySelector(".header .cross");
-        if (ele) {
-            ele.addEventListener("click", () => {
-                me_video_player.pauseVideo();
-                me_video_player = null;
-                target.innerHTML = "";
-                return;
-            });
-        }
-        iframe = target.querySelector("iframe");
-    }
-
-    me_video_player = new YT.Player(iframe.id, {
+    const iframe = target.querySelector("iframe");
+    video_player = new YT.Player(iframe.id, {
         videoId: video_id, // Set the video ID here
         events: {
             onReady: function (event) {
@@ -2123,8 +2648,8 @@ function initializeYouTubePlayer(time, video_id, target) {
 
     // Store the video ID for future reference
     //iframe.me_video_player.videoId = video_id;
-    //let block_id = target.closest(".me-block").id;
-    //old_video_block_id = block_id + video_id;
+    let block_id = target.closest(".me-block").id;
+    old_video_block_id = block_id + video_id;
 }
 
 /*
@@ -2467,6 +2992,20 @@ function getAddNewQuestionHTMLTemplate() {
 }
 
 function loadPreviousMockResults() {
+    /*var tar_ele = document.querySelector(".page.mock .mock-history.list");
+    var head = document.querySelector(".mock-history.head");
+    addDividerBefore(head);
+    head.addEventListener("click", (event) => {
+        tar_ele.classList.toggle("hide");
+        if (tar_ele.classList.contains("hide")) {
+            head.querySelector("i").className = "fa-solid fa-chevron-right";
+            head.querySelector("span").textContent = "Show Mock History";
+        } else {
+            head.querySelector("i").className = "fa-solid fa-chevron-down";
+            head.querySelector("span").textContent = "Hide Mock History";
+        }
+    });*/
+
     var tar_ele = document.querySelector(".page.mock .mock-history-list");
     tar_ele.innerHTML = "";
     var mocks = user_data[0].mocks;
@@ -2533,15 +3072,38 @@ function loadPreviousMockResults() {
         span2.textContent = "Show questions";
         div_mock.appendChild(span2);
         span2.addEventListener("click", (event) => {
-            showPreviousMockQuestions(mock);
+            showPreviousMockQuestions(event, mock);
         });
     });
 }
 
-function showPreviousMockQuestions(mock) {
-    let div = document.querySelector(".page.mock .sidebar .content .prev-mock-questions ");
+function showPreviousMockQuestions(event, mock) {
+    var div = document.querySelector(".page.mock .index-tags .questions");
+    if (!div) {
+        let ele = document.querySelector(".page.mock");
+
+        let div1 = document.createElement("div");
+        div1.className = "index-tags";
+        ele.appendChild(div1);
+        div1.innerHTML = `<div class="head">
+                            <span> Mock Questions </span>
+                            <span class="cross close">X</span>
+                         </div>`;
+        div1.querySelector(".cross").addEventListener("click", () => {
+            div1.remove();
+        });
+
+        let div2 = document.createElement("div");
+        div2.className = "questions";
+        div1.appendChild(div2);
+        div = div2;
+    }
+
     div.innerHTML = "";
-    openSidebar(div);
+    // document.createElement("div");
+    // div.className = "prev-mock-ques list";
+    // mock_div.appendChild(div);
+
     mock.questions.forEach((item) => {
         var que = getQuestionById(item.id);
         var que_div = displayQuestion(que, div, "prev-mock-que");
@@ -2562,7 +3124,6 @@ function showPreviousMockQuestions(mock) {
         if (que.page_uid && que.page_uid != "") {
             let span = document.createElement("span");
             span.className = "page-link link";
-
             let page = "";
             for (var i = 0; i < pages_data.length; i++) {
                 if (que.page_uid == pages_data[i].id) {
@@ -2572,7 +3133,7 @@ function showPreviousMockQuestions(mock) {
             }
             let page_title = page.page_title;
             let parent_block_uid = que.parent_block_uid ? que.parent_block_uid : null;
-            span.textContent = `Click to open explanation block in notes.`; // "${page_title}"`;
+            span.textContent = `Open explanation block in notes: "${page_title}"`;
 
             que_div.appendChild(span);
 
@@ -2581,6 +3142,10 @@ function showPreviousMockQuestions(mock) {
             });
         }
     });
+
+    //showIndexTagsList("questions");
+    let ele = document.querySelector(".page.mock .index-tags");
+    if (ele) ele.classList.add("open");
 }
 
 function getFormattedDate(dateStr) {
@@ -2642,7 +3207,6 @@ function addDividerBefore(element) {
 }
 
 function startNewMockTest(mock) {
-    // Load chapters if selected for mock test
     var selected_chapters = [];
     let eee = document.querySelector(".page.mock .me-mock-chapter");
     if (eee) {
@@ -2654,19 +3218,36 @@ function startNewMockTest(mock) {
         });
     }
 
-    // Show the mock-test section;
-    document.querySelector(".main-content > .me-top").classList.add("hide");
-    document.querySelector(".main-content > .pages").classList.add("hide");
-    //document.querySelector(".main-content > .mock-test").classList.remove("hide");
-
-    var ele = document.querySelector(".main-content > .mock-test");
-    ele.classList.remove("hide");
+    document.querySelector(".main.tabs").classList.add("hide");
+    document.querySelector(".page.mock > div").classList.add("hide");
+    document.querySelector(".page.mock .mock-test-sec").classList.remove("hide");
+    /*
+    document.querySelectorAll(".page.mock > *").forEach((ele) => {
+        ele.classList.add("hide");
+        if (ele.classList.contains("mock-test-sec")) ele.classList.remove("hide");
+    });*/
+    var ele = document.querySelector(".page.mock .mock-test-sec");
     ele.innerHTML = getMockTestHTMLTemplate();
 
     ele.querySelector(".cross").addEventListener("click", () => {
-        document.querySelector(".main-content > .me-top").classList.remove("hide");
-        document.querySelector(".main-content > .pages").classList.remove("hide");
-        document.querySelector(".main-content > .mock-test").classList.add("hide");
+        //document.querySelector(".top").classList.remove("hide");
+        document.querySelector(".tabs").classList.remove("hide");
+        document.querySelector(".page.mock > div").classList.remove("hide");
+        document.querySelector(".page.mock .mock-test-sec").classList.add("hide");
+        user_data[0].mocks.shift();
+
+        return;
+
+        document.querySelectorAll(".page.mock > *").forEach((ele) => {
+            ele.classList.remove("hide");
+            if (ele.classList.contains("mock-test-sec")) ele.classList.add("hide");
+            if (ele.classList.contains("list")) ele.classList.add("hide");
+            if (ele.classList.contains("head")) {
+                while (ele.querySelector("i").className.indexOf("right") == -1) {
+                    ele.click();
+                }
+            }
+        });
     });
 
     fil_ques = que_data.slice(0, 20);
@@ -2739,7 +3320,10 @@ function startNewMockTest(mock) {
             var i = parseInt(event.target.textContent, 10);
             var ele = document.querySelectorAll(".mock-test .que-text .que-div");
             ele = ele[i - 1];
-            scrollToView(ele);
+            ele.scrollIntoView({
+                behavior: "smooth", // Optional: Smooth scrolling behavior
+                block: "start", // Optional: Scroll to the top of the element
+            });
         });
     }
     setTimer(Math.floor(number_of_questions_for_mock / 2));
@@ -2757,16 +3341,13 @@ function startNewMockTest(mock) {
         let que = getQuestionById(id);
         displayQuestion(que, target_ele, "mock");
     });
-    let mock_test_div = document.querySelector(".main-content > .mock-test");
 
-    mock_test_div.querySelector(".submit-test").addEventListener("click", () => {
-        //Showing the top tabs bar so that to switch to explanations
-        document.querySelector(".main-content > .me-top").classList.remove("hide");
-
+    document.querySelector(".page.mock-test .submit-test").addEventListener("click", () => {
+        document.querySelector(".main.tabs").classList.remove("hide");
         user_data[0].mocks[0].end_time = getCurrentTime();
         var que_arr = user_data[0].mocks[0].questions;
 
-        mock_test_div.querySelectorAll(".que-div").forEach((que_ele, index) => {
+        document.querySelectorAll(".mock-test-sec .que-list .que-div").forEach((que_ele, index) => {
             que_arr[index].id = que_ele.id;
             var options = que_ele.querySelectorAll(".option");
             options.forEach((option) => {
@@ -2797,8 +3378,7 @@ function startNewMockTest(mock) {
         result.incorrect_questions = wrong_questions;
 
         saveDataInLocale("user_data", user_data);
-
-        mock_test_div.innerHTML = endMockTestHTMLTemplate();
+        document.querySelector(".mock-test-sec").innerHTML = endMockTestHTMLTemplate();
 
         document.getElementById("total-questions").textContent = total_questions;
         document.getElementById("questions-attempted").textContent = questions_attempted;
@@ -2843,53 +3423,121 @@ function startNewMockTest(mock) {
             animateBar(incorrectBar, incorrect_percentage);
         }
 
-        mock_test_div.querySelector(".cross").addEventListener("click", () => {
-            document.querySelector(".main-content > .me-top").classList.remove("hide");
-            document.querySelector(".main-content > .pages").classList.remove("hide");
-            document.querySelector(".main-content > .mock-test").classList.add("hide");
+        document.querySelector(".mock-test-sec .cross").addEventListener("click", () => {
+            //document.querySelector(".top").classList.remove("hide");
+            document.querySelector(".main.tabs").classList.remove("hide");
+
+            //openMockTestPage("cross");
+            //return;
+            document.querySelectorAll(".page.mock > *").forEach((ele) => {
+                ele.classList.remove("hide");
+                if (ele.classList.contains("mock-test-sec")) ele.classList.add("hide");
+                if (ele.classList.contains("list")) ele.classList.add("hide");
+                if (ele.classList.contains("head")) {
+                    while (ele.querySelector("i").className.indexOf("right") == -1) {
+                        ele.click();
+                    }
+                }
+            });
         });
-        mock_test_div.querySelector(".show-questions").addEventListener("click", (event) => {
+        document.querySelector(".mock-test-sec .show-questions").addEventListener("click", () => {
             let mock = user_data[0].mocks[0];
-            showPreviousMockQuestions(mock);
+            showPreviousMockQuestions(event, mock);
+            return;
+            que_arr.forEach((que) => {
+                var target_ele = document.querySelector(".mock-test-sec .show-que-list");
+                //var que_div = getMCQQuestionElement(getQuestionById(que.id), target_ele, "mock-result");
+                var que_div = displayQuestion(getQuestionById(que.id), target_ele, "mock-result");
+                var id = que.selected_option_id;
+                if (id != "") {
+                    //var aid = que.answer_option_id;
+                    id = escapeCSSSelector(id);
+                    que_div.querySelector(`#${id}`).click();
+                } else {
+                    que_div.querySelectorAll(".option").forEach((opt) => {
+                        opt.classList.add("disabled");
+                    });
+                }
+            });
         });
+        document.querySelector(".mock-test-sec .start-new-mock").addEventListener("click", () => {
+            startNewMockTest();
+        });
+        //loadPreviousMockResults();
     });
 }
 
-function openMCQPage(id) {
-    openPage("mcq");
-    var page_main = document.querySelector(".page.mcq > .main .que-text");
-    if (!page_main) {
-        page_main = document.querySelector(".page.mcq > .main ");
-        page_main.innerHTML = getRandomPageHTMLTemplate();
-        setMcqPageMainItemEvents(page_main);
+function openRandomPractisePage() {
+    openPage("random");
+    var tar_ele = document.querySelector(".page.random");
+    if (!tar_ele.children.length) {
+        tar_ele.innerHTML = getRandomPageHTMLTemplate();
 
-        var page_sidebar = document.querySelector(".page.mcq > .sidebar ");
-        page_sidebar.innerHTML = `<div class="header">
-                            <span class="title">Title</span>
-                            <span class="cross me-mla">X</span>
-                        </div>
-                        <div class="tabs">
-                            <div class="tab chapter-tag active">Chapters</div>
-                            <div class="tab all-tags">All Tags</div>
-                        </div>
-                        <div class="content">
-                            <div class="chapter-tag"> <span> Chapters </span> </div>
-                            <div class="all-tags hide"> <span> All Tags </span>  </div>
-                        </div>`;
-        setMcqPageSidebarItemEvents(page_sidebar);
+        //var ele = tar_ele.querySelector(".head-filter-tag i.fa-search");
+        var ele = document.querySelector(".filter-section i.search");
+        if (ele) {
+            ele.addEventListener("click", (event) => {
+                var ele = tar_ele.querySelector(".head-filter-tag");
+                Array.from(ele.children).forEach((elem) => {
+                    elem.classList.add("hide");
+                });
 
-        addTagIndexList(page_sidebar);
-        sortArrayRandomly(que_data);
-        fil_ques = que_data;
-        curr_que_index = 0;
-        curr_ques = fil_ques[curr_que_index];
-        if (id) {
-            let que = getQuestionById(id);
-            displayQuestion(que);
-        } else displayQuestion();
-        if (is_mobile) {
-            let ele = document.querySelector(".page.mcq .main .que-div");
-            closeSidebar(ele);
+                var input = tar_ele.querySelector(".head-filter-tag input");
+                input.classList.remove("hide");
+                input.focus();
+                input.addEventListener("blur", (event) => {
+                    var ele = tar_ele.querySelector(".head-filter-tag");
+                    Array.from(ele.children).forEach((elem) => {
+                        elem.classList.remove("hide");
+                        if (elem == input) elem.classList.add("hide");
+                    });
+                });
+            });
+        }
+
+        ele = document.querySelector(".filter-section i.search");
+        if (ele) {
+            ele.addEventListener("click", (event) => {
+                var ele = tar_ele.querySelector(".filter-section div.head");
+                Array.from(ele.children).forEach((elem) => {
+                    elem.classList.add("hide");
+                });
+
+                var input = tar_ele.querySelector(".filter-section input");
+                input.classList.remove("hide");
+                input.focus();
+                input.addEventListener("blur", (event) => {
+                    var ele = tar_ele.querySelector(".filter-section div.head");
+                    Array.from(ele.children).forEach((elem) => {
+                        elem.classList.remove("hide");
+                        if (elem == input) elem.classList.add("hide");
+                    });
+                });
+            });
+        }
+
+        ele = document.querySelector(".display-filter-tag-list");
+        if (ele) {
+            ele.addEventListener("click", () => {
+                showIndexTagsList("random");
+            });
+        }
+        ele = document.querySelector("i.fa-filter");
+        if (ele) {
+            ele.addEventListener("click", () => {
+                //showIndexTagsList("random");
+                let ele = document.querySelector(".page.random .index-tags");
+                if (ele) ele.classList.add("open");
+            });
+        }
+
+        ele = document.querySelector(".filter-section div.filter");
+        if (ele) {
+            ele.addEventListener("click", () => {
+                //showIndexTagsList("random");
+                let ele = document.querySelector(".page.random .index-tags");
+                if (ele) ele.classList.add("open");
+            });
         }
     }
 }
@@ -2925,22 +3573,38 @@ function createGlobalVariable(name, value) {
 }
 
 function getRandomPageHTMLTemplate() {
-    return `<div class="middle question-section main-questions">
+    return `<div class="middle main-questions">
                 <div class="filter-section">
                     <div class="head">
-                    
-                        <i class="fa-light fa-sidebar-flip me-mla"></i>
-                        <div class="filter hide">
+                        <input type="text" class="filter input hide" placeholder="search filter tags" />
+                        <i class="fa-solid fa-search hide search"></i>
+                        
+                        <div class="filter">
                             <i class="fa-regular fa-filter"></i>
                             <span>Filter</span>
+                        </div>
+
+                        <div class="search hide">
+                            <i class="fa-regular fa-search"></i>
+                            <span>Search</span>
                         </div>
                     </div>
                     <div class="filtered-tags hide"></div>
                     <span class="filter-ques-count hide label"></span>
                 </div>
+
                 <div class="que-text"></div>
+                
+            </div>
+            <div class="bottom me-dis-flex-co">
                 <button class="new-question">✨ New Question</button>
             </div>
+            <div class="support-me hide me-dis-flex">
+                <i class="fa-solid fa-dollar-sign hide"></i>
+                <span> If you like my work, if you feel this app is helping you in any way, please do support me</span>
+                <span> support me link</span>
+            </div>
+            <div class="edit-que"></div>
             `;
 }
 
@@ -2948,10 +3612,12 @@ function displayQuestion(que, tar_ele, type) {
     if (!type || type == "random") {
         if (!que) que = curr_ques;
         else curr_ques = que;
+        let ele = document.querySelector(".page.random .que-text");
+        if (!ele) document.querySelector(".page.random").innerHTML = getRandomPageHTMLTemplate();
     }
 
-    if (!tar_ele) tar_ele = document.querySelector(".page.mcq .main .que-text");
-    if (!type || type == "random") tar_ele.innerHTML = "";
+    if (!tar_ele) tar_ele = document.querySelector(".page.random .que-text");
+    if (!type) tar_ele.innerHTML = "";
 
     var que_div = document.createElement("div");
     que_div.className = "que-div";
@@ -2994,10 +3660,17 @@ function displayQuestion(que, tar_ele, type) {
     span.innerHTML = `<span class="num">${nn}</span>
                       <span class="text">${tt}</span>`;
 
+    if (!type || type == "main") {
+        //que_div.querySelector(".question .num").classList.add("hide");
+        //que_div.querySelector(".question .text").textContent = "Q. " + que_div.querySelector(".question .text").textContent;
+    }
+
     // mcq options
     var options = document.createElement("div");
     options.className = "options";
     que_div.appendChild(options);
+
+    //shuffleArray(que.options); // shuffle the mcq options every time the question opens
 
     que.options.forEach((opt, index) => {
         var optionLetters = ["(a)", "(b)", "(c)", "(d)"];
@@ -3013,11 +3686,21 @@ function displayQuestion(que, tar_ele, type) {
             div.classList.add("ans");
         }
 
-        // No action on options for mock-result, daily-practise-questions;
+        /*var span = document.createElement("span");
+        span.className = "option me-cp";
+        span.id = opt.id;
+        
+        var optionText = optionLetters[index] + " " + opt.text.replace(" #ans", "");
+        span.textContent = optionText;
+        if (opt.text.includes("#ans")) {
+            span.classList.add("ans");
+        }
+        options.appendChild(span);
+        */
+
         if (type == "mock-result") return;
         if (type == "daily-ques") return;
 
-        // div = option div
         div.addEventListener("click", (event) => {
             var span = event.target.closest(".option");
             if (type == "mock") {
@@ -3039,16 +3722,19 @@ function displayQuestion(que, tar_ele, type) {
                 return;
             }
 
-            var que_div_ele = span.closest(".que-div");
-
+            var que_div_ele = span.closest(".que-div"); // tar_ele.querySelector(".que-div");
             span.classList.add("selected");
+            if (span.classList.contains("ans")) {
+                //span.classList.add("correct-ans");
+                span.classList.add("correct");
+            } else {
+                //span.classList.add("wrong-ans");
+                span.classList.add("wrong");
+            }
 
-            if (span.classList.contains("ans")) span.classList.add("correct");
-            else span.classList.add("wrong");
-
-            // get correct option
             que_div_ele.querySelectorAll(".option").forEach((optionSpan) => {
                 if (optionSpan.classList.contains("ans")) {
+                    // optionSpan.classList.add("correct-ans");
                     optionSpan.classList.add("correct");
                 }
             });
@@ -3058,8 +3744,8 @@ function displayQuestion(que, tar_ele, type) {
             });
 
             if (!type || type == "random") {
-                var que_div = que_div_ele;
-
+                var que_div = document.querySelector(".page.random .que-text .que-div");
+                //save data in today practise questions
                 let ques = user_data[0].daily_practise_questions[0].questions;
                 //let ques = arr[0].questions;
                 let oobj = {
@@ -3069,7 +3755,14 @@ function displayQuestion(que, tar_ele, type) {
                 };
                 ques.unshift(oobj);
                 saveUserData();
-                //updateDailyQuestionsCircles();
+                updateDailyQuestionsCircles();
+
+                //saveDataInLocale("user_data", user_data);
+
+                // showing the explanations for only the random question or question in random page
+                // not showing explanations for the mock questions and pre-mock-questions
+
+                //explanation of the id and the value of the ID in the value
 
                 var div = document.createElement("div");
                 div.className = "explanations me-dis-flex-co";
@@ -3085,9 +3778,6 @@ function displayQuestion(que, tar_ele, type) {
                     let span = document.createElement("span");
                     span.className = "page-link link";
                     let page = "";
-                    debugger;
-                    //popupAlert("Page Data is Not Yet Added");
-                    //return;
                     for (var i = 0; i < pages_data.length; i++) {
                         if (que.page_uid == pages_data[i].id) {
                             page = pages_data[i];
@@ -3107,36 +3797,580 @@ function displayQuestion(que, tar_ele, type) {
                     span.addEventListener("click", () => {
                         openChapterById(que.page_uid, parent_block_uid);
                     });
-                    //if (!page_title) exp_div.classList.add("hide");
+                    if (!page_title) exp_div.classList.add("hide");
+                }
+                if (que.explanation_id && que.explanation_id != "") {
+                    var text = getExplanationTextById(que.explanation_id);
+                    let sss = document.createElement("span");
+                    sss.className = "explanation-text";
+                    sss.textContent = text;
+                    div.appendChild(sss);
+                }
+
+                if (que.linked_block_id && que.linked_block_id != "") {
+                    var obj = getLinkedBlockObjectById(que.linked_block_id);
+                    var block_id = obj.block_id;
+                    var page_id = obj.page_id;
+
+                    var block_text = getBlockText(block_id, page_id);
+
+                    var div2 = document.createElement("div");
+                    div2.className = "me-exp-block me-dis-flex-co";
+                    div.appendChild(div2);
+
+                    var span1 = document.createElement("span");
+                    span1.className = "link";
+                    span1.textContent = "open in notes";
+                    div2.appendChild(span1);
+
+                    span1.addEventListener("click", (event) => {
+                        //openNotePage(block_id, page_id);
+                        openChapterById(page_id, block_id);
+                    });
+
+                    var span2 = document.createElement("span");
+                    span2.className = "exp-text";
+                    span2.innerHTML = getHTMLFormattedText(block_text);
+                    div2.appendChild(span2);
+                }
+
+                if (que.video && que.video != "") {
+                    let video_id = que.video.video_id;
+                    let time = que.video.time;
+
+                    var tar = span.closest(".que-div").querySelector("div.explanations");
+                    if (!tar) {
+                        var que_div = document.querySelector(".page.random .que-text .que-div");
+                        var div = document.createElement("div");
+                        div.className = "explanations me-dis-flex-co";
+                        que_div.appendChild(div);
+                        tar = div;
+
+                        var span = document.createElement("span");
+                        span.className = "label";
+                        span.textContent = "Explanation:";
+                        div.appendChild(span);
+                    }
+                    var div = document.createElement("div");
+                    div.className = "video-exp-blocks me-dis-flex";
+                    tar.appendChild(div);
+
+                    var icon = document.createElement("i");
+                    //icon.className = "fa-sharp fa-solid fa-play";
+                    icon.className = "fa-brands fa-youtube";
+                    div.appendChild(icon);
+
+                    var span = document.createElement("span");
+                    span.className = "video";
+                    span.textContent = "Click to play the video explanation";
+                    div.appendChild(span);
+
+                    div.addEventListener("click", (event) => {
+                        var div2 = event.target.closest(".que-div").querySelector("div.explanations .me-iframe");
+                        if (div2) div2.remove();
+                        div2 = document.createElement("div");
+                        div2.className = "video-player me-iframe";
+                        tar.appendChild(div2);
+                        let iframe = getVideoIframeElement(video_id);
+                        div2.appendChild(iframe);
+                        playVideoPlayer(time, video_id, div2);
+
+                        //div2.innerHTML = `<iframe class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed/${video_id}?enablejsapi=1&amp;origin=http://silju.in&amp;widgetid=5" id="widget6"></iframe>`;
+                        //if (testing) div2.innerHTML = `<iframe class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed/${video_id}?enablejsapi=1&amp;origin=http://127.0.0.1:5500&amp;widgetid=5" id="widget6"></iframe>`;
+
+                        // Initialize and play the video player after a delay to ensure iframe is added to the DOM
+                        // setTimeout(function () {
+                        //  playVideoPlayer(time, video_id, div2);
+                        // }, 3000);
+                        /*
+                    div2 = document.createElement("div");
+                    div2.className = "video-player me-iframe";
+                    tar.appendChild(div2);
+                    div2.innerHTML = `<iframe  class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed//${video_id}?enablejsapi=1&amp;origin=https%3A%2F%2Fhttp://127.0.0.1:5501&amp;widgetid=5" id="widget6"></iframe>`;
+                    //div2.innerHTML = `<iframe id="videoPlayer" class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed//${video_id}?enablejsapi=1&amp;origin=https%3A%2F%2Froamresearch.com&amp;widgetid=5" id="widget6"></iframe>`;
+
+                    setTimeout(function () {
+                        playVideoPlayer(time, video_id, div2);
+                    }, 3000);*/
+                    });
+                }
+
+                if (que.linked_video_id && que.linked_video_id != "") {
+                    var obj = getLinkedVideoObjectById(que.linked_video_id);
+                    let video_id = obj.video_id;
+                    let time = 0;
+                    for (var i = 0; i < obj.linked_questions.length; i++) {
+                        if (obj.linked_questions[i].que_id == curr_ques.id) {
+                            time = obj.linked_questions[i].time;
+                            break;
+                        }
+                    }
+
+                    var tar = span.closest(".que-div").querySelector("div.explanations");
+                    if (!tar) {
+                        var que_div = document.querySelector(".page.random .que-text .que-div");
+                        var div = document.createElement("div");
+                        div.className = "explanations me-dis-flex-co";
+                        que_div.appendChild(div);
+                        tar = div;
+
+                        var span = document.createElement("span");
+                        span.className = "label";
+                        span.textContent = "Explanation:";
+                        div.appendChild(span);
+                    }
+                    var div = document.createElement("div");
+                    div.className = "video-exp-blocks me-dis-flex";
+                    tar.appendChild(div);
+
+                    var icon = document.createElement("i");
+                    //icon.className = "fa-sharp fa-solid fa-play";
+                    icon.className = "fa-brands fa-youtube";
+                    div.appendChild(icon);
+
+                    var span = document.createElement("span");
+                    span.className = "video";
+                    span.textContent = "Click to play the video explanation";
+                    div.appendChild(span);
+
+                    div.addEventListener("click", (event) => {
+                        var div2 = event.target.closest(".que-div").querySelector("div.explanations .me-iframe");
+                        if (div2) div2.remove();
+                        div2 = document.createElement("div");
+                        div2.className = "video-player me-iframe";
+                        tar.appendChild(div2);
+                        //div2.innerHTML = `<iframe class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed/${video_id}?enablejsapi=1&amp;origin=http://silju.in&amp;widgetid=5" id="widget6"></iframe>`;
+                        if (testing) div2.innerHTML = `<iframe class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed/${video_id}?enablejsapi=1&amp;origin=http://127.0.0.1:5500&amp;widgetid=5" id="widget6"></iframe>`;
+
+                        // Initialize and play the video player after a delay to ensure iframe is added to the DOM
+                        setTimeout(function () {
+                            playVideoPlayer(time, video_id, div2);
+                        }, 3000);
+                        /*
+                    div2 = document.createElement("div");
+                    div2.className = "video-player me-iframe";
+                    tar.appendChild(div2);
+                    div2.innerHTML = `<iframe  class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed//${video_id}?enablejsapi=1&amp;origin=https%3A%2F%2Fhttp://127.0.0.1:5501&amp;widgetid=5" id="widget6"></iframe>`;
+                    //div2.innerHTML = `<iframe id="videoPlayer" class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed//${video_id}?enablejsapi=1&amp;origin=https%3A%2F%2Froamresearch.com&amp;widgetid=5" id="widget6"></iframe>`;
+
+                    setTimeout(function () {
+                        playVideoPlayer(time, video_id, div2);
+                    }, 3000);*/
+                    });
                 }
             }
         });
     });
+    if (testing && false) {
+        var edit_div = document.querySelector(".edit-que");
+        edit_div.innerHTML = `<div class="add-explanation  me-dis-flex-co">
+                                    <textarea name="explanation" class="explanation" placeholder="explanation" id="" cols="30" rows="4"></textarea>
+                                    <input type="text" class="linked-blocks" placeholder="linked-blocks">
+                                    <input type="text" class="video-link" placeholder="video link">    
+                                    <button class="update-que">update</button>
+                                </div>`;
 
-    // div = share question div
-    let idiv = document.createElement("div");
-    idiv.className = "que-actions";
-    que_div.appendChild(idiv);
+        var arr = [];
+        //var data = getDataFromLocale("ssc_other_data");
+        //explanation_data = data[0].data;
+        explanation_data = getDataFromLocale("explanation_data");
+        linked_blocks_data = getDataFromLocale("linked_blocks_data");
+        video_links_data = getDataFromLocale("video_links_data");
 
-    let sdiv = document.createElement("div");
-    sdiv.className = "share-question link";
-    idiv.appendChild(sdiv);
+        explanation_data.forEach((item) => {
+            arr.push(item.text + "  ((" + item.id + "))");
+        });
+        var exp_ele = edit_div.querySelector("textarea.explanation");
+        exp_ele.addEventListener("input", (event) => {
+            setAutoComplete(event, arr, "explanation");
+        });
+        // load data
 
-    sdiv.innerHTML = `<i class="fa-regular fa-share-nodes"></i>
-                          <span>Share</span>`;
-    sdiv.addEventListener("click", () => {
-        let url = window.location.href;
-        let ind = url.indexOf("#");
-        if (ind != -1) {
-            url = url.substring(0, ind - 1);
+        //explanation value
+        let exp_id = curr_ques.explanation_id;
+        if (exp_id && exp_id.trim() != "") {
+            let exp_text = getExplanationTextById(exp_id);
+            exp_ele.value = exp_text;
+        } else {
+            exp_ele.value = "NO TEXT";
         }
-        url = url + `/#/${exam}/question/${que.id}`;
-        copyToClipboard(url);
-        popupAlert("Question link copied");
-    });
+
+        //Linked Blocks
+        var linked_block_ele = edit_div.querySelector(".linked-blocks");
+        let linked_block_id = curr_ques.linked_block_id;
+
+        if (linked_block_id && linked_block_id.trim() != "") {
+            let obj = getLinkedBlockObjectById(linked_block_id);
+            linked_block_ele.value = `${obj.block_id}:${obj.page_id}`;
+        } else {
+            linked_block_ele.value = "NO ID";
+        }
+
+        // video id
+        var video_ele = edit_div.querySelector(".video-link");
+        let video_obj_id = curr_ques.linked_video_id;
+
+        if (video_obj_id && video_obj_id.trim() != "") {
+            let obj = getLinkedVideoObjectById(video_obj_id);
+            let video_id = obj.video_id;
+            let time = 0;
+            for (var i = 0; i < obj.linked_questions.length; i++) {
+                if (obj.linked_questions[i].que_id == curr_ques.id) {
+                    time = obj.linked_questions[i].time;
+                    break;
+                }
+            }
+            video_ele.value = `${video_id} : ${time}`;
+        } else {
+            video_ele.value = "NO Video";
+        }
+
+        var update_btn = document.querySelector(".random .update-que");
+
+        update_btn.addEventListener("click", () => {
+            curr_ques.linked_blocks = [];
+            var exp_text = document.querySelector(".add-explanation .explanation").value.trim();
+            var exp_obj = "";
+            if (exp_text != "") {
+                var exp_id = getExplanationId(exp_text);
+                if (exp_id) {
+                    curr_ques.explanation_id = exp_id;
+                    var new_exp_text = exp_text.replace(/\(\(.+?\)\)/, "");
+                    updateExplanationObject(exp_id, new_exp_text, curr_ques.id);
+                } else {
+                    exp_obj = {
+                        id: generateUniqueId(),
+                        text: exp_text,
+                        linked_questions: [],
+                    };
+                    curr_ques.explanation_id = exp_obj.id;
+                    exp_obj.linked_questions.push(curr_ques.id);
+                    explanation_data.push(exp_obj);
+                }
+                saveDataInLocale("explanation_data", explanation_data);
+            }
+
+            var block_ids = document.querySelector(".add-explanation  .linked-blocks ").value.trim();
+            if (block_ids != "") {
+                var parts = block_ids.split(":");
+                var block_id = parts[0];
+                var obj = getLinkedBlockObjectById(block_id);
+                if (obj) {
+                    if (!obj.linked_questions.includes(curr_ques.id)) obj.linked_questions.push(curr_ques.id);
+                    curr_ques.linked_block_id = obj.id;
+                } else {
+                    obj = {
+                        id: generateUniqueId(),
+                        block_id: parts[0],
+                        page_id: parts[1],
+                        linked_questions: [],
+                    };
+                    curr_ques.linked_block_id = obj.id;
+                    obj.linked_questions.push(curr_ques.id);
+                    linked_blocks_data.push(obj);
+                }
+                curr_ques.linked_blocks.push(obj);
+                saveDataInLocale("linked_blocks_data", linked_blocks_data);
+            }
+
+            var video_exp = document.querySelector(".add-explanation .video-link").value.trim();
+            if (video_exp != "") {
+                var obj = getYoutubeObj(video_exp);
+                var video_id = obj.video_id;
+                var obj2 = getLinkedVideoObjectById(video_id);
+                if (obj2) {
+                    var is_present = false;
+                    curr_ques.linked_video_id = obj2.id;
+                    obj2.linked_questions.forEach((item) => {
+                        if (item.que_id == curr_ques.id) {
+                            is_present = true;
+                        }
+                    });
+                    if (!is_present) {
+                        obj2.linked_questions.push({
+                            time: obj.time,
+                            que_id: curr_ques.id,
+                        });
+                    }
+                } else {
+                    obj2 = {
+                        id: generateUniqueId(),
+                        video_id: obj.video_id,
+                        linked_questions: [],
+                    };
+                    obj2.linked_questions.push({
+                        time: obj.time,
+                        que_id: curr_ques.id,
+                    });
+                    video_links_data.push(obj2);
+                    curr_ques.linked_video_id = obj2.id;
+                }
+                saveDataInLocale("video_links_data", video_links_data);
+            }
+            updated_ques.unshift(curr_ques);
+            saveDataInLocale("updated_ques", updated_ques);
+        });
+    }
+    if (testing && false && (!que.linked_blocks || !que.linked_blocks.length)) {
+        var span = document.createElement("span");
+        span.className = "is-linked incorrect";
+        span.textContent = "NOT LINKED";
+        que_div.appendChild(span);
+    }
     return que_div;
 }
+function getExplanationId(exp_text) {
+    const match = exp_text.match(/\(\((.+?)\)\)/);
+    return match ? match[1] : null;
+}
+function updateExplanationObject(exp_id, new_text, que_id) {
+    const exp_obj = explanation_data.find((exp) => exp.id === exp_id);
+    if (exp_obj) {
+        exp_obj.text = new_text;
+        if (!exp_obj.linked_questions.contains(que_id)) exp_obj.linked_questions.push(que_id);
+        console.log("Explanation object not found");
+        saveDataInLocale("explanation_data", explanation_data);
+    } else {
+        console.log("Explanation object not found");
+    }
+}
 
+var test_data = [];
+async function loadDataItems() {
+    return;
+    var ee = getDataFromLocale("exam");
+    if (ee) exam = ee;
+    var name = "";
+    var isOnline = checkInternetConnection();
+    if (isOnline) {
+        // load que data
+        var filename = `silju_${exam}_questions`;
+        var id = gist_id[filename];
+        filename = filename + ".json";
+        que_data = await getDataFromGit(id, filename);
+        name = `${exam}_que_data`;
+        if (que_data == null) {
+            data = getDataFromLocale(name);
+            if (!data) que_data = [];
+            que_data = data;
+        } else {
+            saveDataInLocale(name, que_data);
+        }
+        console.log("que_data[] loaded");
+
+        // load notes data
+        filename = `silju_${exam}_notes`;
+        id = gist_id[filename];
+        filename = filename + ".json";
+        notes_data = await getDataFromGit(id, filename);
+
+        name = `${exam}_notes_data`;
+        if (notes_data == null) {
+            data = getDataFromLocale(name);
+            if (!data) notes_data = [];
+            notes_data = data;
+        } else {
+            saveDataInLocale(name, notes_data);
+        }
+        console.log("notes_data[] loaded");
+
+        // load other data
+        filename = `silju_${exam}_other`;
+        id = gist_id[filename];
+        filename = filename + ".json";
+        other_data = await getDataFromGit(id, filename);
+
+        name = `${exam}_other_data`;
+        if (other_data == null) {
+            data = getDataFromLocale(name);
+            if (!data) other_data = [];
+            other_data = data;
+        } else {
+            saveDataInLocale(name, other_data);
+        }
+        console.log("other_data[] loaded");
+    } else {
+        var name = `${exam}_que_data`;
+        que_data = getDataFromLocale(name);
+        name = `${exam}_notes_data`;
+        notes_data = getDataFromLocale(name);
+        name = `${exam}_other_data`;
+        other_data = getDataFromLocale(name);
+    }
+    name = `user_data_${exam}`;
+    var data = getDataFromLocale(name);
+    user_data = data;
+    if (!data) user_data = [];
+
+    setTimeout(() => {
+        addTagIndexList();
+        addChapterIndexList();
+        initialLoading();
+    }, 1000);
+}
+
+async function updateOtherData() {
+    var arr = [];
+    var data = getDataFromLocale("explanation_data");
+    var obj = {
+        name: "explanation",
+        data: data,
+    };
+    arr.push(obj);
+
+    data = getDataFromLocale("linked_blocks_data");
+    obj = {
+        name: "linked_blocks",
+        data: data,
+    };
+    arr.push(obj);
+
+    data = getDataFromLocale("video_links_data");
+    obj = {
+        name: "video_links",
+        data: data,
+    };
+    arr.push(obj);
+
+    var filename = `silju_${exam}_other`;
+    var id = gist_id[filename];
+    filename = filename + ".json";
+    var name = `${exam}_other_data`;
+    saveDataInLocale(name, arr);
+    await updateGistFile(filename, id, arr);
+}
+
+function openAboutMePage() {
+    openPage("about-me");
+    var tar_ele = document.querySelector(".page.about-me");
+    if (!tar_ele.childNodes.length) {
+        var div = document.createElement("div");
+        div.className = "me-pic-name";
+        tar_ele.appendChild(div);
+
+        var img = document.createElement("img");
+        img.src = "./assets/me.jpg";
+        div.appendChild(img);
+
+        var span = document.createElement("span");
+        span.className = "me-name";
+        span.textContent = "Mehboob Elahi";
+        div.appendChild(span);
+
+        var id = "mehboobelahi05";
+        var link = ["facebook", "twitter", "instagram", "youtube"];
+
+        div = document.createElement("div");
+        div.className = "social-media";
+        tar_ele.appendChild(div);
+
+        link.forEach((site) => {
+            var a = document.createElement("a");
+            a.className = `icon ${name}`;
+            a.target = "_blank";
+            a.href = `https://${site}.com/${id}`;
+            div.appendChild(a);
+            if (site == "youtube") a.href = `https://www.${site}.com/@${id}/featured`;
+
+            var img = document.createElement("img");
+            img.src = `./assets/${site}.png`;
+            a.appendChild(img);
+        });
+        var text = ["Hello everyone, I'm Mehboob Elahi from Kargil, Ladakh. I have developed this app to make your journey of competitive exams easy and joyful, and I hope that it is very useful in your prepration", "About me:", "B.Tech ECE from NIT Warangal", "Software engineer with 3.5 years of experiance in various MNCs", "Cleared UPSC prelims", "Currently a govt. employee in the revenue department, UT Ladakh govt."];
+        div = document.createElement("div");
+        div.className = "about-me-text";
+        tar_ele.appendChild(div);
+        text.forEach((tt, index) => {
+            var span = document.createElement("span");
+            span.className = "text-" + index;
+            span.textContent = tt;
+            div.appendChild(span);
+        });
+    }
+}
+
+function getExplanationTextById(id) {
+    for (var i = 0; i < explanation_data.length; i++) {
+        if (explanation_data[i].id == id) {
+            return explanation_data[i].text;
+        }
+    }
+}
+function getLinkedBlockObjectById(id) {
+    for (var i = 0; i < linked_blocks_data.length; i++) {
+        if (linked_blocks_data[i].id == id) return linked_blocks_data[i];
+    }
+}
+function getLinkedVideoObjectById(id) {
+    for (var i = 0; i < video_links_data.length; i++) {
+        if (video_links_data[i].id == id) return video_links_data[i];
+    }
+}
+
+// Image upload
+/*
+async function uploadImage() {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.onchange = (e) => {
+        const file = e.target.files[0];
+        popupAlert("Image is loading...", true);
+        setTimeout(function () {
+            removePopupAlert();
+        }, 10000);
+
+        //interval_save_image = setInterval(saveImage, 1000);
+        if (file) {
+            const storageRef = ref(storage, `images/${username}/${file.name}`);
+            const uploadTask = uploadBytes(storageRef, file);
+
+            uploadTask
+                .then(() => {
+                    // Upload completed successfully, get the download URL
+                    getDownloadURL(storageRef)
+                        .then((downloadURL) => {
+                            console.log("Image uploaded. URL: " + downloadURL);
+                            image_url = downloadURL;
+                            return downloadURL;
+                        })
+                        .catch((error) => {
+                            console.error("Error getting download URL:", error);
+                        });
+                })
+                .catch((error) => {
+                    console.error("Error uploading image:", error);
+                });
+        }
+    };
+
+    input.click();
+}
+
+var interval_save_image;
+var image_url = "";
+async function getImageURL() {
+    
+    var url = await uploadImage();
+    
+    var text = "test image is added" + generateUniqueId();
+    var obj = {
+        url: url,
+        text: text,
+        linked_block: [],
+        linked_questions: [],
+    };
+    if (!user_data[0].images) user_data[0].images = [];
+    user_data[0].images.push(obj);
+    saveDataInLocale("user_data", user_data);
+}
+function saveImage(url) {
+    if (image_url != "") {
+        image_url = "";
+        clearInterval(interval_save_image);
+    }
+}
+*/
 async function uploadImage() {
     return new Promise((resolve, reject) => {
         const input = document.createElement("input");
@@ -3220,21 +4454,65 @@ function getURLParameters(url) {
         return { exam: null, que_id: null };
     }
 }
-function sortArray(array, type) {
-    if (type === "az") {
-        array.sort();
-    } else if (type === "za") {
-        array.sort((a, b) => b.localeCompare(a));
-    } else {
-        console.error("Invalid type parameter. Please use 'az' for ascending or 'za' for descending.");
-        return;
+
+function addTagIndexList() {
+    //var tar_ele = document.querySelector(".page.random .index-tags .subject");
+
+    var div1 = document.querySelector(".page.random .index-tags.tags");
+    if (!div1) {
+        let ele = document.querySelector(".page.random");
+
+        div1 = document.createElement("div");
+        div1.className = "index-tags tags";
+        ele.appendChild(div1);
+        div1.innerHTML = `<div class="head">
+                                <span> Tag Index </span>
+                                <span class="cross close">X</span>
+                            </div>
+                            <div class="tabs">
+                                <div class="tab subject active">Chapters</div>
+                                <div class="tab all">All</div>
+                            </div>
+                            <div class="content lists">
+                                <div class="list random subject"></div>
+                                <div class="list all hide"></div>
+                            </div>`;
+        ele = div1.querySelector(".cross");
+        if (ele) {
+            ele.addEventListener("click", () => {
+                div1.classList.remove("open");
+            });
+        }
+
+        ele = div1.querySelectorAll(".tabs .tab");
+        if (ele) {
+            ele.forEach((tab) => {
+                tab.addEventListener("click", (event) => {
+                    //let tab = event.target;
+                    let tabs = div1.querySelectorAll(".tabs .tab");
+                    tabs.forEach((tabb) => {
+                        tabb.classList.remove("active");
+                    });
+                    tab.classList.add("active");
+
+                    if (tab.classList.contains("subject")) {
+                        div1.querySelectorAll(".content .list").forEach((list) => {
+                            list.classList.add("hide");
+                        });
+                        div1.querySelector(".content .list.subject").classList.remove("hide");
+                    }
+
+                    if (tab.classList.contains("all")) {
+                        div1.querySelectorAll(".content .list").forEach((list) => {
+                            list.classList.add("hide");
+                        });
+                        div1.querySelector(".content .list.all").classList.remove("hide");
+                    }
+                });
+            });
+        }
     }
 
-    return array;
-}
-
-function addTagIndexList(sidebar) {
-    var ele = "";
     // Load structured tags
     var index_tags = "";
     for (var i = 0; i < other_data.length; i++) {
@@ -3243,20 +4521,20 @@ function addTagIndexList(sidebar) {
         }
     }
 
-    ele = sidebar.querySelector(".content > .chapter-tag");
-    ele.innerHTML = "";
+    let tar_ele = div1.querySelector(".list.subject");
+    tar_ele.classList.add("active");
+    //index_tags.forEach((tag) => {
+
     tags_list.forEach((tag) => {
-        addTagIndexItem(tag, ele, 0);
+        addTagIndexItem(tag, tar_ele, 0);
     });
 
     // Load all tags
     var all_tags = [];
     loadAllTags(all_tags);
-    all_tags = sortArray(all_tags, "az");
-    ele = sidebar.querySelector(".content > .all-tags");
-    ele.innerHTML = "";
+    tar_ele = div1.querySelector(".list.all");
     all_tags.forEach((tag) => {
-        addAllTagsItems(tag, ele);
+        addAllTagsItems(tag, tar_ele);
     });
 }
 
@@ -3571,9 +4849,10 @@ async function getDataFromJSONFiles() {
     tags_list = my_data[0].tags_list;
 
     mocks_data = await fetchDataFromFile(`mocks_${exam}`);
-
+    //generateSomeMocks();
     user_data = getUserData();
 
+    //if (!user_data) user_data = [];
     if (!user_data || !user_data.length) {
         user_data = [];
         var obj = {
@@ -3609,9 +4888,10 @@ async function getDataFromJSONFiles() {
         });
         saveUserData();
     }
-
-    generateSomeMocks();
     console.log("me: user_data[] loaded");
+    addTagIndexList();
+    addChapterIndexList();
+    initialLoading();
 }
 
 function openMyNotesPage2() {
@@ -3754,9 +5034,7 @@ function getBlockHTMLTemplate() {
                     </div>
                     <div class="icon_">
                         <span class="plus">+</span>
-                        <i class="fa-regular fa-share-nodes share"></i>
                         <span class="linked-ques"></span>
-                        <i class="fa-brands fa-youtube video hide"></i>
                     </div>
                 </div>
                 <div class="me-block-icons hide">
@@ -3786,7 +5064,6 @@ function getBlockHTMLTemplate() {
                     </div>
                     <div class="linked-content">
                         <div class="tabs">
-                            <span class="">My notes:</span>
                             <div class="linked-item tab videos hide">Videos</div>
                             <div class="linked-item tab images hide">Images</div>
                             <div class="linked-item tab links hide">Links</div>
@@ -3804,7 +5081,7 @@ function getBlockHTMLTemplate() {
         </div>    `;
 }
 
-function setBlockIconsEvents(div, item) {
+function setBlockIconsEvents(div) {
     var ele = "";
     ele = div.querySelector(".icon_ .plus");
     if (ele) {
@@ -3818,42 +5095,6 @@ function setBlockIconsEvents(div, item) {
             //ele.classList.add("active");
             div.querySelector(".me-block-icons").classList.remove("hide");
         });
-    }
-
-    ele = div.querySelector(".icon_ .share");
-    if (ele) {
-        ele.addEventListener("click", (event) => {
-            var ele = event.target.closest(".me-block");
-            let page_id = ele.getAttribute("page-id");
-            let block_id = ele.id;
-            if (!page_id) {
-                page_id = block_id;
-                //block_id = null;
-            }
-
-            let url = window.location.href;
-            let ind = url.indexOf("#");
-            if (ind != -1) {
-                url = url.substring(0, ind - 1);
-            }
-            if (block_id) url = url + `/#/${exam}/notes/${page_id}/${block_id}`;
-            else url = url + `/#/${exam}/notes/${page_id}`;
-            copyToClipboard(url);
-            popupAlert("Question link copied");
-        });
-    }
-    if (item && item.video_id != "") {
-        ele = div.querySelector(".icon_ .video");
-        ele.classList.remove("hide");
-        if (ele) {
-            ele.addEventListener("click", (event) => {
-                let ele = document.querySelector(".page-title .me-iframe-div");
-                let video_id = item.video_id;
-                let time = item.time;
-                let iframe_id = "";
-                playVideoPlayer(time, video_id, ele);
-            });
-        }
     }
 
     ele = div.querySelector(".me-block-icons .video");
@@ -4032,22 +5273,13 @@ function addBlockLinkedItems(div) {
         video.linked_blocks.forEach((blk) => {
             if (blk.block_id == block_id) {
                 linked_div.classList.remove("hide");
-                let time_hh = convertTimeSecondToHour(video.time);
-
                 var div1 = document.createElement("div");
                 div1.className = "video";
                 div1.id = video.id ? video.id : "";
-                div1.setAttribute("time", video.time);
+
                 let tar_ele = linked_div.querySelector(".content-list .videos");
                 tar_ele.appendChild(div1);
-                div1.innerHTML = `<span class="link">${time_hh}: ${video.text}</span>`;
-                div1.addEventListener("click", () => {
-                    let ele = document.querySelector(".page-title .me-iframe-div");
-                    playVideoPlayer(video.time, video.video_id, ele);
-                    return;
-                });
-                linked_div.querySelector(".tabs .videos").classList.remove("hide");
-                return;
+                let time_hh = convertTimeSecondToHour(video.time);
                 let iframe_id = tar_ele.closest(".me-block").id + video.video_id;
 
                 var page_link = window.location.href; // Get the current URL
@@ -4064,13 +5296,15 @@ function addBlockLinkedItems(div) {
                                <iframe  id="${iframe_id}"class="rm-iframe rm-video-player" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="THE LIVING WORLD in 1 Shot: FULL CHAPTER COVERAGE (Theory+PYQs) ||  Prachand NEET 2024" width="640" height="360" src="https://www.youtube.com/embed/${video.video_id}?enablejsapi=1&amp;origin=${page_link}&amp;widgetid=5" ></iframe>
                             </div>
                             <div class="text">
-                                
+                                <span>${time_hh}: ${video.text}</span>
                             </div>
                             `;
 
                 div1.querySelector(".text").addEventListener("click", (event) => {
                     let tar = event.target.closest(".video");
+                    playVideoPlayer(video.time, video.video_id, tar);
                 });
+                linked_div.querySelector(".tabs .videos").classList.remove("hide");
             }
         });
     });
@@ -4112,12 +5346,8 @@ function addBlockLinkedItems(div) {
                                     <span class="cross">X</span>
                                 </div>
                                 <div class="image-inner">
-                                    <img src="${image.url}"  class="user-image" id="${image.id}" alt="">
+                                    <img src="${image.url}" id="${image.id}" alt="">
                                 </div>`;
-                let img = div1.querySelector("img");
-                img.addEventListener("click", (event) => {
-                    showImagesInOverlay(event);
-                });
                 linked_div.querySelector(".tabs .images").classList.remove("hide");
             }
         });
@@ -4125,8 +5355,7 @@ function addBlockLinkedItems(div) {
 }
 
 async function clearCache() {
-    // Store user data in a variable
-    var user_data = getDataFromLocale("user_data");
+    var user_data = getUserData();
     // Unregister all service workers
     if ("serviceWorker" in navigator) {
         const registrations = await navigator.serviceWorker.getRegistrations();
@@ -4143,7 +5372,7 @@ async function clearCache() {
 
     // Save the user data back in local storage
     if (user_data) {
-        localStorage.setItem("user_data", user_data);
+        saveUserData();
     }
 
     // Optionally reload the page to apply changes
@@ -4237,7 +5466,7 @@ function showDailyQuestions(div) {
 }
 
 function loadMockTestHistory() {
-    let ele = document.querySelector(".page.mock> .main");
+    let ele = document.querySelector(".page.mock > div");
 
     var div = document.createElement("div");
     div.className = "mock-history";
@@ -4270,8 +5499,8 @@ function loadMockTestHistory() {
 }
 
 function loadNewMockTestSection() {
-    let main = document.querySelector(".page.mock .main");
-    main.innerHTML = `
+    let page = document.querySelector(".page.mock");
+    page.innerHTML = `<div>
                     <div class="new-mock me-flex-co">
                         <div class="head me-header">
                             <i class="fa-solid arrow fa-chevron-down"></i>
@@ -4288,9 +5517,12 @@ function loadNewMockTestSection() {
                             </div>
                             <div></div>
                         </div>
-                    </div>`;
+                    </div>
+                </div>
 
-    let div = main.querySelector(".new-mock");
+                <div class="mock-test-sec hide me-dis-flex-co"></div>`;
+
+    let div = page.querySelector(".new-mock");
 
     let ele = div.querySelector(".me-header");
     if (ele) {
@@ -4341,7 +5573,7 @@ function loadNewMockTestSection() {
     }
 }
 function loadPredefinedMocks() {
-    let ele = document.querySelector(".page.mock > .main ");
+    let ele = document.querySelector(".page.mock > div");
 
     var div = document.createElement("div");
     div.className = "pre-defined-mocks";
@@ -4368,6 +5600,7 @@ function loadPredefinedMocks() {
             } else {
                 ele.querySelector("i").className = "fa-solid fa-chevron-down";
                 //head.querySelector("span").textContent = "Mock History";
+                //loadPreviousMockResults();
             }
         });
     }
@@ -4378,7 +5611,7 @@ function loadPredefinedMocks() {
         list_ele.appendChild(div_mock);
 
         div_mock.innerHTML = `
-                            <span class="start link">Mock Test ${index + 1}</span>
+                            <span class="start link">Start mock test ${index + 1}</span>
                             <div class="history">
                                 <div class="head me-header-inner hide">
                                     <i class="fa-solid arrow fa-chevron-right"></i>
@@ -4402,6 +5635,7 @@ function loadPredefinedMocks() {
                 } else {
                     ele.querySelector("i").className = "fa-solid fa-chevron-down";
                     //head.querySelector("span").textContent = "Mock History";
+                    //loadPreviousMockResults();
                 }
             });
         }
@@ -4451,16 +5685,15 @@ function openSettingPage() {
 }
 
 function supportMyWork() {
-    var ele = document.querySelector(".page.home .support-me");
+    var ele = document.querySelector(".page.random .social-media");
     if (ele) return;
 
-    let page = document.querySelector(".page.home");
-    //let intex_tags = document.querySelector(".page.random .index-tags");
+    let page = document.querySelector(".page.random");
+    let intex_tags = document.querySelector(".page.random .index-tags");
 
     var div = document.createElement("div");
     div.className = "support-me";
-    page.appendChild(div);
-    //page.insertBefore(div, intex_tags);
+    page.insertBefore(div, intex_tags);
 
     div.innerHTML = `<div class="head me-header">
                         <i class="fa-solid arrow fa-chevron-right"></i>
@@ -4513,14 +5746,15 @@ function supportMyWork() {
     }
 }
 function addSocialMediaSection() {
-    var ele = document.querySelector(".page.home .social-media");
+    var ele = document.querySelector(".page.random .social-media");
     if (ele) return;
 
-    let page = document.querySelector(".page.home");
+    let page = document.querySelector(".page.random");
+    let intex_tags = document.querySelector(".page.random .index-tags");
 
     var div = document.createElement("div");
     div.className = "social-media about-me";
-    page.appendChild(div);
+    page.insertBefore(div, intex_tags);
 
     var span = document.createElement("h1");
     span.className = "";
@@ -4548,30 +5782,62 @@ function addSocialMediaSection() {
     });
 }
 
-var old_url = "";
-var first_time = true;
-function openItemBasedOnURL() {
-    let obj = null;
-    let url = window.location.href;
-    if (first_time) {
-        obj = parseUrl3(url);
+function setURL(str) {
+    history.pushState(null, "", `#/${exam}/${str}`);
+}
 
-        if (obj.exam) exam = obj.exam;
+function parseUrl2(url) {
+    // Create a URL object to get the pathname
+    let basePath = new URL(url).pathname;
+    // Split the path into segments and filter out any empty segments
+    let segments = basePath.split("/").filter((segment) => segment.length > 0);
+
+    // Initialize the result object
+    let result = {
+        exam: null,
+        type: null,
+        que_id: null,
+        page_id: null,
+        block_id: null,
+    };
+
+    // If there are no segments, return the result with null values
+    if (segments.length === 0) {
+        return result;
+    }
+
+    // Extract exam and type from the segments
+    result.exam = segments[0] || null;
+    result.type = segments[1] || null;
+
+    // Handle specific cases based on the type
+    if (result.type === "question" && segments.length >= 3) {
+        result.que_id = segments[2] || null;
+    } else if (result.type === "notes" && segments.length >= 3) {
+        result.page_id = segments[2] || null;
+        if (segments.length >= 4) {
+            result.block_id = segments[3] || null;
+        }
+    }
+
+    return result;
+}
+
+var old_url = "";
+function openItemBasedOnURL() {
+    if (first_time) {
         first_time = false;
         clearCache();
         getDataFromJSONFiles();
     }
+    if (!que_data.length) return;
 
-    if (que_data.length && user_data.length) {
-    } else {
-        return;
-    }
-
-    clearInterval(interva_url);
-    initialLoading();
-    obj = parseUrl3(url);
+    let url = window.location.href;
+    if (url === old_url) return;
     old_url = url;
     //url = "http://127.0.0.1:5500/ssc/question/9Km7Pmaa4";
+
+    var obj = parseUrl3(url);
     if (obj.type) {
         exam = obj.exam;
         let type = obj.type;
@@ -4582,31 +5848,36 @@ function openItemBasedOnURL() {
         if (type == "question") {
             openPage("random");
             if (que_id) {
-                openMCQPage(que_id);
-                //let que = getQuestionById(que_id);
-                //displayQuestion(que);
+                let que = getQuestionById(que_id);
+                displayQuestion(que);
             }
         } else if (type == "notes") {
+            openPage("notes");
             if (page_id) {
                 if (block_id) {
-                    //openChapterById(page_id, block_id);
-                    openNotesPage2(page_id, block_id);
+                    openChapterById2(page_id, block_id);
                 } else {
-                    //openChapterById(page_id);
-                    openNotesPage2(page_id);
+                    openChapterById2(page_id);
                 }
             }
         }
     } else {
-        openNotesPage2();
-        openPage("home");
+        fil_ques = que_data;
+        curr_que_index = 0;
+        setQuestionURL(fil_ques[0].id);
     }
 }
 function parseUrl3(url) {
+    // Create a URL object to parse the input URL
     let urlObj = new URL(url);
+
+    // Extract the hash fragment (removing the leading #)
     let hashFragment = urlObj.hash.substring(1);
+
+    // Split the hash fragment into segments and filter out any empty segments
     let segments = hashFragment.split("/").filter((segment) => segment.length > 0);
 
+    // Initialize the result object
     let result = {
         exam: null,
         type: null,
@@ -4615,13 +5886,16 @@ function parseUrl3(url) {
         block_id: null,
     };
 
+    // If there are no segments, return the result with null values
     if (segments.length === 0) {
         return result;
     }
 
+    // Extract exam and type from the segments
     result.exam = segments[0] || null;
     result.type = segments[1] || null;
 
+    // Handle specific cases based on the type
     if (result.type === "question" && segments.length >= 3) {
         result.que_id = segments[2] || null;
     } else if (result.type === "notes" && segments.length >= 3) {
@@ -4630,310 +5904,37 @@ function parseUrl3(url) {
             result.block_id = segments[3] || null;
         }
     }
+
     return result;
 }
-var interva_url = setInterval(() => {
+
+function parseURL(url) {
+    // Remove the base part of the URL and split the remaining part
+    const path = url.replace("http://127.0.0.1:5500/index.html/", "");
+    const parts = path.split("/");
+
+    // Extract exam and type
+    const exam = parts[0] || null;
+    const type = parts[1] || null;
+
+    // Initialize IDs as null
+    let que_id = null;
+    let page_id = null;
+    let block_id = null;
+
+    // Check type and assign IDs accordingly
+    if (type === "question") {
+        que_id = parts[2] || null;
+    } else if (type === "notes") {
+        page_id = parts[2] || null;
+        block_id = parts[3] || null;
+    }
+
+    // Return the extracted data
+    return { exam, type, que_id, page_id, block_id };
+}
+
+let first_time = true;
+var intervalId = setInterval(() => {
     openItemBasedOnURL();
 }, 100);
-
-function openSidebar(event) {
-    let ele;
-
-    if (event instanceof Event) {
-        ele = event.target;
-    } else {
-        ele = event;
-    }
-
-    let page = ele.closest(".page");
-    if (is_mobile) {
-        page.children[0].style.flex = "0 0 30%";
-        page.children[1].style.flex = "0 0 70%";
-    } else {
-        page.children[0].style.flex = "0 0 60%";
-        page.children[1].style.flex = "0 0 40%";
-    }
-}
-
-function closeSidebar(event) {
-    let ele;
-
-    if (event instanceof Event) {
-        ele = event.target;
-    } else {
-        ele = event;
-    }
-    let page = ele.closest(".page");
-    page.children[0].style.flex = "0 0 100%";
-    page.children[1].style.flex = "0 0 0%";
-}
-function setMcqPageMainItemEvents(main) {
-    var ele = "";
-
-    ele = main.querySelector(".filter-section div.filter");
-    if (ele) {
-        ele.addEventListener("click", (event) => {
-            openSidebar(event);
-        });
-    }
-
-    ele = main.querySelector(".fa-sidebar-flip");
-    if (ele) {
-        ele.addEventListener("click", (event) => {
-            openSidebar(event);
-        });
-    }
-
-    ele = main.querySelector("button.new-question");
-    if (ele) {
-        ele.addEventListener("click", () => {
-            //unselectSelectQuestionDot();
-            ++curr_que_index;
-            if (curr_que_index == fil_ques.length) {
-                curr_que_index = 0;
-                sortArrayRandomly(fil_ques);
-            }
-            curr_ques = fil_ques[curr_que_index];
-            displayQuestion(curr_ques);
-        });
-    }
-}
-
-function setMcqPageSidebarItemEvents(sidebar) {
-    var ele = "";
-    ele = sidebar.querySelector(".header .cross");
-    if (ele) {
-        ele.addEventListener("click", (event) => {
-            closeSidebar(event);
-        });
-    }
-
-    let tabs = sidebar.querySelectorAll(".tabs .tab");
-    if (tabs) {
-        tabs.forEach((tab) => {
-            tab.addEventListener("click", (event) => {
-                let ele = event.target;
-                let classes = ["chapter-tag", "all-tags"];
-                let tab_class = classes.find((cls) => ele.classList.contains(cls));
-
-                let tabs2 = sidebar.querySelectorAll(".tabs .tab");
-                tabs2.forEach((tab2) => {
-                    if (!tab2.classList.contains(tab_class)) tab2.classList.remove("active");
-                    else tab2.classList.add("active");
-                });
-
-                let pages = sidebar.querySelectorAll(".content > div");
-                pages.forEach((page) => {
-                    if (!page.classList.contains(tab_class)) page.classList.add("hide");
-                    else page.classList.remove("hide");
-                });
-            });
-        });
-    }
-}
-
-function setNotesPageSidebarItemEvents(sidebar) {
-    var ele = "";
-    ele = sidebar.querySelector(".header .cross");
-    if (ele) {
-        ele.addEventListener("click", (event) => {
-            closeSidebar(event);
-        });
-    }
-
-    ele = sidebar.querySelector(".search .top button.search");
-    if (ele) {
-        ele.addEventListener("click", (event) => {
-            let text = sidebar.querySelector(".search .top input").value.trim();
-            if (text != "") searchTextInNotes(text);
-        });
-    }
-
-    ele = sidebar.querySelector(".search .top input");
-    if (ele) {
-        ele.addEventListener("keypress", (event) => {
-            if (event.key === "Enter") {
-                let text = event.target.value.trim();
-                if (text != "") searchTextInNotes(text);
-            }
-        });
-    }
-
-    let tabs = sidebar.querySelectorAll(".tabs .tab");
-    if (tabs) {
-        tabs.forEach((tab) => {
-            tab.addEventListener("click", (event) => {
-                let ele = event.target;
-                let classes = ["chapter-index", "search"];
-                let tab_class = classes.find((cls) => ele.classList.contains(cls));
-
-                let tabs2 = sidebar.querySelectorAll(".tabs .tab");
-                tabs2.forEach((tab2) => {
-                    if (!tab2.classList.contains(tab_class)) tab2.classList.remove("active");
-                    else tab2.classList.add("active");
-                });
-
-                let pages = sidebar.querySelectorAll(".content > div");
-                pages.forEach((page) => {
-                    if (!page.classList.contains(tab_class)) page.classList.add("hide");
-                    else page.classList.remove("hide");
-                });
-            });
-        });
-    }
-}
-
-function searchTextInNotes(search_text) {
-    let tar_ele = document.querySelector(".page.notes .sidebar .search-results");
-    tar_ele.innerHTML = "";
-    pages_data.forEach((page) => {
-        let page_id = page.id;
-        let data = page.data;
-        data.forEach((block) => {
-            searchTextInBlocks(block, page_id, tar_ele, search_text);
-        });
-    });
-}
-function searchTextInBlocks(block, page_id, tar_ele, search_text) {
-    let text = block.text;
-    const regex = new RegExp(search_text, "i");
-    let is_text = regex.test(text);
-
-    if (is_text) {
-        const regex = new RegExp(search_text, "gi");
-        text = text.replace(regex, (match) => `^^${match}^^`);
-
-        let ttt = page_id;
-        ttt = escapeCSSSelector(ttt);
-        var ele = document.querySelector(`.page.notes .sidebar .content .chapter-index #${ttt}`);
-        if (!ele) {
-            ttt = page_id;
-            ttt = escapeCSSSelector2(ttt);
-            ele = document.querySelector(`.page.notes .sidebar .content .chapter-index #${ttt}`);
-        }
-        let par_ele = ele.closest(".children").parentElement.querySelector(".name");
-        let arr = [];
-        arr.push(par_ele.textContent);
-        arr.push(ele.textContent);
-
-        let div = document.createElement("div");
-        div.id = block.id;
-        div.setAttribute("page-id", page_id);
-        div.className = "me-search-block";
-        tar_ele.appendChild(div);
-        div.addEventListener("click", () => {
-            openChapterById(page_id, block.id);
-        });
-
-        let div2 = document.createElement("div");
-        div2.className = "path";
-        div.appendChild(div2);
-
-        arr.forEach((aa) => {
-            let span = document.createElement("span");
-            span.textContent = aa + " > ";
-            div2.appendChild(span);
-        });
-
-        let span2 = document.createElement("span");
-        span2.innerHTML = getHTMLFormattedText(text);
-        div.appendChild(span2);
-    }
-    if (block.children.length) {
-        block.children.forEach((child) => {
-            searchTextInBlocks(child, page_id, tar_ele, search_text);
-        });
-    }
-}
-function showImagesInOverlay(event) {
-    let img = event.target;
-    let ele = "";
-    var div = document.createElement("div");
-    div.className = "me-image-overlay me-io";
-    div.innerHTML = `
-                    <i class="fa-regular fa-xmark cross me-mla"></i>
-                    <img id="overlay-img" class="overlay-img" src="" alt="Image" />
-                    <i class="fa-regular fa-chevron-left prev"></i>
-                    <i class="fa-regular fa-chevron-right next"></i>
-                    `;
-    document.body.appendChild(div);
-
-    ele = div.querySelector(".cross");
-    if (ele) {
-        ele.addEventListener("click", () => {
-            div.remove();
-        });
-    }
-
-    if (img.classList.contains("user-image")) {
-        let all_images = document.querySelectorAll(".page-title  .user-image");
-        let current_image_index = 0;
-        all_images.forEach((image, index) => {
-            if (image === img) current_image_index = index;
-        });
-        div.querySelector("img").src = all_images[current_image_index].src;
-
-        div.querySelector(".next").addEventListener("click", () => {
-            ++current_image_index;
-            if (current_image_index == all_images.length) --current_image_index;
-            div.querySelector("img").src = all_images[current_image_index].src;
-            return;
-        });
-
-        div.querySelector(".prev").addEventListener("click", () => {
-            --current_image_index;
-            if (current_image_index == all_images.length) ++current_image_index;
-            div.querySelector("img").src = all_images[current_image_index].src;
-            return;
-        });
-    } else if (img.classList.contains("note-image")) {
-        let all_images = document.querySelectorAll(".page-title > .chidlren .note-image");
-        let current_image_index = 0;
-        all_images.forEach((image, index) => {
-            if (image === img) current_image_index = index;
-        });
-
-        div.querySelector("img").src = all_images[current_image_index].src;
-
-        div.querySelector(".next").addEventListener("click", () => {
-            ++current_image_index;
-            if (current_image_index == all_images.length) --current_image_index;
-            div.querySelector("img").src = all_images[current_image_index].src;
-            return;
-        });
-
-        div.querySelector(".prev").addEventListener("click", () => {
-            --current_image_index;
-            if (current_image_index == all_images.length) ++current_image_index;
-            div.querySelector("img").src = all_images[current_image_index].src;
-            return;
-        });
-    }
-}
-
-function loadPage(target, page_name) {
-    // Construct the path to the HTML file assuming it's in the same directory
-    var filePath = page_name + ".html";
-
-    // Create a new XMLHttpRequest (XHR) object
-    var xhr = new XMLHttpRequest();
-
-    // Set up the xhr object
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                // If successful, set the target element's innerHTML to the loaded content
-                target.innerHTML = xhr.responseText;
-            } else {
-                // If error, handle it accordingly (e.g., log it, show an error message)
-                console.error("Error loading page:", xhr.status, xhr.statusText);
-            }
-        }
-    };
-
-    // Open the XHR request
-    xhr.open("GET", filePath, true);
-
-    // Send the request
-    xhr.send();
-}
