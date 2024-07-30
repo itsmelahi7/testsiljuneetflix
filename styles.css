@@ -591,6 +591,10 @@ span.cross {
     cursor: pointer;
 }
 
+.mobile .tag .tag-name {
+    font-size: 0.9em;
+}
+
 .calender {
     display: flex;
 }
@@ -2455,7 +2459,7 @@ div.support-me_ {
 .sidebar .chapter-tag .level-1,
 .sidebar .me-chapter.level-1,
 .index-tags .level-1 {
-    margin-left: 15px;
+    margin-left: 30px;
 }
 
 .sidebar .chapter-tag .me-tag>.link.name {
@@ -2465,7 +2469,7 @@ div.support-me_ {
 .sidebar .chapter-tag .level-2,
 .sidebar .me-chapter.level-2,
 .index-tags .level-2 {
-    margin-left: 30px;
+    margin-left: 45px;
 }
 
 .explanations .page-link img {
@@ -2479,13 +2483,13 @@ div.support-me_ {
 .sidebar .chapter-tag .level-3,
 .sidebar .me-chapter.level-3,
 .index-tags .level-3 {
-    margin-left: 45px;
+    margin-left: 60px;
 }
 
 .sidebar .chapter-tag .level-4,
 .sidebar .me-chapter.level-4,
 .index-tags .level-4 {
-    margin-left: 60px;
+    margin-left: 75px;
 }
 
 .tasks .tasks-list {
