@@ -1411,14 +1411,13 @@ function loadPageText2(item, target, level) {
         if (match) {
             // Extract the URL from the match
             const imageUrl = match[1];
-
             const textBeforeImage = text.split(imagePattern)[0].trim();
-
-            // Determine the text to use
             let displayText = textBeforeImage;
             if (displayText.startsWith("![")) {
                 displayText = "";
             } else {
+                //let span = document.createElement("span");
+                //span.innerHTML = getHTMLFormattedText(displayText);
                 ele.innerHTML = getHTMLFormattedText(displayText);
             }
 
@@ -1445,6 +1444,7 @@ function loadPageText2(item, target, level) {
 
             ele.appendChild(div); //getHTMLFormattedText(text);
         } else {
+            //ele.innerHTML = getHTMLFormattedText(text);
             ele.innerHTML = getHTMLFormattedText(text);
         }
     }
@@ -1915,7 +1915,15 @@ function openChapterById(page_id, block_id) {
         }
         if (block_ele) scrollToView(block_ele);
         else console.error("block id selector issue");
+    } else {
+        // Show images when the chapter is open, and not when a block is scrolled.
+        ele = document.querySelectorAll(".page.notes .hide-image-element");
+        ele.forEach((div) => {
+            div.click();
+        });
     }
+
+    // Now show all images
 }
 
 function scrollToView(ele) {
@@ -3085,7 +3093,7 @@ function displayQuestion(que, tar_ele, type) {
                     let span = document.createElement("span");
                     span.className = "page-link link";
                     let page = "";
-                    debugger;
+
                     //popupAlert("Page Data is Not Yet Added");
                     //return;
                     for (var i = 0; i < pages_data.length; i++) {
@@ -3753,7 +3761,7 @@ function getBlockHTMLTemplate() {
                         <span class="text-inner"></span>
                     </div>
                     <div class="icon_">
-                        <span class="plus">+</span>
+                        <span class="plus">+</span> 
                         <i class="fa-regular fa-share-nodes share"></i>
                         <span class="linked-ques"></span>
                         <i class="fa-brands fa-youtube video hide"></i>
@@ -3843,6 +3851,18 @@ function setBlockIconsEvents(div, item) {
         });
     }
     if (item && item.video_id != "") {
+        /*let icon = document.createElement("i");
+        icon.className = "fa-brands fa-youtube video hhh";
+        div.querySelector("span.text-inner").appendChild(icon);
+        icon.addEventListener("click", () => {
+            debugger;
+            let ele = document.querySelector(".page-title .me-iframe-div");
+            let video_id = item.video_id;
+            let time = item.time;
+
+            playVideoPlayer(time, video_id, ele);
+        });
+        */
         ele = div.querySelector(".icon_ .video");
         ele.classList.remove("hide");
         if (ele) {

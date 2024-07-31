@@ -2968,6 +2968,12 @@ i.fa-chevron-right:before {
     display: flex;
     flex-direction: column;
     cursor: pointer;
+    color: #d05b35;
+}
+
+.text-inner .video {
+    margin-left: 10px;
+    opacity: 0.7;
 }
 
 .me-block img {
