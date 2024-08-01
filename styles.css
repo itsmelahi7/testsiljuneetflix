@@ -591,9 +591,7 @@ span.cross {
     cursor: pointer;
 }
 
-.mobile .tag .tag-name {
-    font-size: 0.9em;
-}
+
 
 .calender {
     display: flex;
