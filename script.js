@@ -760,7 +760,6 @@ function filterQuestionsOnTagBased(tag, filter_tags, span) {
     curr_que_index = 0;
     curr_ques = fil_ques[0];
     displayQuestion(curr_ques);
-    //displayQuestion();
 }
 function filterQuestionsByTags(questions, tags) {
     return questions.filter((question) => tags.some((tag) => question.tags.includes(tag)));
@@ -1434,7 +1433,7 @@ function loadPageText2(item, target, level) {
             img.src = imageUrl;
             img.className = "note-image hide";
             img.addEventListener("click", (event) => {
-                showImagesInOverlay(event);
+                //showImagesInOverlay(event);
             });
 
             // Append the img element to the div
@@ -1860,6 +1859,7 @@ function getBlockData(block, block_id) {
 
 function openChapterById(page_id, block_id) {
     openNotesPage2();
+    setNotesURL(page_id);
     let ele = document.querySelector(".page.notes .sidebar .cross");
     if (is_mobile) closeSidebar(ele);
 
@@ -2956,6 +2956,7 @@ function displayQuestion(que, tar_ele, type) {
     if (!type || type == "random") {
         if (!que) que = curr_ques;
         else curr_ques = que;
+        setQuestionURL(curr_ques.id);
     }
 
     if (!tar_ele) tar_ele = document.querySelector(".page.mcq .main .que-text");
@@ -3143,6 +3144,26 @@ function displayQuestion(que, tar_ele, type) {
         popupAlert("Question link copied");
     });
     return que_div;
+}
+
+function setQuestionURL(id) {
+    debugger;
+    let url = window.location.href;
+    let ind = url.indexOf("#");
+    if (ind != -1) {
+        url = url.substring(0, ind - 1);
+    }
+    window.location.href = url + `/#/${exam}/question/${id}`;
+}
+
+function setNotesURL(page_id) {
+    debugger;
+    let url = window.location.href;
+    let ind = url.indexOf("#");
+    if (ind != -1) {
+        url = url.substring(0, ind - 1);
+    }
+    window.location.href = url + `/#/${exam}/notes/${page_id}`;
 }
 
 async function uploadImage() {
@@ -3855,7 +3876,7 @@ function setBlockIconsEvents(div, item) {
         icon.className = "fa-brands fa-youtube video hhh";
         div.querySelector("span.text-inner").appendChild(icon);
         icon.addEventListener("click", () => {
-            debugger;
+            
             let ele = document.querySelector(".page-title .me-iframe-div");
             let video_id = item.video_id;
             let time = item.time;
@@ -4136,7 +4157,7 @@ function addBlockLinkedItems(div) {
                                 </div>`;
                 let img = div1.querySelector("img");
                 img.addEventListener("click", (event) => {
-                    showImagesInOverlay(event);
+                    //showImagesInOverlay(event);
                 });
                 linked_div.querySelector(".tabs .images").classList.remove("hide");
             }
