@@ -3222,3 +3222,19 @@ i.fa-chevron-right:before {
     width: min(400px, 90%);
     max-width: min(400px, 90%);
 }
+
+.tag {
+    cursor: pointer;
+}
+
+.all-tags>input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px auto;
+    border-radius: 17px;
+    padding: 7px;
+    text-align: center;
+    border: 1px solid gray;
+    width: min(300px, 80%);
+}

@@ -2882,7 +2882,10 @@ function openMCQPage(id) {
                         </div>
                         <div class="content">
                             <div class="chapter-tag"> <span> Chapters </span> </div>
-                            <div class="all-tags hide"> <span> All Tags </span>  </div>
+                            <div class="all-tags hide"> 
+                                <input type="text" class="search-all-tags" placeholder="Filter Tags">
+                                <div class="all-tags-list"></div>
+                             </div>
                         </div>`;
         setMcqPageSidebarItemEvents(page_sidebar);
 
@@ -3279,10 +3282,10 @@ function addTagIndexList(sidebar) {
     });
 
     // Load all tags
-    var all_tags = [];
+    all_tags = [];
     loadAllTags(all_tags);
     all_tags = sortArray(all_tags, "az");
-    ele = sidebar.querySelector(".content > .all-tags");
+    ele = sidebar.querySelector(".content > .all-tags .all-tags-list");
     ele.innerHTML = "";
     all_tags.forEach((tag) => {
         addAllTagsItems(tag, ele);
@@ -4742,10 +4745,36 @@ function setMcqPageMainItemEvents(main) {
 
 function setMcqPageSidebarItemEvents(sidebar) {
     var ele = "";
+
     ele = sidebar.querySelector(".header .cross");
     if (ele) {
         ele.addEventListener("click", (event) => {
             closeSidebar(event);
+        });
+    }
+
+    ele = sidebar.querySelector(".all-tags  input");
+    if (ele) {
+        ele.addEventListener("input", (event) => {
+            //var tag = setAutoComplete(event, "filter-all-tags");
+            debugger;
+            const filter = event.target.value.trim().toLowerCase();
+
+            // Get all tags
+            const tags = document.querySelectorAll(".all-tags-list .tag");
+
+            // Loop through each tag
+            tags.forEach((tag) => {
+                // Get the text content of the tag and convert it to lowercase
+                const tagName = tag.querySelector(".tag-name").textContent.toLowerCase();
+
+                // Check if the tag matches the filter
+                if (tagName.includes(filter)) {
+                    tag.style.display = ""; // Show the tag
+                } else {
+                    tag.style.display = "none"; // Hide the tag
+                }
+            });
         });
     }
 
