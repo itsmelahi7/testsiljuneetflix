@@ -3,7 +3,7 @@
         "ques": [
             {
                 "id": "yfNZQQS43",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Indus Valley Civilization belongs to?",
                 "options": [
                     {
@@ -35,7 +35,7 @@
             },
             {
                 "id": "uRnhJdBvC",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Indus Valley Civilization flourished during?",
                 "options": [
                     {
@@ -67,7 +67,7 @@
             },
             {
                 "id": "W8JjmDvLx",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "What is the first site discovered of Indus Valley Civilization?",
                 "options": [
                     {
@@ -99,7 +99,7 @@
             },
             {
                 "id": "WDeglX4bj",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who for the first time excavated Harappa site?",
                 "options": [
                     {
@@ -131,7 +131,7 @@
             },
             {
                 "id": "v3mPJjIQC",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which is the largest site of Indus Valley Civilization?",
                 "options": [
                     {
@@ -164,7 +164,7 @@
             },
             {
                 "id": "QLoEZVz5g",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below Harappan site present in Pakistan?",
                 "options": [
                     {
@@ -196,7 +196,7 @@
             },
             {
                 "id": "NWZBAK4AE",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below Harappan site present in Pakistan?",
                 "options": [
                     {
@@ -228,7 +228,7 @@
             },
             {
                 "id": "hdWjxpCVD",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below Harappan site present in India?",
                 "options": [
                     {
@@ -260,7 +260,7 @@
             },
             {
                 "id": "zoHszHFWf",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below is incorrect with regards to Harappan civilization?",
                 "options": [
                     {
@@ -292,7 +292,7 @@
             },
             {
                 "id": "s2NghqTKM",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below is incorrect with regards to Harappan civilization?",
                 "options": [
                     {
@@ -323,8 +323,457 @@
                 "video": null
             },
             {
+                "id": "JJAS8eFbI",
+                "create_date": "2024-08-01",
+                "question": "Which site is not present in Gujarat?",
+                "options": [
+                    {
+                        "id": "JJAS8eFbI_1",
+                        "text": "Kalibangan #ans"
+                    },
+                    {
+                        "id": "JJAS8eFbI_2",
+                        "text": "Dholavira"
+                    },
+                    {
+                        "id": "JJAS8eFbI_3",
+                        "text": "Lothal"
+                    },
+                    {
+                        "id": "JJAS8eFbI_4",
+                        "text": "Surkotada"
+                    }
+                ],
+                "tags": [
+                    "harappan civilization",
+                    "ssc"
+                ],
+                "page_uid": "75ucnFGYo",
+                "parent_block_uid": "Ooa2nTNpx",
+                "block_uid": "",
+                "explanation": "",
+                "video": null
+            },
+            {
+                "id": "ruipWiV0L",
+                "create_date": "2024-08-01",
+                "question": "Which site was in the Khadir Byte in Rann of Kutch?",
+                "options": [
+                    {
+                        "id": "ruipWiV0L_1",
+                        "text": "Harappa"
+                    },
+                    {
+                        "id": "ruipWiV0L_2",
+                        "text": "Dholavira #ans"
+                    },
+                    {
+                        "id": "ruipWiV0L_3",
+                        "text": "Lothal"
+                    },
+                    {
+                        "id": "ruipWiV0L_4",
+                        "text": "Kalibangan"
+                    }
+                ],
+                "tags": [
+                    "harappan civilization",
+                    "ssc"
+                ],
+                "page_uid": "75ucnFGYo",
+                "parent_block_uid": "GHAgKYC8N",
+                "block_uid": "",
+                "explanation": "",
+                "video": null
+            },
+            {
+                "id": "GfXMKmP_C",
+                "create_date": "2024-08-01",
+                "question": "In which site pictographic script was found written on stones?",
+                "options": [
+                    {
+                        "id": "GfXMKmP_C_1",
+                        "text": "Harappa"
+                    },
+                    {
+                        "id": "GfXMKmP_C_2",
+                        "text": "Dholavira #ans"
+                    },
+                    {
+                        "id": "GfXMKmP_C_3",
+                        "text": "Mohenjodaro"
+                    },
+                    {
+                        "id": "GfXMKmP_C_4",
+                        "text": "Kalibangan"
+                    }
+                ],
+                "tags": [
+                    "harappan civilization",
+                    "ssc"
+                ],
+                "page_uid": "75ucnFGYo",
+                "parent_block_uid": "GHAgKYC8N",
+                "block_uid": "",
+                "explanation": "",
+                "video": null
+            },
+            {
+                "id": "JviwXpSGp",
+                "create_date": "2024-08-01",
+                "question": "Which is the only WHS from among the Harappan sites?",
+                "options": [
+                    {
+                        "id": "JviwXpSGp_1",
+                        "text": "Harappa"
+                    },
+                    {
+                        "id": "JviwXpSGp_2",
+                        "text": "Dholavira #ans"
+                    },
+                    {
+                        "id": "JviwXpSGp_3",
+                        "text": "Lothal"
+                    },
+                    {
+                        "id": "JviwXpSGp_4",
+                        "text": "Mohenjodaro"
+                    }
+                ],
+                "tags": [
+                    "harappan civilization",
+                    "ssc"
+                ],
+                "page_uid": "75ucnFGYo",
+                "parent_block_uid": "GHAgKYC8N",
+                "block_uid": "",
+                "explanation": "",
+                "video": null
+            },
+            {
+                "id": "GllXcC7gU",
+                "create_date": "2024-08-01",
+                "question": "In which site the town is divided into three parts?",
+                "options": [
+                    {
+                        "id": "GllXcC7gU_1",
+                        "text": "Harappa"
+                    },
+                    {
+                        "id": "GllXcC7gU_2",
+                        "text": "Lothal"
+                    },
+                    {
+                        "id": "GllXcC7gU_3",
+                        "text": "Kalibangan"
+                    },
+                    {
+                        "id": "GllXcC7gU_4",
+                        "text": "Dholavira #ans"
+                    }
+                ],
+                "tags": [
+                    "harappan civilization",
+                    "ssc"
+                ],
+                "page_uid": "75ucnFGYo",
+                "parent_block_uid": "GHAgKYC8N",
+                "block_uid": "",
+                "explanation": "",
+                "video": null
+            },
+            {
+                "id": "T8oD2aD4w",
+                "create_date": "2024-08-01",
+                "question": "In which site water reservoirs were found?",
+                "options": [
+                    {
+                        "id": "T8oD2aD4w_1",
+                        "text": "Dholavira #ans"
+                    },
+                    {
+                        "id": "T8oD2aD4w_2",
+                        "text": "Mohenjodara"
+                    },
+                    {
+                        "id": "T8oD2aD4w_3",
+                        "text": "Lothal"
+                    },
+                    {
+                        "id": "T8oD2aD4w_4",
+                        "text": "Kalibangan"
+                    }
+                ],
+                "tags": [
+                    "harappan civilization",
+                    "ssc"
+                ],
+                "page_uid": "75ucnFGYo",
+                "parent_block_uid": "GHAgKYC8N",
+                "block_uid": "",
+                "explanation": "",
+                "video": null
+            },
+            {
+                "id": "UF-3BkbvM",
+                "create_date": "2024-08-01",
+                "question": "The site Lothal of Harappan civilization is on the bank of which river?",
+                "options": [
+                    {
+                        "id": "UF-3BkbvM_1",
+                        "text": "Saraswati river"
+                    },
+                    {
+                        "id": "UF-3BkbvM_2",
+                        "text": "Sabarmati river"
+                    },
+                    {
+                        "id": "UF-3BkbvM_3",
+                        "text": "Bogava river #ans"
+                    },
+                    {
+                        "id": "UF-3BkbvM_4",
+                        "text": "Indus river"
+                    }
+                ],
+                "tags": [
+                    "river",
+                    "harappan civilization",
+                    "ssc"
+                ],
+                "page_uid": "75ucnFGYo",
+                "parent_block_uid": "4iCJ59OG0",
+                "block_uid": "",
+                "explanation": "",
+                "video": null
+            },
+            {
+                "id": "a-we28jEj",
+                "create_date": "2024-08-01",
+                "question": "Which of the below was not correct about Lothal?",
+                "options": [
+                    {
+                        "id": "a-we28jEj_1",
+                        "text": "Fire altar evidence found"
+                    },
+                    {
+                        "id": "a-we28jEj_2",
+                        "text": "It had a dock yard"
+                    },
+                    {
+                        "id": "a-we28jEj_3",
+                        "text": "It was site of precious stones"
+                    },
+                    {
+                        "id": "a-we28jEj_4",
+                        "text": "It had Great Bath #ans"
+                    }
+                ],
+                "tags": [
+                    "harappan civilization",
+                    "ssc"
+                ],
+                "page_uid": "75ucnFGYo",
+                "parent_block_uid": "4iCJ59OG0",
+                "block_uid": "",
+                "explanation": "",
+                "video": null
+            },
+            {
+                "id": "QNriMlGpg",
+                "create_date": "2024-08-01",
+                "question": "The Dock yard was found at which site?",
+                "options": [
+                    {
+                        "id": "QNriMlGpg_1",
+                        "text": "Harappa"
+                    },
+                    {
+                        "id": "QNriMlGpg_2",
+                        "text": "Dholavira"
+                    },
+                    {
+                        "id": "QNriMlGpg_3",
+                        "text": "Lothal #ans"
+                    },
+                    {
+                        "id": "QNriMlGpg_4",
+                        "text": "Kalibangan"
+                    }
+                ],
+                "tags": [
+                    "harappan civilization",
+                    "ssc"
+                ],
+                "page_uid": "75ucnFGYo",
+                "parent_block_uid": "4iCJ59OG0",
+                "block_uid": "",
+                "explanation": "",
+                "video": null
+            },
+            {
+                "id": "EVith70f1",
+                "create_date": "2024-08-01",
+                "question": "The Great Bath is in which site?",
+                "options": [
+                    {
+                        "id": "EVith70f1_1",
+                        "text": "Harappa"
+                    },
+                    {
+                        "id": "EVith70f1_2",
+                        "text": "Mohenjodaro #ans"
+                    },
+                    {
+                        "id": "EVith70f1_3",
+                        "text": "Kalibangan"
+                    },
+                    {
+                        "id": "EVith70f1_4",
+                        "text": "Lothal"
+                    }
+                ],
+                "tags": [
+                    "harappan civilization",
+                    "ssc"
+                ],
+                "page_uid": "75ucnFGYo",
+                "parent_block_uid": "6Mulh9Ats",
+                "block_uid": "",
+                "explanation": "",
+                "video": null
+            },
+            {
+                "id": "LGNau8842",
+                "create_date": "2024-08-01",
+                "question": "The evidence of fire altar was found from?",
+                "options": [
+                    {
+                        "id": "LGNau8842_1",
+                        "text": "Kalibangan"
+                    },
+                    {
+                        "id": "LGNau8842_2",
+                        "text": "Lothal"
+                    },
+                    {
+                        "id": "LGNau8842_3",
+                        "text": "Both 1 and 2 #ans"
+                    },
+                    {
+                        "id": "LGNau8842_4",
+                        "text": "None of these"
+                    }
+                ],
+                "tags": [
+                    "harappan civilization",
+                    "ssc"
+                ],
+                "page_uid": "75ucnFGYo",
+                "parent_block_uid": "6Mulh9Ats",
+                "block_uid": "",
+                "explanation": "",
+                "video": null
+            },
+            {
+                "id": "YNcKZ-p0B",
+                "create_date": "2024-08-01",
+                "question": "Pot burial was found at which site?",
+                "options": [
+                    {
+                        "id": "YNcKZ-p0B_1",
+                        "text": "Kalibangan"
+                    },
+                    {
+                        "id": "YNcKZ-p0B_2",
+                        "text": "Lothal"
+                    },
+                    {
+                        "id": "YNcKZ-p0B_3",
+                        "text": "Surkotada #ans"
+                    },
+                    {
+                        "id": "YNcKZ-p0B_4",
+                        "text": "Harappa"
+                    }
+                ],
+                "tags": [
+                    "harappan civilization",
+                    "ssc"
+                ],
+                "page_uid": "75ucnFGYo",
+                "parent_block_uid": "KDqSpkYaQ",
+                "block_uid": "",
+                "explanation": "",
+                "video": null
+            },
+            {
+                "id": "VX74kU_dH",
+                "create_date": "2024-08-01",
+                "question": "Double (Couple) burial was found at which site?",
+                "options": [
+                    {
+                        "id": "VX74kU_dH_1",
+                        "text": "Kalibangan"
+                    },
+                    {
+                        "id": "VX74kU_dH_2",
+                        "text": "Lothal #ans"
+                    },
+                    {
+                        "id": "VX74kU_dH_3",
+                        "text": "Surkotada"
+                    },
+                    {
+                        "id": "VX74kU_dH_4",
+                        "text": "Harappa"
+                    }
+                ],
+                "tags": [
+                    "harappan civilization",
+                    "ssc"
+                ],
+                "page_uid": "75ucnFGYo",
+                "parent_block_uid": "KDqSpkYaQ",
+                "block_uid": "",
+                "explanation": "",
+                "video": null
+            },
+            {
+                "id": "pTavmh9yE",
+                "create_date": "2024-08-01",
+                "question": "Graveyard was found at which site?",
+                "options": [
+                    {
+                        "id": "pTavmh9yE_1",
+                        "text": "Kalibangan"
+                    },
+                    {
+                        "id": "pTavmh9yE_2",
+                        "text": "Lothal"
+                    },
+                    {
+                        "id": "pTavmh9yE_3",
+                        "text": "Surkotada"
+                    },
+                    {
+                        "id": "pTavmh9yE_4",
+                        "text": "Harappa #ans"
+                    }
+                ],
+                "tags": [
+                    "harappan civilization",
+                    "ssc"
+                ],
+                "page_uid": "75ucnFGYo",
+                "parent_block_uid": "KDqSpkYaQ",
+                "block_uid": "",
+                "explanation": "",
+                "video": null
+            },
+            {
                 "id": "w4HmFL6Hp",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Sagittarius A is a ?",
                 "options": [
                     {
@@ -356,7 +805,7 @@
             },
             {
                 "id": "KJuJL-2rO",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which object in the universe has infinite gravity?",
                 "options": [
                     {
@@ -388,7 +837,7 @@
             },
             {
                 "id": "Lpp70hidU",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who discovered milky way galaxy?",
                 "options": [
                     {
@@ -421,7 +870,7 @@
             },
             {
                 "id": "q39UtK0BR",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The study of universe is called?",
                 "options": [
                     {
@@ -454,7 +903,7 @@
             },
             {
                 "id": "I2S-cSW2D",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Our sun (a star) is present in which galaxy?",
                 "options": [
                     {
@@ -486,7 +935,7 @@
             },
             {
                 "id": "5wiW8Ai9Q",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The Sun is mainly made up of?",
                 "options": [
                     {
@@ -518,7 +967,7 @@
             },
             {
                 "id": "a10Q_hOuO",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Sunlight takes approximately how many minutes to reach the surface of the earth?",
                 "options": [
                     {
@@ -550,7 +999,7 @@
             },
             {
                 "id": "cWlB8Rt8w",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The source of Sun's energy is due to?",
                 "options": [
                     {
@@ -582,7 +1031,7 @@
             },
             {
                 "id": "0eUqiE8nk",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The nearest start to the Sun is ?",
                 "options": [
                     {
@@ -614,7 +1063,7 @@
             },
             {
                 "id": "9q97e_rQk",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "A group of stars are called as ?",
                 "options": [
                     {
@@ -646,7 +1095,7 @@
             },
             {
                 "id": "Mt317RvKZ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Ursa Major is a ?",
                 "options": [
                     {
@@ -678,7 +1127,7 @@
             },
             {
                 "id": "1OczP6diE",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "How many planets are there in the solar system?",
                 "options": [
                     {
@@ -710,7 +1159,7 @@
             },
             {
                 "id": "IwkuMcwn4",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Astroid belts lies between which two planets?",
                 "options": [
                     {
@@ -742,7 +1191,7 @@
             },
             {
                 "id": "hJjV1skQy",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which is the largest astroid in astroid belt?",
                 "options": [
                     {
@@ -774,7 +1223,7 @@
             },
             {
                 "id": "mUuJU180D",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which planet rotates clockwise or from east to west?",
                 "options": [
                     {
@@ -806,7 +1255,7 @@
             },
             {
                 "id": "zdj5MjU18",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which planet rotates clockwise or from east to west?",
                 "options": [
                     {
@@ -838,7 +1287,7 @@
             },
             {
                 "id": "iDhfeF7OC",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which is the fastest planet (in terms of revolution) on solar system?",
                 "options": [
                     {
@@ -870,7 +1319,7 @@
             },
             {
                 "id": "8yL1qNg2S",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which is the fastest planet (in terms of rotation) on solar system?",
                 "options": [
                     {
@@ -902,7 +1351,7 @@
             },
             {
                 "id": "KY_w2XGsj",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which is the slowest planet (in terms of rotation) on solar system?",
                 "options": [
                     {
@@ -934,7 +1383,7 @@
             },
             {
                 "id": "TxhGVbQiw",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which is the largest planet on solar system?",
                 "options": [
                     {
@@ -966,7 +1415,7 @@
             },
             {
                 "id": "Z-LlZhL4e",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which is the largest planets on solar system?",
                 "options": [
                     {
@@ -998,7 +1447,7 @@
             },
             {
                 "id": "VaxtvCamr",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Mercury take how many days to complete one revolution?",
                 "options": [
                     {
@@ -1030,7 +1479,7 @@
             },
             {
                 "id": "-MFVxKSkG",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which planet has a day that is longer than its year?",
                 "options": [
                     {
@@ -1062,7 +1511,7 @@
             },
             {
                 "id": "k6_SY_Rvt",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which is the hottest planet on solar system?",
                 "options": [
                     {
@@ -1094,7 +1543,7 @@
             },
             {
                 "id": "KT37yDPwk",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which planet is called as \"earths twin\"?",
                 "options": [
                     {
@@ -1126,7 +1575,7 @@
             },
             {
                 "id": "NmMfz_bqo",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The distance between earth and sun is ?",
                 "options": [
                     {
@@ -1158,7 +1607,7 @@
             },
             {
                 "id": "QCW8H_uBV",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Mars planet has how many natural satellites?",
                 "options": [
                     {
@@ -1190,7 +1639,7 @@
             },
             {
                 "id": "z3QoCPQd4",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below is a natural satellite of Mars?",
                 "options": [
                     {
@@ -1222,7 +1671,7 @@
             },
             {
                 "id": "5voh44qVU",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below is a natural satellite of Mars?",
                 "options": [
                     {
@@ -1254,7 +1703,7 @@
             },
             {
                 "id": "OMRZSKwdv",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which planet is called as \"red planet\"?",
                 "options": [
                     {
@@ -1286,7 +1735,7 @@
             },
             {
                 "id": "Riqqh24tb",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which is the largest satellite on solar system?",
                 "options": [
                     {
@@ -1319,7 +1768,7 @@
             },
             {
                 "id": "AiUIqf5ed",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When the earth is closest to the Sun is called?",
                 "options": [
                     {
@@ -1351,7 +1800,7 @@
             },
             {
                 "id": "3NBGXpbJz",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Aphelion occurs on which day?",
                 "options": [
                     {
@@ -1384,7 +1833,7 @@
             },
             {
                 "id": "n6uQpqonp",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When the earth is farthest from the Sun is called?",
                 "options": [
                     {
@@ -1416,7 +1865,7 @@
             },
             {
                 "id": "7OrtJHegu",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Perihelion occurs on which day?",
                 "options": [
                     {
@@ -1449,7 +1898,7 @@
             },
             {
                 "id": "Anqs1mlJt",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "During summer solstice vertical rays of sun directly falls over?",
                 "options": [
                     {
@@ -1481,7 +1930,7 @@
             },
             {
                 "id": "EjgoSQUvq",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When is the longest day in the northern hemisphere?",
                 "options": [
                     {
@@ -1514,7 +1963,7 @@
             },
             {
                 "id": "ksHgU6IPT",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When is the shortest night  in the northern hemisphere?",
                 "options": [
                     {
@@ -1546,7 +1995,7 @@
             },
             {
                 "id": "291Se5otO",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When is the yoga day in India?",
                 "options": [
                     {
@@ -1579,7 +2028,7 @@
             },
             {
                 "id": "4btebGpNf",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "During winter solstice vertical rays of sun directly falls over?",
                 "options": [
                     {
@@ -1611,7 +2060,7 @@
             },
             {
                 "id": "V8pVjwSRr",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When is the shortest day in the norther hemisphere?",
                 "options": [
                     {
@@ -1644,7 +2093,7 @@
             },
             {
                 "id": "nHXeNwl2w",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When is the longest night  in the northern hemisphere?",
                 "options": [
                     {
@@ -1676,7 +2125,7 @@
             },
             {
                 "id": "ToIVkqFzX",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "During equinox the vertical rays of sun directly falls over?",
                 "options": [
                     {
@@ -1708,7 +2157,7 @@
             },
             {
                 "id": "c8I1koggQ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did the night and day are equal in northern hemisphere?",
                 "options": [
                     {
@@ -1740,7 +2189,7 @@
             },
             {
                 "id": "BHVhsIZQX",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "On which of the following day the day and night are almost equal?",
                 "options": [
                     {
@@ -1772,7 +2221,7 @@
             },
             {
                 "id": "RWi9hZTDi",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "On which of the following day the day and night are almost equal?",
                 "options": [
                     {
@@ -1804,7 +2253,7 @@
             },
             {
                 "id": "bymTcM4PH",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The cause for different weathers on the earth is?",
                 "options": [
                     {
@@ -1836,7 +2285,7 @@
             },
             {
                 "id": "FFKz1sCkO",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The earth is tilted on its axis by ?",
                 "options": [
                     {
@@ -1868,7 +2317,7 @@
             },
             {
                 "id": "mmqwBEa2o",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "What causes day and night on the earth?",
                 "options": [
                     {
@@ -1900,7 +2349,7 @@
             },
             {
                 "id": "-KkvEEM6e",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below is incorrect about moon?",
                 "options": [
                     {
@@ -1933,7 +2382,7 @@
             },
             {
                 "id": "URhz3jCmT",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Moon completes one rotation in around?",
                 "options": [
                     {
@@ -1966,7 +2415,7 @@
             },
             {
                 "id": "bhy1t9oUb",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Moon completes one revolution in around?",
                 "options": [
                     {
@@ -1999,7 +2448,7 @@
             },
             {
                 "id": "9JugsGKSP",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When can we see a full moon?",
                 "options": [
                     {
@@ -2032,7 +2481,7 @@
             },
             {
                 "id": "Iw2J4aEB4",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "How many days a full moon is away from new moon?",
                 "options": [
                     {
@@ -2065,7 +2514,7 @@
             },
             {
                 "id": "vKh4SX27J",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When the moon is nearest to the Earth is called?",
                 "options": [
                     {
@@ -2097,7 +2546,7 @@
             },
             {
                 "id": "s88mldRi0",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When the moon is farthest from the Earth is called?",
                 "options": [
                     {
@@ -2129,7 +2578,7 @@
             },
             {
                 "id": "AtB2Au8DK",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When we call moon as super moon?",
                 "options": [
                     {
@@ -2162,7 +2611,7 @@
             },
             {
                 "id": "asrDSGvye",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When we call moon as micro moon?",
                 "options": [
                     {
@@ -2195,7 +2644,7 @@
             },
             {
                 "id": "kU6hz0V7f",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who for the first time suggest for constitution of a \"constituent assembly\"?",
                 "options": [
                     {
@@ -2229,7 +2678,7 @@
             },
             {
                 "id": "MpBWQHH5U",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who for the first time officially demanded constitution of a \"constituent assembly\"?",
                 "options": [
                     {
@@ -2263,7 +2712,7 @@
             },
             {
                 "id": "73nkOnPSP",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "For the first time the Britisher agreed to formation of  constitution assembly under?",
                 "options": [
                     {
@@ -2296,7 +2745,7 @@
             },
             {
                 "id": "EtGHW7uWt",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The constitution assembly was constituted based on the recommendation of?",
                 "options": [
                     {
@@ -2328,7 +2777,7 @@
             },
             {
                 "id": "9XGPYp4j7",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "As per cabinet mission plan the constituent assembly has ?",
                 "options": [
                     {
@@ -2360,7 +2809,7 @@
             },
             {
                 "id": "d9SH7n5fe",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Consider the following statements regarding constituent assembly?",
                 "options": [
                     {
@@ -2392,7 +2841,7 @@
             },
             {
                 "id": "-IrWamhGS",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did election for the constituent assembly held?",
                 "options": [
                     {
@@ -2426,7 +2875,7 @@
             },
             {
                 "id": "5kh-YAQIH",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who was appointed as the acting president of the constituent assembly on its first sitting?",
                 "options": [
                     {
@@ -2460,7 +2909,7 @@
             },
             {
                 "id": "_2RjW57iJ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who was elected as the president of the constituent assembly?",
                 "options": [
                     {
@@ -2494,7 +2943,7 @@
             },
             {
                 "id": "im9xS8aSV",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who was elected as the vice president of the constituent assembly?",
                 "options": [
                     {
@@ -2528,7 +2977,7 @@
             },
             {
                 "id": "g5B7LQ7Zq",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who was elected as the vice president of the constituent assembly?",
                 "options": [
                     {
@@ -2562,7 +3011,7 @@
             },
             {
                 "id": "gZetxVGMj",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who was elected as the vice president of the constituent assembly?",
                 "options": [
                     {
@@ -2596,7 +3045,7 @@
             },
             {
                 "id": "fsuWtwmyd",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did the president and vice president of the constitution assembly was elected?",
                 "options": [
                     {
@@ -2629,7 +3078,7 @@
             },
             {
                 "id": "KdDQ-2HIp",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who moved objective resolution in the constituent assembly?",
                 "options": [
                     {
@@ -2662,7 +3111,7 @@
             },
             {
                 "id": "YPqugVkC4",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did the objective resolution was moved in the constitution assembly?",
                 "options": [
                     {
@@ -2695,7 +3144,7 @@
             },
             {
                 "id": "TEzjn6vOP",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did the objective resolution was adopted (or passed) by the constitution assembly?",
                 "options": [
                     {
@@ -2728,7 +3177,7 @@
             },
             {
                 "id": "GiM0SN66m",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did the objective resolution was adopted as preamble by the constitution assembly?",
                 "options": [
                     {
@@ -2761,7 +3210,7 @@
             },
             {
                 "id": "5t4JGrHTP",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did the constitution assembly adopted \"the constitution\" ?",
                 "options": [
                     {
@@ -2794,7 +3243,7 @@
             },
             {
                 "id": "rDEJq3DYP",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which date is mentioned in the preamble ?",
                 "options": [
                     {
@@ -2827,7 +3276,7 @@
             },
             {
                 "id": "D-idqh2yO",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When India celebrated \"constitution day\"?",
                 "options": [
                     {
@@ -2862,7 +3311,7 @@
             },
             {
                 "id": "cMR3HUo3F",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When was the last working day of the constitution assembly?",
                 "options": [
                     {
@@ -2895,7 +3344,7 @@
             },
             {
                 "id": "H_Ftcs6--",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did the constitution assembly adopted \"preamble\" ?",
                 "options": [
                     {
@@ -2928,7 +3377,7 @@
             },
             {
                 "id": "VcQ2ZnYfz",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did the constitution assembly adopted \"national anthem\" ?",
                 "options": [
                     {
@@ -2961,7 +3410,7 @@
             },
             {
                 "id": "ro-0wkHDk",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did the constitution assembly adopted \"national song\" ?",
                 "options": [
                     {
@@ -2994,7 +3443,7 @@
             },
             {
                 "id": "FmEP8xpmg",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did the constitution assembly adopted \"national flag\" ?",
                 "options": [
                     {
@@ -3026,7 +3475,7 @@
             },
             {
                 "id": "Tkf_uAVxn",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did the constitution of India came into force?",
                 "options": [
                     {
@@ -3059,7 +3508,7 @@
             },
             {
                 "id": "jzfrEZf0n",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did the first president of India took oath?",
                 "options": [
                     {
@@ -3094,7 +3543,7 @@
             },
             {
                 "id": "WWKstkbre",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did India became a republic State?",
                 "options": [
                     {
@@ -3127,7 +3576,7 @@
             },
             {
                 "id": "Zg2JlvbrW",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who was the first governor-general of free India?",
                 "options": [
                     {
@@ -3161,7 +3610,7 @@
             },
             {
                 "id": "mpuoSrAm8",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who was the first indian governor-general of free India?",
                 "options": [
                     {
@@ -3195,7 +3644,7 @@
             },
             {
                 "id": "edKoB1Qib",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who was the last governor-general of British India?",
                 "options": [
                     {
@@ -3229,7 +3678,7 @@
             },
             {
                 "id": "NKD-YPVFL",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who was the first indian governor-general of free India?",
                 "options": [
                     {
@@ -3263,7 +3712,7 @@
             },
             {
                 "id": "9Km7Pmaa4",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did the first president of India took oath?",
                 "options": [
                     {
@@ -3297,7 +3746,7 @@
             },
             {
                 "id": "9pUVUg1bl",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did India became a Sovereign state?",
                 "options": [
                     {
@@ -3330,7 +3779,7 @@
             },
             {
                 "id": "0do0Wen4E",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did India became a Republic state?",
                 "options": [
                     {
@@ -3363,7 +3812,7 @@
             },
             {
                 "id": "XzPx5qBDz",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did India became a British dominion?",
                 "options": [
                     {
@@ -3396,7 +3845,7 @@
             },
             {
                 "id": "VfNfQrbz0",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who was the chairman of the drafting committee?",
                 "options": [
                     {
@@ -3429,7 +3878,7 @@
             },
             {
                 "id": "1yy3ZfKdx",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who from the below were not a members drafting committee?",
                 "options": [
                     {
@@ -3462,7 +3911,7 @@
             },
             {
                 "id": "FIpCjzkFY",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who was the only muslim member of the drafting committee?",
                 "options": [
                     {
@@ -3495,7 +3944,7 @@
             },
             {
                 "id": "PmnTVt6qj",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The \"original constitution\" is the constitution on date?",
                 "options": [
                     {
@@ -3529,7 +3978,7 @@
             },
             {
                 "id": "6I7BggQi7",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Among the following which is incorrect regarding original constitution?",
                 "options": [
                     {
@@ -3562,7 +4011,7 @@
             },
             {
                 "id": "vdGP5xmip",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Among the following which is incorrect regarding original constitution?",
                 "options": [
                     {
@@ -3595,7 +4044,7 @@
             },
             {
                 "id": "rbx78Z2BI",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Among the following which is incorrect regarding original constitution?",
                 "options": [
                     {
@@ -3628,7 +4077,7 @@
             },
             {
                 "id": "TbOJRRG_r",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The original constitution has ?",
                 "options": [
                     {
@@ -3661,7 +4110,7 @@
             },
             {
                 "id": "CIzpnVwsL",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The constitution at present has ?",
                 "options": [
                     {
@@ -3694,7 +4143,7 @@
             },
             {
                 "id": "weeb4a4Wh",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "As of July 2024 the constitution was amendment how many times?",
                 "options": [
                     {
@@ -3728,7 +4177,7 @@
             },
             {
                 "id": "rHy34B_5C",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did preamble was adopted?",
                 "options": [
                     {
@@ -3761,7 +4210,7 @@
             },
             {
                 "id": "7EKkgQIch",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The objective resolution was later adopted as preamble on which date?",
                 "options": [
                     {
@@ -3794,7 +4243,7 @@
             },
             {
                 "id": "TlNF36bvm",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "What is the correct order of keywords in the preamble?",
                 "options": [
                     {
@@ -3826,7 +4275,7 @@
             },
             {
                 "id": "FnquCrvi-",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The idea of preamble in the constitution was borrowed from?",
                 "options": [
                     {
@@ -3858,7 +4307,7 @@
             },
             {
                 "id": "ilLN2Ojty",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The idea of \"JUSTICE\" in the preamble was borrowed from?",
                 "options": [
                     {
@@ -3890,7 +4339,7 @@
             },
             {
                 "id": "fzrV2Z-pQ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The idea of \"LIBERTY\" in the preamble was borrowed from?",
                 "options": [
                     {
@@ -3922,7 +4371,7 @@
             },
             {
                 "id": "rG2-1t5MN",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The idea of \"EQUALITY\" in the preamble was borrowed from?",
                 "options": [
                     {
@@ -3954,7 +4403,7 @@
             },
             {
                 "id": "_sNsJaBkL",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The idea of \"Republic\" in the preamble was borrowed from?",
                 "options": [
                     {
@@ -3986,7 +4435,7 @@
             },
             {
                 "id": "RBh_wFLVG",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The idea of \"FRATERNITY\" in the preamble was borrowed from?",
                 "options": [
                     {
@@ -4018,7 +4467,7 @@
             },
             {
                 "id": "rTjP2DQZP",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did India became a sovereign state?",
                 "options": [
                     {
@@ -4051,7 +4500,7 @@
             },
             {
                 "id": "7FWifdNkN",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did India became a republic state?",
                 "options": [
                     {
@@ -4084,7 +4533,7 @@
             },
             {
                 "id": "cyhoxysCt",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When was the constitution came into force?",
                 "options": [
                     {
@@ -4117,7 +4566,7 @@
             },
             {
                 "id": "uuba3gAel",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which date is mentioned in the preamble?",
                 "options": [
                     {
@@ -4150,7 +4599,7 @@
             },
             {
                 "id": "wRjSH6Nlr",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When was constitution adopted?",
                 "options": [
                     {
@@ -4183,7 +4632,7 @@
             },
             {
                 "id": "N9GPaEMk7",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "In which case SC held that preamble is not part of the constitution?",
                 "options": [
                     {
@@ -4217,7 +4666,7 @@
             },
             {
                 "id": "SoT8VTYBe",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "In which case SC held that preamble  can as as guide to read the constitution?",
                 "options": [
                     {
@@ -4249,7 +4698,7 @@
             },
             {
                 "id": "GOLgbeCxC",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "In which case SC held that preamble is a part of the constitution?",
                 "options": [
                     {
@@ -4281,7 +4730,7 @@
             },
             {
                 "id": "bP6mgNM7X",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did preamble was amedned?",
                 "options": [
                     {
@@ -4314,7 +4763,7 @@
             },
             {
                 "id": "aGJKwgtTg",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "How many times preamble was amended?",
                 "options": [
                     {
@@ -4346,7 +4795,7 @@
             },
             {
                 "id": "1U0-_xAi4",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which keyword was not added by amendment in the preamble?",
                 "options": [
                     {
@@ -4379,7 +4828,7 @@
             },
             {
                 "id": "XYSh2ILuC",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "By which amendment preamble was admended?",
                 "options": [
                     {
@@ -4412,7 +4861,7 @@
             },
             {
                 "id": "thV5zl-Fi",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which keywords were added in preamble by amendment?",
                 "options": [
                     {
@@ -4445,7 +4894,7 @@
             },
             {
                 "id": "HyU0pijb5",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which part of the constitution deals with citizenship?",
                 "options": [
                     {
@@ -4479,7 +4928,7 @@
             },
             {
                 "id": "N1tgSF7JY",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article of the constitution deals with automatic citizenship to those who migrated to India from Pakistan before July 1948?",
                 "options": [
                     {
@@ -4512,7 +4961,7 @@
             },
             {
                 "id": "1RJcdMYfc",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "India borrowed the idea of single citizenship from?",
                 "options": [
                     {
@@ -4544,7 +4993,7 @@
             },
             {
                 "id": "eUBvSAzZQ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article of the constitution deals with single citizenship?",
                 "options": [
                     {
@@ -4578,7 +5027,7 @@
             },
             {
                 "id": "bgpntO7ZG",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "If an adult man acquires citizenship of any other country then which of the below is true?",
                 "options": [
                     {
@@ -4611,7 +5060,7 @@
             },
             {
                 "id": "QHQEsaOda",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the following is a subject in union list?",
                 "options": [
                     {
@@ -4643,7 +5092,7 @@
             },
             {
                 "id": "jlMHivt0g",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article of the constitution gives power to the parliament to make laws with respect to citizenship?",
                 "options": [
                     {
@@ -4676,7 +5125,7 @@
             },
             {
                 "id": "zycJY0eDi",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the following is not a way to acquire Indian citizenship?",
                 "options": [
                     {
@@ -4708,7 +5157,7 @@
             },
             {
                 "id": "cxvZjBm5d",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the following is not a way to lose Indian citizenship?",
                 "options": [
                     {
@@ -4740,7 +5189,7 @@
             },
             {
                 "id": "jEY-b7oKA",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which part of the constitution deals with fundamental rights?",
                 "options": [
                     {
@@ -4774,7 +5223,7 @@
             },
             {
                 "id": "SHVF9f22h",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Fundamental rights are called as \"fundamental\" because?",
                 "options": [
                     {
@@ -4806,7 +5255,7 @@
             },
             {
                 "id": "PO_fsyY7h",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the following is justiciable?",
                 "options": [
                     {
@@ -4839,7 +5288,7 @@
             },
             {
                 "id": "VDMj-HYc4",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "How many fundamental rights were there in the original constitution?",
                 "options": [
                     {
@@ -4871,7 +5320,7 @@
             },
             {
                 "id": "M29XYwOYT",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "How many fundamental rights are there in the constitution?",
                 "options": [
                     {
@@ -4903,7 +5352,7 @@
             },
             {
                 "id": "0-tboJP_8",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below is not a fundamental right?",
                 "options": [
                     {
@@ -4936,7 +5385,7 @@
             },
             {
                 "id": "Rdzw1dp4Z",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with \"right to equality\"?",
                 "options": [
                     {
@@ -4969,7 +5418,7 @@
             },
             {
                 "id": "3Aa_C1pim",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with \"Equality before law\"?",
                 "options": [
                     {
@@ -5002,7 +5451,7 @@
             },
             {
                 "id": "_h7GFMbAX",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with \"Equal protection by law\"?",
                 "options": [
                     {
@@ -5035,7 +5484,7 @@
             },
             {
                 "id": "WjnttzLDw",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Prohibition of discrimination on grounds of religion, caste, sex, place of birth or race is a part of which fundamental right?",
                 "options": [
                     {
@@ -5067,7 +5516,7 @@
             },
             {
                 "id": "mod52uWYU",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with \"Prohibition of discrimination on certain grounds\"?",
                 "options": [
                     {
@@ -5100,7 +5549,7 @@
             },
             {
                 "id": "y6NmXG-TI",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below is not a ground for \"prohibition of discrimination\" under Article 15?",
                 "options": [
                     {
@@ -5134,7 +5583,7 @@
             },
             {
                 "id": "ML43dBFfx",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Equality of opportunity in terms of public employment\" is a part of which fundamental right?",
                 "options": [
                     {
@@ -5166,7 +5615,7 @@
             },
             {
                 "id": "5_iMm0wnO",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with \"Equality of opportunity in terms of public employment\"?",
                 "options": [
                     {
@@ -5199,7 +5648,7 @@
             },
             {
                 "id": "0aEjp-om_",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Abolition of untouchability\" is a part of which fundamental right?",
                 "options": [
                     {
@@ -5231,7 +5680,7 @@
             },
             {
                 "id": "ewLCwj5fW",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with \"Abolition of untouchability\"?",
                 "options": [
                     {
@@ -5264,7 +5713,7 @@
             },
             {
                 "id": "qkgtCkcjL",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Abolition of titles except military and academic\" is a part of which fundamental right?",
                 "options": [
                     {
@@ -5296,7 +5745,7 @@
             },
             {
                 "id": "ZLFTllJvW",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with \"Abolition of titles\"?",
                 "options": [
                     {
@@ -5329,7 +5778,7 @@
             },
             {
                 "id": "a9XMvAJjm",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which articles deals with \"Right to Freedom\"?",
                 "options": [
                     {
@@ -5361,7 +5810,7 @@
             },
             {
                 "id": "X7Xld_fmT",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article of the Indian Constitution guarantees the Right to Freedom?",
                 "options": [
                     {
@@ -5394,7 +5843,7 @@
             },
             {
                 "id": "matxEhj5e",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Fundamental Right of the constitution deals with the Freedom of Speech?",
                 "options": [
                     {
@@ -5427,7 +5876,7 @@
             },
             {
                 "id": "N_G5Dm-Gt",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Fundamental Right of the constitution deals with the Freedom of Residence?",
                 "options": [
                     {
@@ -5460,7 +5909,7 @@
             },
             {
                 "id": "fbTpyeD5A",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Fundamental Right of the constitution deals with the Freedom of Assembly without arms?",
                 "options": [
                     {
@@ -5493,7 +5942,7 @@
             },
             {
                 "id": "tb8DNGsAv",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Fundamental Right of the constitution deals with the Freedom of movement?",
                 "options": [
                     {
@@ -5526,7 +5975,7 @@
             },
             {
                 "id": "avH0ups-6",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Fundamental Right of the constitution deals with the Freedom of make unions?",
                 "options": [
                     {
@@ -5559,7 +6008,7 @@
             },
             {
                 "id": "PrbqzutUN",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Fundamental Right of the constitution deals with the Freedom of protest?",
                 "options": [
                     {
@@ -5592,7 +6041,7 @@
             },
             {
                 "id": "zgsXO9J0A",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Fundamental Right of the constitution deals with the Freedom of profession in any part of India?",
                 "options": [
                     {
@@ -5625,7 +6074,7 @@
             },
             {
                 "id": "ubD322wjx",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article of the Indian Constitution provides protection in respect of conviction for offenses?",
                 "options": [
                     {
@@ -5658,7 +6107,7 @@
             },
             {
                 "id": "Lk9q6Cr0m",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article of the Indian Constitution protects the right to life and personal liberty?",
                 "options": [
                     {
@@ -5691,7 +6140,7 @@
             },
             {
                 "id": "Qsh_IJk6H",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article of the Indian Constitution deals with \"free education for children between 6-14 age\"?",
                 "options": [
                     {
@@ -5724,7 +6173,7 @@
             },
             {
                 "id": "9xyc1VPmz",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The article 21A was added through which amendment?",
                 "options": [
                     {
@@ -5758,7 +6207,7 @@
             },
             {
                 "id": "bmv4CkRMB",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Under which Article is the protection against arrest and detention provided?",
                 "options": [
                     {
@@ -5791,7 +6240,7 @@
             },
             {
                 "id": "u-39JAQ80",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article prohibits traffic in human beings and forced labor?",
                 "options": [
                     {
@@ -5824,7 +6273,7 @@
             },
             {
                 "id": "dZ9-7xhlc",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article prohibits the employment of children in factories?",
                 "options": [
                     {
@@ -5857,7 +6306,7 @@
             },
             {
                 "id": "gmAymRVjC",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which articles deals with \"Right to Freedom of Religion\"?",
                 "options": [
                     {
@@ -5889,7 +6338,7 @@
             },
             {
                 "id": "eFgsferpz",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article guarantees the freedom of religion?",
                 "options": [
                     {
@@ -5922,7 +6371,7 @@
             },
             {
                 "id": "kgnTgjqHS",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article grants every religious denomination the freedom to manage its own affairs in matters of religion?",
                 "options": [
                     {
@@ -5955,7 +6404,7 @@
             },
             {
                 "id": "l_VcTfp8V",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article ensures that no person shall be compelled to pay any taxes for the promotion or maintenance of any particular religion?",
                 "options": [
                     {
@@ -5988,7 +6437,7 @@
             },
             {
                 "id": "Rn2Jl8-O8",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article deals with the freedom as to attendance at religious instruction or religious worship in certain educational institutions?",
                 "options": [
                     {
@@ -6021,7 +6470,7 @@
             },
             {
                 "id": "l2c98MWUL",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which articles deals with \"Right to Freedom of Religion\"?",
                 "options": [
                     {
@@ -6053,7 +6502,7 @@
             },
             {
                 "id": "un7r9w0ui",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article protects the interests of minorities to protect their culture?",
                 "options": [
                     {
@@ -6086,7 +6535,7 @@
             },
             {
                 "id": "fXFwRNZMZ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article grants minorities the right to establish and administer educational institutions of their choice?",
                 "options": [
                     {
@@ -6119,7 +6568,7 @@
             },
             {
                 "id": "PENlTwUHL",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article guarantees the right to constitutional remedies?",
                 "options": [
                     {
@@ -6152,7 +6601,7 @@
             },
             {
                 "id": "rbBjuh44r",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the following is true?",
                 "options": [
                     {
@@ -6184,7 +6633,7 @@
             },
             {
                 "id": "cRUqVMpWh",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "India is a \"Welfare state\" is mentioned under?",
                 "options": [
                     {
@@ -6216,7 +6665,7 @@
             },
             {
                 "id": "n_cMhglIT",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which parts of the constitution deals with DPSP?",
                 "options": [
                     {
@@ -6249,7 +6698,7 @@
             },
             {
                 "id": "AMS8WrCRi",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The DPSP were borrowed from countries?",
                 "options": [
                     {
@@ -6281,7 +6730,7 @@
             },
             {
                 "id": "k-xPE5N0n",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below is true for DPSP?",
                 "options": [
                     {
@@ -6313,7 +6762,7 @@
             },
             {
                 "id": "adnvYeha2",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "According to the Constitution of India, which of the following are fundamental to the governance of the country?",
                 "options": [
                     {
@@ -6345,7 +6794,7 @@
             },
             {
                 "id": "BotddXjZZ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Directive Principles of State Policy are?",
                 "options": [
                     {
@@ -6377,7 +6826,7 @@
             },
             {
                 "id": "MyZ09OVM1",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The purpose of the inclusion of DPSP in the Indian Constitution is to establish ?",
                 "options": [
                     {
@@ -6409,7 +6858,7 @@
             },
             {
                 "id": "AOdHY4D_8",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which amendment added provision for \"reduce income inequalities\" in DPSP ?",
                 "options": [
                     {
@@ -6442,7 +6891,7 @@
             },
             {
                 "id": "4oaCWngzR",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article says that India is a \"welfare state\"?",
                 "options": [
                     {
@@ -6475,7 +6924,7 @@
             },
             {
                 "id": "tTgyyPIBW",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which one of the following is not the objective of the Directive Principles of State Policy?",
                 "options": [
                     {
@@ -6507,7 +6956,7 @@
             },
             {
                 "id": "lmrE7YCzQ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The concept of Welfare State is included in the Constitution of India in the?",
                 "options": [
                     {
@@ -6539,7 +6988,7 @@
             },
             {
                 "id": "nF1QPvHAw",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The idea of India as Welfare State is found in?",
                 "options": [
                     {
@@ -6571,7 +7020,7 @@
             },
             {
                 "id": "vbaFn_lQj",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article says that the there should be equal pay for men and women?",
                 "options": [
                     {
@@ -6604,7 +7053,7 @@
             },
             {
                 "id": "UCjjF582j",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article says that the state should provide adequate livelihood to its citizens?",
                 "options": [
                     {
@@ -6637,7 +7086,7 @@
             },
             {
                 "id": "ao53SNNAa",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which one of the following is included in the Directive Principles of State Policy?",
                 "options": [
                     {
@@ -6669,7 +7118,7 @@
             },
             {
                 "id": "1Ir73Molh",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "‘Equal Pay for Equal Work’ has been ensured in the Indian Constitution as one of the ?",
                 "options": [
                     {
@@ -6701,7 +7150,7 @@
             },
             {
                 "id": "Xt6BWoXAM",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the following is not a Fundamental Right?",
                 "options": [
                     {
@@ -6733,7 +7182,7 @@
             },
             {
                 "id": "LVsv0WvpS",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which principle among the following was added to the DPSP by the 42nd Amendment to the Constitution?",
                 "options": [
                     {
@@ -6766,7 +7215,7 @@
             },
             {
                 "id": "0RFNaLJ5O",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article deals with \"free legal aid\"?",
                 "options": [
                     {
@@ -6799,7 +7248,7 @@
             },
             {
                 "id": "n2UwpQCO3",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The provision for \"Free Legal Aid\" were added in DPSP via which amendment?",
                 "options": [
                     {
@@ -6832,7 +7281,7 @@
             },
             {
                 "id": "dNS--fg2Y",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The article 39A in DPSP was added which amendment?",
                 "options": [
                     {
@@ -6865,7 +7314,7 @@
             },
             {
                 "id": "-V_XgY-qP",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with \"formation of panchayati system\"?",
                 "options": [
                     {
@@ -6898,7 +7347,7 @@
             },
             {
                 "id": "n0rqar6Ov",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article deals with \"Organisation of village panchayats\"?",
                 "options": [
                     {
@@ -6931,7 +7380,7 @@
             },
             {
                 "id": "URNmpK0oT",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which one of the following Articles directs State Government to \"Organize Village Panchayats?",
                 "options": [
                     {
@@ -6964,7 +7413,7 @@
             },
             {
                 "id": "SrvAeqKr2",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article deals with \"Right to Work, Education\"?",
                 "options": [
                     {
@@ -6997,7 +7446,7 @@
             },
             {
                 "id": "n7J8WU22l",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article asks the state to provide \"Humane working condition\"?",
                 "options": [
                     {
@@ -7030,7 +7479,7 @@
             },
             {
                 "id": "Lci1bDIjR",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article asks the state to provide \"maternity benefits\"?",
                 "options": [
                     {
@@ -7063,7 +7512,7 @@
             },
             {
                 "id": "tQd88FN8P",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article asks the state to make law for \"living wages\"?",
                 "options": [
                     {
@@ -7096,7 +7545,7 @@
             },
             {
                 "id": "aXhUpyh2r",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article asks the state to make law for \"promotion of cottage Industries\"?",
                 "options": [
                     {
@@ -7129,7 +7578,7 @@
             },
             {
                 "id": "QcuavoK51",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article asks the state to make law for \"participation of workers in the management of Industries\"?",
                 "options": [
                     {
@@ -7162,7 +7611,7 @@
             },
             {
                 "id": "DuPxowcBh",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which principle among the following was added to the DPSP by the 42nd amendment to the Constitution?",
                 "options": [
                     {
@@ -7195,7 +7644,7 @@
             },
             {
                 "id": "Tu8Lx4dig",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which amendment added provision for \"participation of workers in the management of Industries\" in DPSP ?",
                 "options": [
                     {
@@ -7228,7 +7677,7 @@
             },
             {
                 "id": "TiWoS4n71",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which principle among the following was added to the DPSP by the 97th Amendment to the Constitution?",
                 "options": [
                     {
@@ -7261,7 +7710,7 @@
             },
             {
                 "id": "FDKZPlsul",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which amendment added provision for \"promotion of cooperative societies\" in DPSP ?",
                 "options": [
                     {
@@ -7294,7 +7743,7 @@
             },
             {
                 "id": "M57Xm9jYf",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article asks the state to make law for \"promotion of cottage Cooperative societies\"?",
                 "options": [
                     {
@@ -7327,7 +7776,7 @@
             },
             {
                 "id": "jpGSQee-R",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below Article promotes secularism ?",
                 "options": [
                     {
@@ -7360,7 +7809,7 @@
             },
             {
                 "id": "0K9-Idvfn",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article asks the state to bring for Uniform Civil Code(UCC)?",
                 "options": [
                     {
@@ -7393,7 +7842,7 @@
             },
             {
                 "id": "8BorHiJis",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which one of the following is not a Directive Principle of State Policy?",
                 "options": [
                     {
@@ -7425,7 +7874,7 @@
             },
             {
                 "id": "0aCR5G7Mc",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which amendment added provision for \"early childhood education\" in DPSP ?",
                 "options": [
                     {
@@ -7458,7 +7907,7 @@
             },
             {
                 "id": "TEEFWongz",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which principle among the following was added to the DPSP by the 86th Amendment to the Constitution?",
                 "options": [
                     {
@@ -7491,7 +7940,7 @@
             },
             {
                 "id": "7OJ1GtTkt",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article has \"Provision for early childhood care and education\"?",
                 "options": [
                     {
@@ -7524,7 +7973,7 @@
             },
             {
                 "id": "NAuZ62wuh",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article asks the state for promotion of economic and educational interests of SCs and STs?",
                 "options": [
                     {
@@ -7557,7 +8006,7 @@
             },
             {
                 "id": "aCzjtyExF",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article asks the state to \"raise the level of nutrition and the standard of living and to improve public health\"?",
                 "options": [
                     {
@@ -7590,7 +8039,7 @@
             },
             {
                 "id": "g-5t2N8mL",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article asks the state to \"to bring prohibition of the consumption of intoxicating drinks and of drugs\"?",
                 "options": [
                     {
@@ -7623,7 +8072,7 @@
             },
             {
                 "id": "2ZX9LzJNf",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article deals with \"Organisation of agriculture and animal husbandry\"?",
                 "options": [
                     {
@@ -7656,7 +8105,7 @@
             },
             {
                 "id": "-v-VLB_TC",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article deals with \"prohibiting the slaughter of cows\"?",
                 "options": [
                     {
@@ -7689,7 +8138,7 @@
             },
             {
                 "id": "nrLGSuPFw",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which amendment added provision for \"protection for environment\" in DPSP ?",
                 "options": [
                     {
@@ -7722,7 +8171,7 @@
             },
             {
                 "id": "sC5pSR_fM",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which principle among the following was added to the DPSP by the 42nd Amendment to the Constitution?",
                 "options": [
                     {
@@ -7755,7 +8204,7 @@
             },
             {
                 "id": "avMDmL1y8",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article deals with \"Protection and improvement of environment\"?",
                 "options": [
                     {
@@ -7788,7 +8237,7 @@
             },
             {
                 "id": "MZ0lEwMMn",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article deals with \"Protection of monuments and places and objects of national importance\"?",
                 "options": [
                     {
@@ -7821,7 +8270,7 @@
             },
             {
                 "id": "iYC4eVOZh",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below DPSP is part of basic structure?",
                 "options": [
                     {
@@ -7853,7 +8302,7 @@
             },
             {
                 "id": "KwZH64MW4",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below DPSP is not a Gandhian principle?",
                 "options": [
                     {
@@ -7885,7 +8334,7 @@
             },
             {
                 "id": "6GYSFwmDP",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article deals with \"Separation of judiciary from executive\"?",
                 "options": [
                     {
@@ -7918,7 +8367,7 @@
             },
             {
                 "id": "UNpeqvZHV",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article of the Indian Constitution is related to Indian Foreign Policy?",
                 "options": [
                     {
@@ -7951,7 +8400,7 @@
             },
             {
                 "id": "T2Es_3tbq",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Article deals with \"Promotion of international peace and security.\"?",
                 "options": [
                     {
@@ -7984,7 +8433,7 @@
             },
             {
                 "id": "wvg3Mmukj",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The DPSP was not amended by which of the following amendment?",
                 "options": [
                     {
@@ -8017,7 +8466,7 @@
             },
             {
                 "id": "54NItYwIC",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The DPSP was amended how many times?",
                 "options": [
                     {
@@ -8050,7 +8499,7 @@
             },
             {
                 "id": "iE5uMY-rh",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below article of DPDP is not a Gandhian principle?",
                 "options": [
                     {
@@ -8083,7 +8532,7 @@
             },
             {
                 "id": "XqstFxxDZ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the following amendment is related with fundamental duties?",
                 "options": [
                     {
@@ -8116,7 +8565,7 @@
             },
             {
                 "id": "uLRN_yub2",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which part deals with fundamental duties?",
                 "options": [
                     {
@@ -8149,7 +8598,7 @@
             },
             {
                 "id": "qazCRAKVw",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which amendment added the fundamental duties in the constitution?",
                 "options": [
                     {
@@ -8182,7 +8631,7 @@
             },
             {
                 "id": "o6YwcaPDf",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When did the fundamental duties where added in the constitution?",
                 "options": [
                     {
@@ -8215,7 +8664,7 @@
             },
             {
                 "id": "udsgfrooA",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "On which committee recommendation fundamental duties was duties?",
                 "options": [
                     {
@@ -8248,7 +8697,7 @@
             },
             {
                 "id": "a8HvjplEp",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the following amendment added 11th fundamental duties?",
                 "options": [
                     {
@@ -8281,7 +8730,7 @@
             },
             {
                 "id": "6drmiHDRQ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the following amendment is related with fundamental duties?",
                 "options": [
                     {
@@ -8313,7 +8762,7 @@
             },
             {
                 "id": "gPltZJz2w",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "How many fundamental duties where there in 1980?",
                 "options": [
                     {
@@ -8345,7 +8794,7 @@
             },
             {
                 "id": "USzT2RBpY",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Abide the constitution and respect national anthem and flag\" is which fundamental duty?",
                 "options": [
                     {
@@ -8377,7 +8826,7 @@
             },
             {
                 "id": "e_AzXlTOi",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Fundamental duty \"1\" is about?",
                 "options": [
                     {
@@ -8409,7 +8858,7 @@
             },
             {
                 "id": "CB18Ac0Pu",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Follow the ideals of the freedom fighters\" is which fundamental duty?",
                 "options": [
                     {
@@ -8441,7 +8890,7 @@
             },
             {
                 "id": "yFVR-yGGs",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Fundamental duty \"2\" is about?",
                 "options": [
                     {
@@ -8473,7 +8922,7 @@
             },
             {
                 "id": "14R9jjSPQ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Cherish the ideals of freedom fighters\" is which fundamental duty?",
                 "options": [
                     {
@@ -8505,7 +8954,7 @@
             },
             {
                 "id": "jid_w65za",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Fundamental duty \"3\" is about?",
                 "options": [
                     {
@@ -8537,7 +8986,7 @@
             },
             {
                 "id": "m2O2Jhlf2",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Protect the sovereignty and unity of the country\" is which fundamental duty?",
                 "options": [
                     {
@@ -8569,7 +9018,7 @@
             },
             {
                 "id": "ktMEItUt9",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Fundamental duty \"4\" is about?",
                 "options": [
                     {
@@ -8601,7 +9050,7 @@
             },
             {
                 "id": "UTThny7MC",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Defend the country and render national service\" is which fundamental duty?",
                 "options": [
                     {
@@ -8633,7 +9082,7 @@
             },
             {
                 "id": "-3J_zIh5z",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Fundamental duty \"5\" is about?",
                 "options": [
                     {
@@ -8665,7 +9114,7 @@
             },
             {
                 "id": "dvmJwwitX",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Promote harmony and brotherhood\" is which fundamental duty?",
                 "options": [
                     {
@@ -8697,7 +9146,7 @@
             },
             {
                 "id": "gtxaQQ7lF",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Respect women\" is which fundamental duty?",
                 "options": [
                     {
@@ -8729,7 +9178,7 @@
             },
             {
                 "id": "pOdi3s0fW",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Fundamental duty \"6\" is about?",
                 "options": [
                     {
@@ -8761,7 +9210,7 @@
             },
             {
                 "id": "_lm0Mz3Vu",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Preserve rich heritage of India's composite culture\" is which fundamental duty?",
                 "options": [
                     {
@@ -8793,7 +9242,7 @@
             },
             {
                 "id": "ltv8ILeXv",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Fundamental duty \"7\" is about?",
                 "options": [
                     {
@@ -8825,7 +9274,7 @@
             },
             {
                 "id": "kF-kQ7q40",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Protect environment and wildlife\" is which fundamental duty?",
                 "options": [
                     {
@@ -8858,7 +9307,7 @@
             },
             {
                 "id": "FaQDESQRw",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Constitution asks about \"Protect environment and wildlife\" under which provisions?",
                 "options": [
                     {
@@ -8892,7 +9341,7 @@
             },
             {
                 "id": "P6zFnjmuL",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which Amendment introduced provisions for \"protection of environment?",
                 "options": [
                     {
@@ -8927,7 +9376,7 @@
             },
             {
                 "id": "LvizRvCJA",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Fundamental duty \"8\" is about?",
                 "options": [
                     {
@@ -8959,7 +9408,7 @@
             },
             {
                 "id": "UaHPRlxDx",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Develop Humanism and Scientific temper\" is which fundamental duty?",
                 "options": [
                     {
@@ -8991,7 +9440,7 @@
             },
             {
                 "id": "ZpT_5WrZU",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Fundamental duty \"9\" is about?",
                 "options": [
                     {
@@ -9023,7 +9472,7 @@
             },
             {
                 "id": "1xZlnb2tD",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Safeguard public property and abjure violence\" is which fundamental duty?",
                 "options": [
                     {
@@ -9055,7 +9504,7 @@
             },
             {
                 "id": "e00ekjBaL",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Fundamental duty \"10\" is about?",
                 "options": [
                     {
@@ -9087,7 +9536,7 @@
             },
             {
                 "id": "TEBsfq-fI",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Strive for excellence\" is which fundamental duty?",
                 "options": [
                     {
@@ -9119,7 +9568,7 @@
             },
             {
                 "id": "BpXbXV8w3",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Fundamental duty \"11\" is about?",
                 "options": [
                     {
@@ -9151,7 +9600,7 @@
             },
             {
                 "id": "T2xk10fXV",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "\"Duty of guardian to provide opportunity of education to their child or wards\" is which fundamental duty?",
                 "options": [
                     {
@@ -9183,7 +9632,7 @@
             },
             {
                 "id": "06-5qylCy",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who is the 1st citizen of India?",
                 "options": [
                     {
@@ -9215,7 +9664,7 @@
             },
             {
                 "id": "Omy8zb-Ga",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who is the head of the country India?",
                 "options": [
                     {
@@ -9247,7 +9696,7 @@
             },
             {
                 "id": "cM8eq5luJ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "What are the qualification for the vice president?",
                 "options": [
                     {
@@ -9279,7 +9728,7 @@
             },
             {
                 "id": "eKjuN9HLo",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "What are the qualification for the vice president?",
                 "options": [
                     {
@@ -9311,7 +9760,7 @@
             },
             {
                 "id": "ArmbihGfS",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "What are the qualification for the vice president?",
                 "options": [
                     {
@@ -9343,7 +9792,7 @@
             },
             {
                 "id": "OdBL6JQrb",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The election of president held through?",
                 "options": [
                     {
@@ -9376,7 +9825,7 @@
             },
             {
                 "id": "co_iaE8gG",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with oath of the vice president?",
                 "options": [
                     {
@@ -9409,7 +9858,7 @@
             },
             {
                 "id": "zZikYJ3M1",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below is correct ?",
                 "options": [
                     {
@@ -9441,7 +9890,7 @@
             },
             {
                 "id": "6JsCtREmV",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with tenure of the president?",
                 "options": [
                     {
@@ -9474,7 +9923,7 @@
             },
             {
                 "id": "4jhoX6owP",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The president can be elected for how many terms?",
                 "options": [
                     {
@@ -9506,7 +9955,7 @@
             },
             {
                 "id": "AxMldrbEb",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article place no bar on becoming president in India?",
                 "options": [
                     {
@@ -9539,7 +9988,7 @@
             },
             {
                 "id": "Bt4JXPvmN",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When resigns the vice president writes to ?",
                 "options": [
                     {
@@ -9571,7 +10020,7 @@
             },
             {
                 "id": "hLc7LdEB0",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The president is impeached from office by?",
                 "options": [
                     {
@@ -9603,7 +10052,7 @@
             },
             {
                 "id": "OJNIcdmAP",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with impeachment of the president?",
                 "options": [
                     {
@@ -9636,7 +10085,7 @@
             },
             {
                 "id": "Ty0gUo-hd",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who is the 2nd citizen of India?",
                 "options": [
                     {
@@ -9668,7 +10117,7 @@
             },
             {
                 "id": "yrvFnfnuu",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The office of the vice president was borrowed from?",
                 "options": [
                     {
@@ -9700,7 +10149,7 @@
             },
             {
                 "id": "rTwlhfLGD",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "What are the main functions of the vice president?",
                 "options": [
                     {
@@ -9732,7 +10181,7 @@
             },
             {
                 "id": "NrNtQNNit",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Vice president is the chairman of the rajya sabha under which article?",
                 "options": [
                     {
@@ -9765,7 +10214,7 @@
             },
             {
                 "id": "YZepax7fk",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The vice president is?",
                 "options": [
                     {
@@ -9797,7 +10246,7 @@
             },
             {
                 "id": "WRJg9wOtM",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The vice president is?",
                 "options": [
                     {
@@ -9829,7 +10278,7 @@
             },
             {
                 "id": "fmfOby6eO",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Vice president is functions as \"acting president\" under which article?",
                 "options": [
                     {
@@ -9862,7 +10311,7 @@
             },
             {
                 "id": "Zd-vgVSxD",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "In the absent of the president who acts as \"acting president\"?",
                 "options": [
                     {
@@ -9895,7 +10344,7 @@
             },
             {
                 "id": "cGv2lMLwu",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "In the absent of the president who acts as \"acting president\"?",
                 "options": [
                     {
@@ -9928,7 +10377,7 @@
             },
             {
                 "id": "6OsQhrY6Y",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "What are the qualification for the vice president?",
                 "options": [
                     {
@@ -9960,7 +10409,7 @@
             },
             {
                 "id": "IFWRn--gG",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "What are the qualification for the vice president?",
                 "options": [
                     {
@@ -9992,7 +10441,7 @@
             },
             {
                 "id": "VK5ucvTd7",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "What are the qualification for the vice president?",
                 "options": [
                     {
@@ -10024,7 +10473,7 @@
             },
             {
                 "id": "0BoiBFpBe",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The election of vice president held through?",
                 "options": [
                     {
@@ -10057,7 +10506,7 @@
             },
             {
                 "id": "ECesuaJG7",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The election dispute of president and vice president is taken to ?",
                 "options": [
                     {
@@ -10093,7 +10542,7 @@
             },
             {
                 "id": "Z-hXUTQYv",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with oath of the vice president?",
                 "options": [
                     {
@@ -10126,7 +10575,7 @@
             },
             {
                 "id": "6Iu8NEWlQ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below is correct ?",
                 "options": [
                     {
@@ -10158,7 +10607,7 @@
             },
             {
                 "id": "_vbweFyrA",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with tenure of the vice president?",
                 "options": [
                     {
@@ -10191,7 +10640,7 @@
             },
             {
                 "id": "UVgsxLfXq",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The vice president can be elected for how many terms?",
                 "options": [
                     {
@@ -10223,7 +10672,7 @@
             },
             {
                 "id": "tIkkpjbf_",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article place no bar on becoming president in India?",
                 "options": [
                     {
@@ -10255,7 +10704,7 @@
             },
             {
                 "id": "DUxdLHdnD",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "When resigns the vice president writes to ?",
                 "options": [
                     {
@@ -10287,7 +10736,7 @@
             },
             {
                 "id": "CSFLeNCna",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with resignation of the vice president?",
                 "options": [
                     {
@@ -10320,7 +10769,7 @@
             },
             {
                 "id": "X9vv3hsCv",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the following statements is incorrect?",
                 "options": [
                     {
@@ -10352,7 +10801,7 @@
             },
             {
                 "id": "fEvExyTxR",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the following statements is correct?",
                 "options": [
                     {
@@ -10384,7 +10833,7 @@
             },
             {
                 "id": "o3zf4ry3R",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "What is the ground for the removal of the vice president?",
                 "options": [
                     {
@@ -10416,7 +10865,7 @@
             },
             {
                 "id": "pnSpUHAXt",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who is the head of the state in Indian states?",
                 "options": [
                     {
@@ -10448,7 +10897,7 @@
             },
             {
                 "id": "68TblrOuf",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Who appoints the governor of a state?",
                 "options": [
                     {
@@ -10480,7 +10929,7 @@
             },
             {
                 "id": "77Di38wcW",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with appointment of governor?",
                 "options": [
                     {
@@ -10513,7 +10962,7 @@
             },
             {
                 "id": "sMBVyi1wd",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below statements is true regarding governor?",
                 "options": [
                     {
@@ -10545,7 +10994,7 @@
             },
             {
                 "id": "lx_GDSDMQ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "A person can become governor for how many terms?",
                 "options": [
                     {
@@ -10577,7 +11026,7 @@
             },
             {
                 "id": "wPWozvsEJ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with tenure of governor?",
                 "options": [
                     {
@@ -10610,7 +11059,7 @@
             },
             {
                 "id": "VNpftyUEQ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below is incorrect?",
                 "options": [
                     {
@@ -10642,7 +11091,7 @@
             },
             {
                 "id": "b1ivJE5WF",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which of the below is correct about Governor?",
                 "options": [
                     {
@@ -10674,7 +11123,7 @@
             },
             {
                 "id": "Lkv7aukG0",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which is incorrect regarding qualification of governor?",
                 "options": [
                     {
@@ -10706,7 +11155,7 @@
             },
             {
                 "id": "1jiVkyzTU",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with qualification of governor?",
                 "options": [
                     {
@@ -10739,7 +11188,7 @@
             },
             {
                 "id": "HBM3vOocy",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The Governor takes oath before?",
                 "options": [
                     {
@@ -10771,7 +11220,7 @@
             },
             {
                 "id": "B9JjqZp9W",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with aoth of governor?",
                 "options": [
                     {
@@ -10804,7 +11253,7 @@
             },
             {
                 "id": "GlBgQPDZ-",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "With regards to the office of the governor which is correct?",
                 "options": [
                     {
@@ -10836,7 +11285,7 @@
             },
             {
                 "id": "ad5TIYgRN",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "The official residence of the governor is called ?",
                 "options": [
                     {
@@ -10868,7 +11317,7 @@
             },
             {
                 "id": "iX7GOkGAe",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with pardon power of governor?",
                 "options": [
                     {
@@ -10901,7 +11350,7 @@
             },
             {
                 "id": "M7Xdn17CZ",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with ordinance power of governor?",
                 "options": [
                     {
@@ -10934,7 +11383,7 @@
             },
             {
                 "id": "kcnEVFjtb",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "Which article deals with veto powers of governor?",
                 "options": [
                     {
@@ -10967,7 +11416,7 @@
             },
             {
                 "id": "t7RG204ob",
-                "create_date": "2024-07-31",
+                "create_date": "2024-08-01",
                 "question": "WHo is brother of Zahid?",
                 "options": [
                     {
@@ -11031,6 +11480,14 @@
                                         "children": []
                                     },
                                     {
+                                        "id": "1viTILMT9",
+                                        "text": "The Indus valley thrived around the river Indus, and thus the new  and old name of river Indus and its tributaries\nIndus : Sindhu (Sanskrit), Indos (Greek), Hindu (Persian)\n\nTributaries:\nJhelum : Vitasta (Sanskrit)\nChenab : Asikni (Sanskrit)\nRavi : Parushni or Iravati (Sanskrit)\nBeas : Vipasa (Sanskrit)\nSutlej : Shatadru or Sutudri (Sanskrit)\n![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fsilju_ssc%2F9qqZCx3-Bv.png?alt=media&token=c1d27297-599d-4ea5-926f-0f062d38229e)\n",
+                                        "page_id": "75ucnFGYo",
+                                        "video_id": "",
+                                        "time": "",
+                                        "children": []
+                                    },
+                                    {
                                         "id": "-C2s-NeBX",
                                         "text": "Mohenjodaro, in Sind, Pakistan, is the largest site of Harappan Civilization.",
                                         "page_id": "75ucnFGYo",
@@ -11049,6 +11506,195 @@
                                             {
                                                 "id": "cgHGSjgam",
                                                 "text": "Important Sites in Pakistan:\n(a) **Harappa**, in Punjab, on the bank of river Ravi\n(b) **Mohenjodaro**, in Sind, on the bank of river Indus.\n\nImportant Sites in India:\n(a) **Ropar**, Punjab\n(b) **Ratnawali**, **Rakhigiri**, in Haryana\n(c) **Kalibangan**, in Rajasthan\n(d) **Lothal**, **Dholavira** in Gujurat\n\n![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fsilju_ssc%2FG1I-lzhxor.png?alt=media&token=8f03c02c-1465-4ccd-8837-c8830cd7d206)",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": []
+                                            },
+                                            {
+                                                "id": "Ooa2nTNpx",
+                                                "text": "Indus Valley sites image from 6th NCERT \n![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fsilju_ssc%2Fv5_M2vRL0N.png?alt=media&token=64ac2d26-fafd-467a-8f56-4aaf54308fa3)\n",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": []
+                                            },
+                                            {
+                                                "id": "8DJj-TloL",
+                                                "heading": 3,
+                                                "text": "Dholavira",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": [
+                                                    {
+                                                        "id": "GHAgKYC8N",
+                                                        "text": "Dholavira is the only World Heritage Site (WHS) from the Harappan civilization. It is on the Khadir Beyt (island) in the Rann of Kutch in Gujarat where the famous Luni river flows. The site of Dholavira has many unique features:\n\nIn other sites, the city is divided into two parts, and each is surrounded by brick walls. However, in Dholavira, the city is divided into three parts, each surrounded by stone walls.\n\nIn other places, pictographic script was mainly found on seals, but in Dholavira, pictographic script was found written on stones and perhaps on wood.\n\nIt also has water reservoirs",
+                                                        "page_id": "75ucnFGYo",
+                                                        "video_id": "",
+                                                        "time": "",
+                                                        "children": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "4dwn3DZqW",
+                                                "heading": 3,
+                                                "text": "Lothal",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": [
+                                                    {
+                                                        "id": "4iCJ59OG0",
+                                                        "text": "Lothal site is present on the bank of river Bogava, which is a tributary of river Sabarmati in Gujurat. \nImportant discovered:\nWarehouse: to store grains\nFire Alter,\nDouble burial\nDock yard\nPrecious stones: site of making stone objects\n![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fsilju_ssc%2F30dtEkrQJr.png?alt=media&token=da4d933f-2f02-45db-a874-2360e3743754)",
+                                                        "page_id": "75ucnFGYo",
+                                                        "video_id": "",
+                                                        "time": "",
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "G34Wy6W_W",
+                                        "heading": 3,
+                                        "text": "Economy",
+                                        "page_id": "75ucnFGYo",
+                                        "video_id": "",
+                                        "time": "",
+                                        "children": [
+                                            {
+                                                "id": "tWOmoANBW",
+                                                "text": "They use to trade with the neighbouring civilizations like mesopotamia.\nSome raw materials were found loccally and some were brought fro far places.\nFor Example:\nCopper: Rajasthan and Oman\nTin: Afghanistan, Iran\nGold: Karnataka region\nPrecious stones: Gujarat region",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": [
+                                                    {
+                                                        "id": "ARYSzncxq",
+                                                        "text": "Which of the below is correct about Harappan raw materials?\nTin from Afghanistan region\nCopper from Gujarat region\nGold from Rajasthan region\nPrecious stones from Karnataka region",
+                                                        "page_id": "75ucnFGYo",
+                                                        "video_id": "",
+                                                        "time": "",
+                                                        "children": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "rfU3grj5D",
+                                                "text": "Image of a Harappan seal:\n![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fsilju_ssc%2FK-vIQ-ui6W.png?alt=media&token=bd15634b-94d1-4f47-9b03-c2880c15a84a)",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "YKYnSUre3",
+                                        "heading": 3,
+                                        "text": "Agriculture",
+                                        "page_id": "75ucnFGYo",
+                                        "video_id": "",
+                                        "time": "",
+                                        "children": [
+                                            {
+                                                "id": "akHC_pZXU",
+                                                "text": "The people of the Harappan civilization practiced agriculture. Evidence from Kalibangan in Rajasthan, where terracotta plough toys were found, suggests the use of bulls or cattle for ploughing. They also employed some form of irrigation. The major crops grown were wheat, rice, barley, pulses, peas, and mustard. Cotton cultivation in Mehrgarh dates back to 7000 years ago, during Neolithic times.",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": []
+                                            },
+                                            {
+                                                "id": "GC7frZMW-",
+                                                "text": "Storehouses were present in major cities such as Harappa, Mohenjodaro, and Lothal. Common domesticated animals included cattle, bulls, goats, and sheep, with the bull being the most frequently depicted animal on seals.",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "ft9D0ENIe",
+                                        "heading": 3,
+                                        "text": "Religion",
+                                        "page_id": "75ucnFGYo",
+                                        "video_id": "",
+                                        "time": "",
+                                        "children": [
+                                            {
+                                                "id": "6Mulh9Ats",
+                                                "text": "The people of the Harappan civilization believed in some form of religion, but there is no evidence of temple-like structures. Evidence of **fire altars** from Kalibangan and Lothal suggests they practiced some rituals. The **Great Bath** from Mohenjodaro indicates that ritual bathing might have been practiced. **Pot burials** found in Lothal suggest they buried their dead in this manner. Evidence also suggests that they worshipped plants and animals.\n![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fsilju_ssc%2FKS81aCWhT8.png?alt=media&token=e417ba28-6a0b-459e-8bfa-34679d43d72a)",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": []
+                                            },
+                                            {
+                                                "id": "KDqSpkYaQ",
+                                                "text": "Lothal - **Double burial** was found here. Burial of a male & female person in a single grave is found here.\nHarappa - A **graveyard** was found in Harappa. Graveyard had 57 burials in total.\nKalibangan - A different kind of burial was found here. The body was laid straight with head towards north in a brick chamber or a simple sand pit.\nSurkotada (in Gujurat) - Four **pot burials** were found. Pot burials contained bone ashes.",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "am6eYYKRU",
+                                        "heading": 3,
+                                        "text": "Decline of Harappan Site",
+                                        "page_id": "75ucnFGYo",
+                                        "video_id": "",
+                                        "time": "",
+                                        "children": [
+                                            {
+                                                "id": "3HTtGgMHz",
+                                                "text": "Around 3900 years ago, many people stopped living in the cities of the Harappan civilization. ",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": []
+                                            },
+                                            {
+                                                "id": "JAfYpTwt4",
+                                                "text": "**River dried up:** One reason might be that the rivers dried up. Without rivers, it became difficult to get water for drinking and farming.",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": []
+                                            },
+                                            {
+                                                "id": "lHGDu75M0",
+                                                "text": "**Deforestation:** Another reason could be deforestation. People needed wood to bake bricks and to melt copper ores. They cut down many trees for this. Also, large herds of cattle, sheep, and goats ate the plants, making it hard for the trees to grow back.\n",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": []
+                                            },
+                                            {
+                                                "id": "7L80_gR-I",
+                                                "text": "**Flood:** In some places, there were floods. Too much water from the rivers could have damaged houses and fields. However, flooding or rivers drying up can't explain why all the cities were abandoned, since these issues would only affect certain areas.",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": []
+                                            },
+                                            {
+                                                "id": "kw8EOroRX",
+                                                "text": "**Over grazing:** Large herds of cattle, sheep, and goats may have eaten too much grass and plants. This would have left the land bare and unable to support farming or other activities.\n",
+                                                "page_id": "75ucnFGYo",
+                                                "video_id": "",
+                                                "time": "",
+                                                "children": []
+                                            },
+                                            {
+                                                "id": "n_BxMyG3x",
+                                                "text": "**Aryan invasion:** Some scholars suggest that new groups of people, like the Aryans, moved into the area. This may have caused conflicts and changes in how the cities were controlled. As a result, people might have left the big cities and moved to smaller settlements in the east and south.\n\n",
                                                 "page_id": "75ucnFGYo",
                                                 "video_id": "",
                                                 "time": "",
