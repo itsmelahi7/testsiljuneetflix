@@ -1182,7 +1182,7 @@ function openNotesPage2(id1, id2) {
                             <div class="chapter-index"></div>
                             <div class="search hide">
                                 <div class="top">
-                                    <input type="text" class="search" placeholder="Search" />
+                                    <input type="search" class="search" placeholder="Search" />
                                     <button class="search">Search</button>
                                 </div>
                                 <div class="search-results"></div>
@@ -2883,7 +2883,7 @@ function openMCQPage(id) {
                         <div class="content">
                             <div class="chapter-tag"> <span> Chapters </span> </div>
                             <div class="all-tags hide"> 
-                                <input type="text" class="search-all-tags" placeholder="Filter Tags">
+                                <input type="search" class="search-all-tags" placeholder="Filter Tags">
                                 <div class="all-tags-list"></div>
                              </div>
                         </div>`;
@@ -4328,7 +4328,10 @@ function loadNewMockTestSection() {
                                     <i class="fa-solid arrow fa-chevron-right"></i>
                                     <span class="label">Select Chapters</span>
                                 </div>
-                                <div class="mock-chapters-list list me-header-inner-list hide"></div>
+                                <div class="list me-header-inner-list hide">
+                                    <input type="search" class="filter" placeholder="filter chapters">
+                                    <div class="mock-chapters-list"></div>
+                                </div>
                             </div>
                             <div></div>
                         </div>
@@ -4361,7 +4364,7 @@ function loadNewMockTestSection() {
     if (ele) {
         ele.addEventListener("click", (event) => {
             let head = event.target.closest(".head");
-            let eee = div.querySelector(".mock-chapters .mock-chapters-list");
+            let eee = div.querySelector(".mock-chapters .me-header-inner-list");
             eee.classList.toggle("hide");
             if (eee.classList.contains("hide")) {
                 head.querySelector("i").className = "fa-solid arrow fa-chevron-right";
@@ -4381,6 +4384,27 @@ function loadNewMockTestSection() {
                           <span class="name">${chapter.textContent}</span>`;
                 });
             }
+        });
+    }
+
+    ele = div.querySelector(".mock-chapters  input");
+    if (ele) {
+        ele.addEventListener("input", (event) => {
+            const filter = event.target.value.trim().toLowerCase();
+            const chapters = div.querySelectorAll(".me-mock-chapter .name");
+
+            // Loop through each tag
+            chapters.forEach((chapter) => {
+                // Get the text content of the tag and convert it to lowercase
+                const tagName = chapter.textContent.toLowerCase();
+
+                // Check if the tag matches the filter
+                if (tagName.includes(filter)) {
+                    chapter.parentElement.style.display = ""; // Show the tag
+                } else {
+                    chapter.parentElement.style.display = "none"; // Hide the tag
+                }
+            });
         });
     }
 }

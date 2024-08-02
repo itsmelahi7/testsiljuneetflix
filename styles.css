@@ -3238,3 +3238,34 @@ i.fa-chevron-right:before {
     border: 1px solid gray;
     width: min(300px, 80%);
 }
+
+.mock-chapters .list>input {
+    margin: 15px auto;
+    border-radius: 3px;
+    padding: 7px;
+    text-align: center;
+    border: 1px solid gray;
+    width: min(300px, 80%);
+}
+
+.mock-chapters .me-mock-chapter {
+    margin: 7px 3px;
+}
+
+.mock-chapters .mock-chapters-list {
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
+.mock-chapters .me-mock-chapter input {
+    padding: 7px;
+    width: 18px;
+    height: 18px;
+
+}
+
+
+.mock-chapters .me-mock-chapter span {
+    font-size: 1.15em;
+    color: #565454;
+}
