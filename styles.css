@@ -3271,6 +3271,11 @@ i.fa-chevron-right:before {
 }
 
 .download-app {
+    display: none;
+}
+
+.mobile .download-app {
+    display: flex;
     border: 1px solid green;
     width: 200px !important;
     padding: 5px;
