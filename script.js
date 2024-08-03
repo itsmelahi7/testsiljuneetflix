@@ -340,6 +340,15 @@ function initialLoading() {
                 link.click();
                 document.body.removeChild(link);
             });
+
+            // Check the user-agent string for common patterns in Android .apk environments
+            let userAgent = navigator.userAgent.toLowerCase();
+            let isAPK = userAgent.includes("android") && userAgent.includes("wv");
+
+            if (isAPK) {
+                // If true, show the download link
+                ele.style.display = "none";
+            }
         }
     }, 1000);
 
