@@ -332,8 +332,7 @@ function initialLoading() {
         if (ele) {
             clearInterval(download_app);
             ele.addEventListener("click", () => {
-                debugger;
-                const filePath = "assets/revise.apk";
+                const filePath = "/assets/revise.apk";
                 const link = document.createElement("a");
                 link.href = filePath;
                 link.download = filePath.split("/").pop(); // Sets the download attribute to the filename
