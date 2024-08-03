@@ -345,7 +345,7 @@ function initialLoading() {
             let userAgent = navigator.userAgent.toLowerCase();
             let isAPK = userAgent.includes("android") && userAgent.includes("wv");
 
-            if (isAPK) {
+            if (!isAPK) {
                 // If true, show the download link
                 ele.style.display = "none";
             }
