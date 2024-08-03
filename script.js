@@ -325,6 +325,25 @@ function initialLoading() {
     document.querySelector(".me-content").classList.remove("hide");
     let target = document.querySelector(".page.home");
     loadPage(target, "home");
+    debugger;
+
+    var download_app = setInterval(() => {
+        let ele = document.querySelector(".download-app");
+        if (ele) {
+            clearInterval(download_app);
+            ele.addEventListener("click", () => {
+                debugger;
+                const filePath = "assets/revise.apk";
+                const link = document.createElement("a");
+                link.href = filePath;
+                link.download = filePath.split("/").pop(); // Sets the download attribute to the filename
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        }
+    }, 1000);
+
     //openPage("home");
     //openNotesPage2();
     //openPage("home");
@@ -1050,6 +1069,15 @@ function setTimer(minutes) {
 }
 
 function openPage(tab) {
+    if (tab == "home") {
+        setHomeUrl();
+    } else if (tab == "mock") {
+        setMockUrl();
+    } else if (tab == "notes") {
+        setNotesURL();
+    } else if (tab == "more") {
+        setMoreURL();
+    }
     document.querySelectorAll(".main.tabs > .tab").forEach((tab) => {
         tab.classList.remove("active");
     });
@@ -1190,6 +1218,10 @@ function openNotesPage2(id1, id2) {
                         </div>`;
         setNotesPageSidebarItemEvents(sidebar);
         addChapterIndexList2(sidebar);
+        if (id1) {
+            openChapterById(id1, id2);
+        }
+    } else {
         if (id1) {
             openChapterById(id1, id2);
         }
@@ -3150,7 +3182,6 @@ function displayQuestion(que, tar_ele, type) {
 }
 
 function setQuestionURL(id) {
-    debugger;
     let url = window.location.href;
     let ind = url.indexOf("#");
     if (ind != -1) {
@@ -3158,15 +3189,39 @@ function setQuestionURL(id) {
     }
     window.location.href = url + `/#/${exam}/question/${id}`;
 }
-
-function setNotesURL(page_id) {
-    debugger;
+function setHomeUrl(id) {
     let url = window.location.href;
     let ind = url.indexOf("#");
     if (ind != -1) {
         url = url.substring(0, ind - 1);
     }
-    window.location.href = url + `/#/${exam}/notes/${page_id}`;
+    window.location.href = url + `/#/${exam}/home`;
+}
+function setMockUrl() {
+    let url = window.location.href;
+    let ind = url.indexOf("#");
+    if (ind != -1) {
+        url = url.substring(0, ind - 1);
+    }
+    window.location.href = url + `/#/${exam}/mock`;
+}
+
+function setNotesURL(page_id) {
+    let url = window.location.href;
+    let ind = url.indexOf("#");
+    if (ind != -1) {
+        url = url.substring(0, ind - 1);
+    }
+    if (page_id) window.location.href = url + `/#/${exam}/notes/${page_id}`;
+    else window.location.href = url + `/#/${exam}/notes`;
+}
+function setMoreURL() {
+    let url = window.location.href;
+    let ind = url.indexOf("#");
+    if (ind != -1) {
+        url = url.substring(0, ind - 1);
+    }
+    window.location.href = url + `/#/${exam}/more`;
 }
 
 async function uploadImage() {
@@ -4646,6 +4701,7 @@ function openItemBasedOnURL() {
         let que_id = obj.que_id;
         let page_id = obj.page_id;
         let block_id = obj.block_id;
+        openNotesPage2(); // To load the notes data
 
         if (type == "question") {
             openPage("random");
@@ -4655,15 +4711,23 @@ function openItemBasedOnURL() {
                 //displayQuestion(que);
             }
         } else if (type == "notes") {
-            if (page_id) {
-                if (block_id) {
-                    //openChapterById(page_id, block_id);
-                    openNotesPage2(page_id, block_id);
-                } else {
-                    //openChapterById(page_id);
-                    openNotesPage2(page_id);
-                }
+            if (block_id) {
+                //openChapterById(page_id, block_id);
+                openNotesPage2(page_id, block_id);
+            } else if (page_id) {
+                //openChapterById(page_id);
+                openNotesPage2(page_id);
+            } else {
+                openNotesPage2();
             }
+        } else if (type == "home") {
+            openPage("home");
+        } else if (type == "mock") {
+            openMockPage();
+        } else if (type == "more") {
+            openSettingPage();
+        } else {
+            openPage("home");
         }
     } else {
         openNotesPage2();
@@ -4781,7 +4845,7 @@ function setMcqPageSidebarItemEvents(sidebar) {
     if (ele) {
         ele.addEventListener("input", (event) => {
             //var tag = setAutoComplete(event, "filter-all-tags");
-            debugger;
+
             const filter = event.target.value.trim().toLowerCase();
 
             // Get all tags
